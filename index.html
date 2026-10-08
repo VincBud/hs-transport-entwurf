@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
 <title>Entwurf – HS Transport GmbH, Wechselbrücken und Systemverkehr</title>
-<meta name="description" content="HS Transport GmbH, Siegsdorf und Rodgau: täglicher Systemlinienverkehr mit 30 eigenen LKW, Multiwechsler für 745er und 782er Wechselbrücken. Fahrer und Disponenten gesucht.">
+<meta name="description" content="HS Transport GmbH, Siegsdorf und Rodgau: täglicher Systemlinienverkehr mit 30 LKW, Multiwechsler für 745er und 782er Wechselbrücken. Fahrer und Disponenten gesucht.">
 <meta name="theme-color" content="#FFFFFF">
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Crect%20width='32'%20height='32'%20fill='%232A3977'/%3E%3Ctext%20x='16'%20y='23'%20font-family='Helvetica,Arial,sans-serif'%20font-size='16'%20font-weight='700'%20text-anchor='middle'%20fill='%23FFFFFF'%3EHS%3C/text%3E%3C/svg%3E">
 <link rel="preload" as="image" href="bilder/hero-poster-854.webp"
@@ -217,8 +217,10 @@ footer a{color:#fff;display:inline-flex;align-items:center;min-height:44px;text-
 .szene-himmel{position:absolute;inset:0;pointer-events:none;opacity:0;
   background:linear-gradient(180deg, rgba(17,19,26,.62) 0%, rgba(17,19,26,.62) 52%, rgba(17,19,26,0) 74%)}
 
-.szene-ui{display:flex;flex-direction:column;gap:16px;align-items:flex-start;
+.szene-kopfzone{display:flex;flex-direction:column;gap:16px;align-items:flex-start;
   padding:30px var(--gutter) 34px;max-width:1240px;margin:0 auto;width:100%}
+.szene-ui{display:flex;flex-direction:column;gap:16px;align-items:flex-start}
+.szene-aktion{display:flex}
 .szene-h1{margin:0;font-weight:800;font-size:clamp(34px,4.8vw,66px);line-height:1.04;letter-spacing:-.03em;text-wrap:balance}
 .szene-h1 > span{display:block}
 .szene-lead{margin:0;font-size:18px;max-width:30em;color:#D8DBE2}
@@ -251,7 +253,7 @@ footer a{color:#fff;display:inline-flex;align-items:center;min-height:44px;text-
 .js-szene .szene-klebe{position:sticky;top:0;height:100svh;overflow:hidden}
 .js-szene .szene-bild{position:absolute;inset:0}
 .js-szene .szene-himmel{opacity:1}
-.js-szene .szene-ui{position:absolute;top:0;left:0;right:0;z-index:3;
+.js-szene .szene-kopfzone{position:absolute;top:0;left:0;right:0;z-index:3;
   padding-top:calc(var(--kopf) + clamp(18px,3.5vh,44px))}
 .js-szene .gang-titel{position:absolute;z-index:3;opacity:0;visibility:hidden;text-align:center}
 .js-szene .etiketten{position:absolute;inset:0;padding:0;margin:0;display:block;
@@ -271,7 +273,43 @@ footer a{color:#fff;display:inline-flex;align-items:center;min-height:44px;text-
   .js-szene .poster,.js-szene .film{width:100%;height:100%;aspect-ratio:auto}
 }
 @media (orientation:portrait){
-  .js-szene .poster,.js-szene .film{width:100%;height:auto;aspect-ratio:16/9;transform-origin:center}
+  /* Hinweis bleibt oben stehen, der Header rastet darunter ein. */
+  .draft{position:sticky;top:0;z-index:12}
+  header{top:var(--hinweis,49px);background:var(--weiss)}
+  /* Buehne beginnt direkt unter dem Kopf, damit sie von der ersten Zeile an
+     klebt und oben kein schwarzer Streifen entsteht. Sie ist laenger als im
+     Querformat, weil die fuenf Etiketten hier nacheinander auftreten. */
+  .js-szene .szene-buehne{height:420svh;margin-top:calc(-1 * (var(--hinweis,49px) + var(--kopf)))}
+  /* Der Text liegt hier nicht auf dem Video, der Abdunklungsverlauf oben
+     wird also nicht gebraucht. */
+  .js-szene .szene-himmel{display:none}
+  /* Kompakter Aufbau: Text, Video in voller Breite, Button darunter.
+     Das Video wird auf 3:2 beschnitten - der Zug bleibt dabei ganz im Bild. */
+  .js-szene .poster,.js-szene .film{width:100%;aspect-ratio:3/2;height:var(--band,auto);object-fit:cover;transform-origin:center}
+  .js-szene .szene-kopfzone{display:contents}
+  .js-szene .szene-ui{position:absolute;left:0;right:0;z-index:3;padding:0 var(--gutter);gap:9px;max-width:none}
+  .js-szene .szene-aktion{position:absolute;left:0;right:0;z-index:3;padding:0 var(--gutter)}
+  .js-szene .szene-sprung{width:100%;justify-content:center}
+  /* Notstufe fuer sehr niedrige Geraete - wird nur gesetzt, wenn die
+     Komposition sonst nicht zwischen Header und Bewerbungsleiste passt. */
+  .js-szene .szene-klebe.eng .szene-h1{font-size:clamp(24px,6.6vw,30px)}
+  .js-szene .szene-klebe.eng .szene-lead{font-size:15px}
+  .js-szene .szene-klebe.klein .etikett{padding:8px 11px 7px}
+  .js-szene .szene-klebe.klein .etikett-meta{font-size:9.5px}
+  .js-szene .szene-klebe.klein .etikett b{font-size:15px;margin-top:3px}
+  .js-szene .szene-klebe.klein .etikett-text{font-size:12.5px;margin-top:2px}
+  .js-szene .szene-klebe.klein .etikett-code{height:8px;margin-top:5px}
+  /* Der sichtbare Ausschnitt ist am Ende hell - die Ueberschrift braucht
+     deshalb eine eigene Flaeche statt mehr Abdunklung. */
+  .js-szene .gang-titel{background:rgba(26,30,46,.86);border-radius:10px;
+    padding:10px 16px;text-align:center;font-size:clamp(21px,5.6vw,26px)}
+  /* Etiketten kompakter: rund 75 % der Breite, kleinerer Barcode. Sie duerfen
+     das Videoband nicht zudecken - die Ladung bleibt rundherum sichtbar. */
+  .js-szene .etikett{padding:10px 13px 9px;gap:0}
+  .js-szene .etikett-meta{font-size:10.5px}
+  .js-szene .etikett b{font-size:17px;line-height:1.14;margin-top:4px}
+  .js-szene .etikett-text{font-size:13.5px;line-height:1.32;margin-top:3px}
+  .js-szene .etikett-code{height:9px;margin-top:6px}
 }
 
 /* ============================================================
@@ -406,10 +444,12 @@ footer a{color:#fff;display:inline-flex;align-items:center;min-height:44px;text-
           <div class="szene-tiefe" aria-hidden="true"></div>
         </div>
 
-        <div class="szene-ui">
-          <h1 class="szene-h1"><span>Wechselbr&uuml;cken.</span> <span>Systemverkehr.</span> <span>Jeden Tag.</span></h1>
-          <p class="szene-lead">T&auml;glicher Systemlinienverkehr mit <strong>30</strong> eigenen LKW von Siegsdorf und Rodgau aus.</p>
-          <a class="szene-sprung" href="#karriere">Direkt zu den Stellen</a>
+        <div class="szene-kopfzone">
+          <div class="szene-ui">
+            <h1 class="szene-h1"><span>Wechselbr&uuml;cken.</span> <span>Systemverkehr.</span> <span>Jeden Tag.</span></h1>
+            <p class="szene-lead">T&auml;glicher Systemlinienverkehr mit <strong>30</strong> LKW von Siegsdorf und Rodgau aus.</p>
+          </div>
+          <div class="szene-aktion"><a class="szene-sprung" href="#karriere">Direkt zu den Stellen</a></div>
         </div>
 
         <p class="gang-titel" aria-hidden="true">Was wir fahren</p>
@@ -683,7 +723,7 @@ footer a{color:#fff;display:inline-flex;align-items:center;min-height:44px;text-
   "@context": "https://schema.org",
   "@type": "MovingCompany",
   "name": "HS Transport GmbH",
-  "description": "Spedition für Wechselbrücken und Systemverkehr mit 30 eigenen LKW.",
+  "description": "Spedition für Wechselbrücken und Systemverkehr mit 30 LKW.",
   "url": "https://www.h-s-transport.de/",
   "telephone": "+49 8662 6682425",
   "email": "info@h-s-transport.de",
@@ -732,6 +772,23 @@ footer a{color:#fff;display:inline-flex;align-items:center;min-height:44px;text-
 }
 </script>
 -->
+
+<script>
+/* Hoehe des Entwurfs-Hinweises, damit der Header im Hochformat darunter
+   einrastet statt den Hinweis zu verdecken. */
+(function () {
+  var hinweis = document.querySelector('.draft');
+  if (!hinweis) return;
+  function messen() {
+    document.documentElement.style.setProperty('--hinweis',
+      Math.round(hinweis.getBoundingClientRect().height) + 'px');
+  }
+  messen();
+  window.addEventListener('resize', messen, { passive: true });
+  window.addEventListener('orientationchange', messen);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(messen);
+})();
+</script>
 
 <script>
 /* Mobiles Menü – eigener Block, damit ein Fehler hier das Formular nicht mitnimmt. */
@@ -856,8 +913,12 @@ window.addEventListener('DOMContentLoaded', function () {
   var film   = document.querySelector('.film');
   var bild   = document.querySelector('.szene-bild');
   var titel  = document.querySelector('.gang-titel');
+  var kopfText = document.querySelector('.szene-ui');
+  var aktion   = document.querySelector('.szene-aktion');
   var etiketten = Array.prototype.slice.call(document.querySelectorAll('.etikett'));
-  if (!buehne || !klebe || !film || !bild || !titel || !etiketten.length) return;
+  if (!buehne || !klebe || !film || !bild || !titel || !kopfText || !aktion) return;
+  if (!etiketten.length) return;
+  var versatz = 0;
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   if (!window.gsap || !window.ScrollTrigger) return;
 
@@ -894,11 +955,25 @@ window.addEventListener('DOMContentLoaded', function () {
 
   function hochformat() { return window.matchMedia('(orientation: portrait)').matches; }
 
-  function zielScale() {
-    if (!hochformat()) return 1;
-    var h = klebe.getBoundingClientRect().height;
-    var vh = bild.clientWidth * 9 / 16;
-    return vh > 0 ? Math.max(1, Math.min(4, h / vh)) : 1;
+  /* Hoehe des Videobands im Hochformat. 3:2 ist der flachste Ausschnitt,
+     in dem der Zug noch komplett steht - inklusive Zugmaschine. Auf sehr
+     niedrigen Geraeten wird er gekuerzt, damit nichts unter die Leiste rutscht. */
+  var bandH = 0;
+  function bandHoehe() { return bandH || Math.round(bild.clientWidth / 1.5); }
+
+  function zielScale() { return 1; }
+
+  /* Nutzbares Band der Buehne: unter Hinweis + Header, ueber der WhatsApp-Leiste. */
+  function band() {
+    var kr = klebe.getBoundingClientRect();
+    var kopf = document.querySelector('header');
+    var leiste = document.querySelector('.thumb');
+    var kb = kopf ? kopf.getBoundingClientRect().bottom : 0;
+    var lh = leiste && getComputedStyle(leiste).display !== 'none'
+      ? leiste.getBoundingClientRect().height : 0;
+    return { h: kr.height, w: kr.width,
+             oben: Math.max(14, Math.round(kb - kr.top) + 14),
+             unten: Math.round(kr.height - lh - 14) };
   }
 
   /* Etiketten auf die Palettenflaechen setzen. Die normierten Koordinaten
@@ -907,22 +982,72 @@ window.addEventListener('DOMContentLoaded', function () {
   function platzieren() {
     var r = bild.getBoundingClientRect();
     titel.removeAttribute('style');
+    kopfText.style.top = ''; aktion.style.top = '';
     etiketten.forEach(function (e) { e.removeAttribute('style'); });
 
     if (hochformat()) {
-      /* Im gewachsenen Ausschnitt ist von der Ware kaum etwas sichtbar,
-         deshalb hier Ueberschrift oben und Etiketten darunter gestapelt. */
-      var bw = Math.min(420, r.width - 32);
-      var x = Math.round((r.width - bw) / 2);
-      titel.style.left = x + 'px';
-      titel.style.width = bw + 'px';
-      titel.style.top = Math.round(r.height * 0.09) + 'px';
-      etiketten.forEach(function (e) { e.style.left = x + 'px'; e.style.width = bw + 'px'; });
-      var hs = etiketten.map(function (e) { return e.offsetHeight; });
-      var ges = hs.reduce(function (a, b) { return a + b; }, 0) + 16 * (etiketten.length - 1);
-      var y = Math.max(r.height * 0.09 + 52, (r.height - ges) / 2 + 18);
-      etiketten.forEach(function (e, i) { e.style.top = Math.round(y) + 'px'; y += hs[i] + 16; });
+      /* Kompakter Aufbau: Ueberschrift, Fliesstext, Video in voller Breite,
+         Button direkt darunter - nichts liegt uebereinander. */
+      klebe.classList.remove('eng');
+      var b = band(), lu = 40;
+      bandH = 0;
+      var th = kopfText.offsetHeight, ah = aktion.offsetHeight, bh = bandHoehe();
+      var frei = b.unten - b.oben;
+      var rest = function () { return frei - (th + 2 * lu + bh + ah); };
+      /* Auf niedrigen Geraeten der Reihe nach nachgeben: erst die Abstaende,
+         dann die Schrift, zuletzt die Hoehe des Videobands. Der Button darf
+         unter keinen Umstaenden unter die WhatsApp-Leiste rutschen. */
+      if (rest() < 0) { lu = Math.max(12, lu + Math.ceil(rest() / 2)); }
+      if (rest() < 0) {
+        klebe.classList.add('eng');
+        th = kopfText.offsetHeight; ah = aktion.offsetHeight;
+      }
+      if (rest() < 0) { bh = Math.max(100, bh + rest()); }
+      bandH = bh;
+      rest = rest();
+      /* Grosszuegige Innenabstaende, Restluft gleich auf oben und unten -
+         dann wirkt die Buehne als Komposition und nicht als Video mit Rand. */
+      rest = Math.max(0, rest);
+      var yText = b.oben + Math.round(rest / 2);
+      var yBand = yText + th + lu;
+      kopfText.style.top = yText + 'px';
+      aktion.style.top   = (yBand + bh + lu) + 'px';
+      /* Das Video sitzt zunaechst in diesem Band und waechst von dort auf
+         die ganze Buehne - deshalb Verschiebung per transform, nicht Layout. */
+      versatz = Math.round(yBand + bh / 2 - b.h / 2);
+      bild.style.setProperty('--band', bh + 'px');
+      gsap.set(['.film', '.poster'], { y: versatz });
+
+      /* Schlussbild: Ueberschrift oben, ein Etikett mittig auf der Ware. */
+      var tw = Math.min(360, r.width - 2 * 20);
+      titel.style.width = tw + 'px';
+      titel.style.left  = Math.round((r.width - tw) / 2) + 'px';
+      /* Mittig im Raum ueber dem Band - sonst klebt sie unter dem Header und
+         darunter steht eine leere Flaeche. */
+      titel.style.top   = Math.max(b.oben,
+        Math.round((b.oben + yBand) / 2 - titel.offsetHeight / 2)) + 'px';
+      /* Rund drei Viertel der Breite. Bleibt das hoechste Etikett dem Band
+         nicht rund 24 px Ladung ueber und unter sich, wird es erst breiter
+         (weniger Umbrueche) und dann kleiner gesetzt. */
+      klebe.classList.remove('klein');
+      var mitte = yBand + bh / 2;
+      var hoechstes = function () {
+        return etiketten.reduce(function (m, e) { return Math.max(m, e.offsetHeight); }, 0);
+      };
+      var breit = function (anteil) {
+        var w = Math.round(r.width * anteil), x = Math.round((r.width - w) / 2);
+        etiketten.forEach(function (e) { e.style.width = w + 'px'; e.style.left = x + 'px'; });
+      };
+      breit(0.75);
+      if (hoechstes() > bh - 48) breit(0.88);
+      if (hoechstes() > bh - 48) { klebe.classList.add('klein'); }
+      etiketten.forEach(function (e) {
+        e.style.top = Math.round(mitte - e.offsetHeight / 2) + 'px';
+      });
     } else {
+      bandH = 0; versatz = 0;
+      bild.style.removeProperty('--band');
+      gsap.set(['.film', '.poster'], { y: 0 });
       var sc = Math.max(r.width / 16, r.height / 9);
       var vw = 16 * sc, vh = 9 * sc;
       var gross = window.matchMedia('(min-width: 1280px)').matches;
@@ -956,34 +1081,77 @@ window.addEventListener('DOMContentLoaded', function () {
                        scrub: 0.5, invalidateOnRefresh: true }
     });
 
+    /* Hochformat bekommt einen laengeren Scrollweg: Text und Button treten
+       zuerst ab, dann waechst der Ausschnitt, und die fuenf Etiketten haben
+       je rund 180 px Scrollweg zum Lesen. Querformat bleibt unveraendert. */
+    var hoch = hochformat();
+    var V  = hoch ? 0.620 : 1;            /* Anteil des Wegs fuer das Video */
+    /* Im Querformat liegt die Ueberschrift auf dem Video und muss bei rund
+       4 s abtreten. Im Hochformat steht sie darueber - dort bleibt sie bis
+       zum Schluss stehen und wechselt direkt zu "Was wir fahren", sonst
+       stuende die Buehne die halbe Strecke leer um ein kleines Videoband. */
+    var ab = hoch ? 0.575 : 0.41;         /* Abgang von Text und Button      */
+
     /* Videozeit: 0-7,15 s normal, 7,15-7,62 s (Tueren) dreifach, dann normal. */
-    tl.to(z, { t: 7.15, duration: 0.738, ease: 'none', onUpdate: setzen }, 0)
-      .to(z, { t: 7.62, duration: 0.016, ease: 'none', onUpdate: setzen }, 0.738)
-      .to(z, { t: 10.0, duration: 0.246, ease: 'none', onUpdate: setzen }, 0.754);
+    tl.to(z, { t: 7.15, duration: V * 0.738, ease: 'none', onUpdate: setzen }, 0)
+      .to(z, { t: 7.62, duration: V * 0.016, ease: 'none', onUpdate: setzen }, V * 0.738)
+      .to(z, { t: 10.0, duration: V * 0.246, ease: 'none', onUpdate: setzen }, V * 0.754);
 
-    tl.to(['.film', '.poster'], { scale: function () { return zielScale(); },
-                                  ease: 'none', duration: 0.30 }, 0.32);
+    /* Ueberschrift bleibt stehen und geht erst bei 4 s Videozeit. */
+    tl.to([kopfText, aktion], { autoAlpha: 0, duration: hoch ? 0.045 : 0.07,
+                                ease: hoch ? 'none' : 'power1.out' }, ab);
+    if (!hoch) tl.to('.szene-himmel', { opacity: 0, duration: 0.07 }, ab);
 
-    /* Ueberschrift bleibt stehen und geht erst bei 4 s Videozeit (41 % Scrollweg). */
-    tl.to('.szene-ui', { autoAlpha: 0, duration: 0.07 }, 0.41)
-      .to('.szene-himmel', { opacity: 0, duration: 0.07 }, 0.41);
+    /* Im Querformat waechst der Ausschnitt in den Laderaum hinein. Im
+       Hochformat nicht: die Paletten stehen am linken und rechten Bildrand,
+       jeder staerkere Zoom wirft sie aus dem Bild. Dort bleibt das Band
+       stehen, und nur Text und Etiketten wechseln. */
+    if (!hoch) {
+      tl.to(['.film', '.poster'], { scale: function () { return zielScale(); },
+                                    ease: 'none', duration: 0.30 }, 0.32);
+    }
 
     /* Nur leicht abdunkeln und schwach weichzeichnen - die Ware soll
        erkennbar bleiben, die Etiketten tragen ihren Kontrast selbst. */
-    tl.to('.szene-tiefe', { opacity: 0.32, duration: 0.06, ease: 'none' }, 0.82)
-      .to(film, { filter: 'blur(2.5px)', duration: 0.06, ease: 'none',
+    var dunkel = hoch ? 0.56 : 0.82;
+    tl.to('.szene-tiefe', { opacity: hoch ? 0.16 : 0.32, duration: 0.06, ease: 'none' }, dunkel)
+      .to(film, { filter: hoch ? 'blur(0.8px)' : 'blur(2.5px)', duration: 0.06, ease: 'none',
                   onStart: function () { film.style.willChange = 'transform,filter'; },
                   onComplete: function () { film.style.willChange = ''; },
-                  onReverseComplete: function () { film.style.willChange = ''; } }, 0.82);
+                  onReverseComplete: function () { film.style.willChange = ''; } }, dunkel);
 
     tl.fromTo(titel, { autoAlpha: 0, y: 14 },
-              { autoAlpha: 1, y: 0, duration: 0.032, ease: 'power2.out' }, 0.845);
+              { autoAlpha: 1, y: 0, duration: hoch ? 0.020 : 0.032, ease: 'power2.out' },
+              hoch ? 0.608 : 0.845);
 
-    /* Aufkleben: kurz groesser, dann auf 1 - nacheinander. */
-    etiketten.forEach(function (e, i) {
-      tl.fromTo(e, { autoAlpha: 0, scale: 1.04 },
-                { autoAlpha: 1, scale: 1, duration: 0.028, ease: 'power2.out' }, 0.878 + i * 0.022);
-    });
+    /* Aufkleben: kurz groesser, dann auf 1. Im Querformat bleiben alle fuenf
+       stehen, im Hochformat macht jedes Etikett dem naechsten Platz. */
+    if (hoch) {
+      /* Haelt die Zeitachse auf genau 1.0, damit die Positionen oben
+         Bruchteile des Scrollwegs sind und nicht gestaucht werden. */
+      tl.to(buehne, { duration: 1 }, 0);
+      var los = 0.670, takt = 0.066;
+      etiketten.forEach(function (e, i) {
+        var a = los + i * takt;
+        tl.fromTo(e, { autoAlpha: 0, scale: 1.05 },
+                  { autoAlpha: 1, scale: 1, duration: 0.014, ease: 'power2.out' }, a);
+        if (i < etiketten.length - 1) {
+          tl.to(e, { autoAlpha: 0, duration: 0.014, ease: 'none' }, a + 0.052);
+        }
+      });
+    } else {
+      etiketten.forEach(function (e, i) {
+        tl.fromTo(e, { autoAlpha: 0, scale: 1.04 },
+                  { autoAlpha: 1, scale: 1, duration: 0.028, ease: 'power2.out' }, 0.878 + i * 0.022);
+      });
+    }
+
+    /* Die Etiketten werden anhand ihrer Hoehe gesetzt. Steht Manrope beim
+       ersten Messen noch nicht, sitzen sie ein paar Pixel daneben - deshalb
+       einmal nachmessen, sobald die Schrift da ist. */
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(function () { if (tl) platzieren(); });
+    }
   }
 
   var warte;
@@ -993,7 +1161,10 @@ window.addEventListener('DOMContentLoaded', function () {
     warte = setTimeout(function () {
       if (tl.scrollTrigger) tl.scrollTrigger.kill();
       tl.kill();
-      gsap.set(etiketten.concat([titel]), { clearProps: 'all' });
+      gsap.set(etiketten.concat([titel, kopfText, aktion]), { clearProps: 'all' });
+      gsap.set(['.film', '.poster'], { clearProps: 'all' });
+      film.style.filter = '';
+      gsap.set(['.szene-tiefe', '.szene-himmel'], { clearProps: 'all' });
       aufbauen();
       ScrollTrigger.refresh();
     }, 200);

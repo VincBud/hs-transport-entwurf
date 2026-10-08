@@ -137,3 +137,21 @@ Die beiden unteren bekommen `stroke-dasharray` = Pfadlänge und einen vom Scroll
 **Barrierefreiheit.** Straßen-SVG `aria-hidden="true"`. Die Haltepunkte sind echte `<a>` mit Textbeschriftung in einem `<nav aria-label="Seitenfortschritt">`, sichtbarer Fokus, Trefferfläche mindestens 44 px (darf größer sein als der sichtbare Ring). Bekannt und akzeptiert: Diese vier Links verdoppeln die Hauptnavigation und erzeugen vier zusätzliche Tab-Stopps.
 
 **Größe.** SVG ~2,4 KB, CSS ~1,2 KB, JS ~1,8 KB — zusammen rund **5,4 KB roh, ~1,6 KB gzip**.
+
+## Hero im Hochformat (eigene Komposition, nicht das Querformat verkleinert)
+
+Das Hero-Video ist 16:9, ein Handy ist etwa 9:19,5. Beide Formate lassen sich nicht mit derselben Bildführung bedienen. Im Hochformat gilt deshalb eine eigene Anordnung; der Querformat-Hero bleibt davon unberührt.
+
+**Reihenfolge von oben nach unten:** Überschrift, Fließtext, Video in voller Breite, Button. Kein Text liegt auf dem Video. Die Reste an freier Höhe liegen zu gleichen Teilen oben und unten, die Innenabstände sind mit 40 px großzügig — so liest sich die Bühne als Komposition und nicht als Video mit schwarzen Rändern.
+
+**3:2 ist die Untergrenze für den Ausschnitt.** Flacher geht nicht, sonst fällt die Zugmaschine aus dem Bild; 4:3 schneidet sie bereits ab. Auf sehr niedrigen Geräten wird das Band gekürzt, bevor Text oder Button unter die WhatsApp-Leiste rutschen.
+
+**Kein Hineinzoomen im Hochformat — bewusste Abweichung vom Querformat.** Im Schlussbild stehen die Paletten am linken und rechten Bildrand; erkennbar bleiben sie nur, solange rund 85 % der Bildbreite sichtbar sind. Das entspricht einem Ausschnitt von höchstens 1,51:1, bei 390 px Breite also rund 258 px Höhe. Jeder stärkere Zoom zeigt nur noch den leeren Gang. Die Anforderung "Paletten gut erkennbar" schließt das Mitwachsen des Ausschnitts auf dem Handy damit aus.
+
+**Text bleibt bis zum Schluss stehen.** Im Querformat liegt die Überschrift auf dem Video und muss bei rund 4 s abtreten. Im Hochformat steht sie darüber, hat also keinen Grund zu verschwinden: Sie bleibt bis kurz vor den Etiketten und wechselt dann direkt zu "Was wir fahren". Sonst stünde die halbe Strecke eine leere Bühne um ein kleines Videoband.
+
+**Fünf Etiketten nacheinander statt gleichzeitig.** Je rund 180 px Scrollweg, davon etwa 140 px Standzeit. Dafür ist die Bühne im Hochformat 420 svh lang statt 260. Die Zähler 01/05 bis 05/05 bleiben, das letzte Etikett steht bis zum Ende.
+
+**Die Überschrift bekommt eine eigene Fläche.** Im sichtbaren Ausschnitt ist die Rückwand hell; weiße Schrift käme dort selbst bei 0,32 Abdunklung nur auf 2,90:1. Statt stärker abzudunkeln liegt "Was wir fahren" auf `rgba(26,30,46,.86)` — 10,66:1 auch über reinem Weiß. So kann die Abdunklung bei 0,16 und der Weichzeichner bei 0,8 px bleiben.
+
+**Entwurfs-Hinweis.** Bleibt oben kleben, der Header rastet darunter ein. Seine Höhe misst ein eigenes Skript in `--hinweis`; der CSS-Rückfallwert 49 px gilt nur ohne JavaScript und stimmt für zweizeiligen Umbruch ab 360 px Breite.
