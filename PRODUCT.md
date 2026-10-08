@@ -60,6 +60,7 @@ Offene Stellen:
 - Namentliche Ansprechpartner für Bewerbung und für Auftraggeber.
 - Welches der beiden Ziele Vorrang hat: Fahrer gewinnen oder Aufträge gewinnen. Der Entwurf arbeitet bis zur Klärung mit Fahrern zuerst.
 - Fotos: noch keine vorhanden.
+- Ob **alle 30 LKW Eigentum** der HS Transport GmbH sind oder ein Teil geleast, gemietet oder ueber den Unternehmerverbund gefahren wird. Bis zur Klaerung heisst es auf der Seite nur „30 LKW im Fuhrpark“, nicht „im eigenen Fuhrpark“.
 - Farbe der eigenen Wechselbrücken. Arbeitsannahme bis zur Klärung: hellgrau-weißer Kofferaufbau mit Schriftzug in Navy `#2A3977`.
 - Inhalte, die im Laderaum der Eröffnungsszene stehen sollen (Vincent liefert nach; vorläufig die zwei Wege Jobs und Leistungen).
 - **Scroll-Straße am rechten Rand** — beschlossen am 07.10.2026, wird **nach Schritt 2** gebaut. Der Plan liegt vollständig im Abschnitt „Bauplan Scroll-Straße" am Ende dieser Datei.
