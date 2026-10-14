@@ -1,4 +1,4 @@
-# Fotos für Leistungen, Karriere und Standorte
+# Fotos für Leistungen und Karriere
 
 Quelle: `fotos-original/`. Zuschnitt als Pixel-Box `(links, oben, rechts, unten)`
 im Originalbild. Danach als WebP (Qualität ~80) in drei Breiten nach `bilder/`
@@ -12,11 +12,11 @@ exportieren: `-560`, `-900`, `-1400` (Hochformat 4:5 bzw. wie angegeben).
 | `leistung-04-sattel` | `32-zugmaschine-609-bauernhaus-seite-links.webp` | (0, 100, 1200, 1600) | 4:5 |
 | `leistung-05-telematik` | `10-actros-kreisverkehr-traunstein.webp` | (0, 100, 1200, 1600) | 4:5 |
 | `karriere-blau` | `13-blauer-man-503-front-nah.webp` | (0, 100, 1200, 1600) | 4:5 |
-| `standorte-berge` | `38-hof-berge-viel-himmel-lkw-rechts.webp` | (0, 520, 1200, 1220) | 12:7 (nur 900 + 1400) |
 | `karriere-nacht` | `24-weisser-man-501-nacht-nebel.webp` | (0, 200, 1200, 1400) | 1:1 (nur 280 + 560 nötig) |
 
 Bereits vorhanden und weiterverwendet: `bilder/karriere-440/640/900.webp`
-(Actros mit offener Tür) für „So bewirbst du dich“.
+(Actros mit offener Tür) für „So bewirbst du dich“ und
+`bilder/ueberuns-480/700/1000.webp` für Über uns. Standorte braucht kein Foto.
 
 Bewusst nicht verwendet: Fotos, auf denen DHL, Dachser, Fercam oder Lermer
 groß zu sehen sind (Auftraggeber sind laut PRODUCT.md noch offen) und der
