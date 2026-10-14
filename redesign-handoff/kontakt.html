@@ -1,0 +1,41 @@
+<!-- ============================================================
+     ERSETZT die bisherige Sektion #kontakt. Position: #ueber-uns → #kontakt.
+     Das Formular behält alle Namen, ids, Fehlermeldungen, #form-status und
+     .form-note – das bestehende Formular-Skript in index.html läuft unverändert weiter.
+     ============================================================ -->
+<section id="kontakt" class="r-sec r-grau" aria-labelledby="h-kontakt">
+<div class="wrap">
+<p class="r-label rv">Kontakt</p>
+<div class="r-12 kon2">
+<div class="kon2-text">
+<h2 id="h-kontakt" class="r-h2 rv">Kapazität anfragen</h2>
+<p class="r-lead rv d1">Sagen Sie uns, welche Linie oder welches Volumen Sie abdecken müssen. Wir melden uns <span class="ph">[innerhalb eines Werktags]</span> mit einer Einschätzung.</p>
+<p class="tel2-l rv d1">Telefon, rund um die Uhr</p>
+<a class="tel2 rv d1" href="tel:+4986626682425">+49 8662 6682425</a>
+<dl class="kon-dl rv d2">
+<div><dt>Firmensitz und Betriebsstätte</dt><dd>HS Transport GmbH<br>Gamstraße 16, 83313 Siegsdorf</dd></div>
+<div><dt>E-Mail</dt><dd><a href="mailto:info@h-s-transport.de">info@h-s-transport.de</a></dd></div>
+<div><dt>Ansprechpartner</dt><dd><span class="ph">[Name für Auftraggeber-Anfragen]</span></dd></div>
+</dl>
+</div>
+<form id="anfrage" class="f2 rv d1" novalidate aria-label="Anfrageformular für Auftraggeber">
+<label class="full">Firma <span class="req">(nötig)</span>
+<input name="firma" type="text" autocomplete="organization" aria-describedby="err-firma" required></label>
+<p class="err" id="err-firma" hidden>Bitte den Firmennamen angeben.</p>
+<label>Ansprechpartner <span class="req">(nötig)</span>
+<input name="person" type="text" autocomplete="name" aria-describedby="err-person" required></label>
+<label>Telefon<input name="telefon" type="tel" inputmode="tel" autocomplete="tel"></label>
+<p class="err" id="err-person" hidden>Bitte einen Ansprechpartner angeben.</p>
+<label class="full">E-Mail <span class="req">(nötig)</span>
+<input name="email" type="email" inputmode="email" autocomplete="email" aria-describedby="err-email" required></label>
+<p class="err" id="err-email" hidden>Bitte eine E-Mail-Adresse angeben, an die wir antworten können.</p>
+<label class="full">Ihr Anliegen <span class="req">(nötig)</span>
+<textarea name="anliegen" rows="4" maxlength="1200" aria-describedby="err-anliegen" required placeholder="Welche Linie, welches Volumen, ab wann?"></textarea></label>
+<p class="err" id="err-anliegen" hidden>Bitte kurz beschreiben, worum es geht.</p>
+<button type="submit">Anfrage per E-Mail senden<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button>
+<p class="status" id="form-status" role="status" aria-live="polite" tabindex="-1"></p>
+<p class="form-note">Das Formular öffnet Ihr E-Mail-Programm mit der fertigen Anfrage. Es werden keine Daten auf dieser Seite gespeichert.</p>
+</form>
+</div>
+</div>
+</section>

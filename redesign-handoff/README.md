@@ -1,8 +1,8 @@
-# Redesign-Übergabe: „Was wir fahren“, „Fahrer gesucht“, „Von wo wir fahren“, „Über uns“
+# Redesign-Übergabe: alles ab „Was wir fahren“
 
 Freigegebener Entwurf aus dem Design-Canvas (v2). Diese Mappe enthält nur die
-Sektionen **#leistungen**, **#karriere**, **#standorte** und **#ueber-uns**. Alles andere auf der
-Seite bleibt, wie es ist.
+Sektionen **#leistungen**, **#karriere**, **#standorte**, **#ueber-uns**, **#kontakt**
+und den **Footer**. Alles darüber bleibt, wie es ist.
 
 | Datei | Inhalt |
 |---|---|
@@ -13,16 +13,21 @@ Seite bleibt, wie es ist.
 | `standorte.css` | CSS für die Standorte-Sektion (nach `redesign.css` einfügen) |
 | `ueberuns.html` | Neues Markup für `<section id="ueber-uns">` – Zitat führt, Foto klein |
 | `ueberuns.css` | CSS für Über uns (nach `standorte.css` einfügen) |
+| `kontakt.html` | Neues Markup für `<section id="kontakt">` – Formular behält alle Namen und ids |
+| `kontakt.css` | CSS für Kontakt (nach `ueberuns.css` einfügen) |
+| `footer.html` | Neuer `<footer class="fu">` |
+| `footer.css` | CSS für den Footer (zuletzt einfügen) |
 | `fotos.md` | Welche Originalfotos wie zugeschnitten und exportiert werden |
 
 ## Regeln
-- Hero, Header, Entwurfs-Hinweis, „Unser Fuhrpark“,
-  Kontakt, Footer, Scroll-Straße, `.thumb`-Leiste: **unverändert**.
+- Hero, Header, Entwurfs-Hinweis, „Unser Fuhrpark“, Scroll-Straße,
+  `.thumb`-Leiste und alle bestehenden Skripte (Menü, Formular, Hero, Straße):
+  **unverändert**.
 - Nur Manrope und die bestehenden CI-Farben (`--navy`, `--blau`, `--tief`,
   `--hell`, `--text`, `--grau`). Keine neuen Inhalte, `.ph`-Platzhalter bleiben.
 - Bewegung nur mit JS, nur beim Scrollen, aus bei `prefers-reduced-motion`.
   Ohne JS ist alles sofort sichtbar.
-- Die Fotos aus `fotos-original/` sind für diese beiden Sektionen freigegeben.
+- Die Fotos aus `fotos-original/` sind für die neuen Sektionen freigegeben.
 
 ## Standorte: Entscheidung vom 14.10.2026
 Die Gliederzug-Zeichnung (`bilder/lkw-seitenansicht-ohne-branding.svg`) fliegt aus
@@ -37,3 +42,7 @@ Das große Hochformat-Foto weicht einem großen Zitat mit deutschen
 Anführungszeichen. Das Foto (vorhandene `bilder/ueberuns-*.webp`) steht klein
 rechts daneben. Darunter eine Zeile mit Firmentext-Platzhalter, Geschäftsführung
 und CS-Logistics-Hinweis.
+
+## Reihenfolge der CSS-Dateien
+Ans Ende des `<style>`-Blocks, genau so: `redesign.css` → `standorte.css` →
+`ueberuns.css` → `kontakt.css` → `footer.css`.

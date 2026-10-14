@@ -1,0 +1,26 @@
+/* ============================================================
+   REDESIGN Footer (.fu). Ans Ende des <style>-Blocks, nach kontakt.css.
+   Danach entfällt die alte footer-Regelgruppe (footer, footer .wrap, footer ul,
+   footer a). .ext bleibt (Pfeil-Icon an externen Links).
+   ============================================================ */
+/* Footer */
+.fu{background:var(--navy);color:var(--hell);font-size:15px}
+.fu .wrap{padding-top:clamp(72px,8vw,120px);padding-bottom:calc(36px + env(safe-area-inset-bottom,0px))}
+.fu-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:32px;padding-bottom:clamp(48px,5vw,72px);border-bottom:1px solid rgba(255,255,255,.2)}
+.fu-name{font-weight:800;font-size:clamp(34px,4vw,52px);letter-spacing:-.035em;line-height:1;color:#fff}
+.fu-sub{margin-top:10px;font-size:15px;color:var(--hell)}
+.fu-akt{display:flex;flex-wrap:wrap;gap:10px}
+.fu-btn{display:inline-flex;align-items:center;min-height:52px;padding:0 22px;border-radius:4px;font-weight:700;text-decoration:none;color:#fff;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.4);transition:background 160ms ease,box-shadow 160ms ease}
+.fu-btn:hover{box-shadow:inset 0 0 0 1.5px #fff}
+.fu-btn.voll{background:var(--blau);box-shadow:none}
+.fu-btn.voll:hover{background:var(--tief)}
+.fu-cols{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:32px 24px;padding:clamp(40px,4vw,56px) 0}
+.fu-cols h3{font-size:12.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#fff;margin:0 0 14px}
+.fu-cols address{font-style:normal;line-height:1.75}
+.fu-cols ul{list-style:none;margin:0;padding:0}
+.fu-cols a{color:#fff;display:inline-flex;align-items:center;min-height:36px;text-decoration:none}
+.fu-cols a:hover{text-decoration:underline;text-underline-offset:4px}
+.fu-bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 24px;padding-top:22px;border-top:1px solid rgba(255,255,255,.2);font-size:13.5px}
+
+@media (max-width:980px){.fu-cols{grid-template-columns:1fr 1fr}}
+@media (max-width:640px){.fu-cols{grid-template-columns:1fr}}

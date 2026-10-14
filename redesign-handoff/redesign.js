@@ -31,7 +31,7 @@ window.addEventListener('DOMContentLoaded', function () {
 window.addEventListener('DOMContentLoaded', function () {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   if (!('IntersectionObserver' in window)) return;
-  var ziele = document.querySelectorAll('#leistungen .rv, #leistungen .cur, #karriere .rv, #karriere .cur, #standorte .rv, #standorte .cur, #ueber-uns .rv, #ueber-uns .cur');
+  var ziele = document.querySelectorAll('#leistungen .rv, #leistungen .cur, #karriere .rv, #karriere .cur, #standorte .rv, #standorte .cur, #ueber-uns .rv, #ueber-uns .cur, #kontakt .rv, #kontakt .cur');
   if (!ziele.length) return;
   document.documentElement.classList.add('rv-on');
   var io = new IntersectionObserver(function (es) {

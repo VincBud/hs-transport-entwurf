@@ -65,7 +65,6 @@ nav a{text-decoration:none;display:inline-flex;align-items:center;min-height:44p
 @media (hover:hover) and (pointer:fine){
   nav a:hover{color:var(--blau)}
   .call:hover{background:var(--tief)!important}
-  footer a:hover,.kontakt dd a:hover{text-decoration:underline;text-underline-offset:4px}
 }
 .call{background:var(--blau);color:#fff!important;padding:0 18px!important;border-radius:8px;font-weight:700;
   transition:background 160ms ease,transform 160ms var(--ease-out)}
@@ -96,44 +95,6 @@ section.block{padding-top:clamp(56px,7vw,104px);padding-bottom:clamp(56px,7vw,10
 .zahl span{display:block;margin-top:7px;font-size:15px;color:var(--hell)}
 .zahlen img{border-radius:16px;aspect-ratio:4/3;object-fit:cover;object-position:50% 44%;width:100%;height:auto}
 
-/* Ueber uns */
-
-/* Kontakt */
-.kontakt{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(28px,4vw,56px)}
-.kontakt h2{font-size:clamp(30px,4vw,50px);color:var(--navy)}
-.kontakt > div > p{margin-top:14px;color:var(--text)}
-.kontakt dl{margin:24px 0 0;display:grid;gap:16px}
-.kontakt dt{font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--blau)}
-.kontakt dd{margin:3px 0 0;font-weight:600;color:var(--navy)}
-.kontakt dd a{text-decoration:none;display:inline-flex;align-items:center;min-height:44px}
-.tel{font-size:21px;font-weight:800;font-variant-numeric:tabular-nums}
-form{background:var(--weiss);border:1px solid var(--kante);border-radius:18px;padding:clamp(22px,2.6vw,32px);
-  display:grid;grid-template-columns:1fr 1fr;gap:16px 18px;align-content:start;box-shadow:0 10px 30px rgba(22,32,62,.07)}
-label{display:flex;flex-direction:column;gap:6px;font-weight:600;font-size:14.5px;color:var(--navy)}
-.req{color:#6B7490;font-weight:500}
-input,textarea{font:inherit;font-weight:400;padding:12px 14px;border:1.5px solid #7580A4;border-radius:9px;
-  background:var(--weiss);min-height:48px;width:100%;color:var(--nacht);transition:border-color 160ms ease}
-@media (hover:hover) and (pointer:fine){input:hover,textarea:hover{border-color:var(--navy)}}
-input::placeholder,textarea::placeholder{color:#6A7085;opacity:1}
-textarea{resize:vertical;min-height:120px}
-input[aria-invalid="true"],textarea[aria-invalid="true"]{border-color:var(--rot);border-width:2px}
-.full{grid-column:1/-1}
-.err{grid-column:1/-1;margin:-8px 0 0;font-size:14px;font-weight:700;color:var(--rot)}
-form button{grid-column:1/-1;font:inherit;font-weight:700;background:var(--blau);color:#fff;border:0;border-radius:9px;
-  min-height:56px;cursor:pointer;transition:background 160ms ease,transform 160ms var(--ease-out)}
-@media (hover:hover) and (pointer:fine){form button:hover{background:var(--tief)}}
-form button:active{transform:scale(.98)}
-.form-note{grid-column:1/-1;margin:0;font-size:14px;color:#6B7490}
-.status{grid-column:1/-1;margin:0;font-size:15px;font-weight:600;padding:12px 14px;border:1.5px solid var(--navy);
-  border-radius:9px;background:var(--grau);color:var(--navy)}
-.status:empty{display:none}
-.status-err{border-color:var(--rot);color:var(--rot)}
-
-footer{background:var(--navy);color:var(--hell);font-size:15px}
-footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px 24px;
-  padding-top:34px;padding-bottom:calc(34px + env(safe-area-inset-bottom,0px))}
-footer ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:4px 24px}
-footer a{color:#fff;display:inline-flex;align-items:center;min-height:44px;text-decoration:none}
 .ext{width:11px;height:11px;margin-left:.45em;flex:none;opacity:.8}
 
 .thumb{display:none}
@@ -294,7 +255,7 @@ footer a{color:#fff;display:inline-flex;align-items:center;min-height:44px;text-
 
 /* Responsive */
 @media (max-width:980px){
-  .zahlen .wrap,.kontakt{grid-template-columns:1fr}
+  .zahlen .wrap{grid-template-columns:1fr}
 }
 @media (max-width:900px){
   :root{--kopf:64px}
@@ -320,7 +281,6 @@ footer a{color:#fff;display:inline-flex;align-items:center;min-height:44px;text-
 }
 @media (max-width:640px){
   .zahlen-raster{grid-template-columns:1fr 1fr}
-  form{grid-template-columns:1fr}
 }
 
 /* ============================================================
@@ -496,6 +456,77 @@ footer a{color:#fff;display:inline-flex;align-items:center;min-height:44px;text-
   .ueb3-text,.ueb3-sign,.ueb3-cs{grid-column:1/-1}
 }
 @media (max-width:640px){.ueb3-bild{grid-column:1/-1;aspect-ratio:4/3}}
+
+/* ============================================================
+   REDESIGN „Kapazität anfragen“ (#kontakt). Setzt redesign.css und standorte.css
+   voraus (.r-grau). Ans Ende des <style>-Blocks, nach ueberuns.css.
+   Entfernt wurden die alten globalen Regeln für form, label, input, textarea,
+   .req, .full, .err, .form-note, .status, .kontakt, .tel – nur #kontakt hat sie benutzt.
+   ============================================================ */
+/* Kontakt */
+.kon2{row-gap:56px}
+.kon2-text{grid-column:1/span 5}
+.kon2-text .r-lead{margin-top:22px}
+.tel2-l{margin-top:clamp(40px,4vw,56px);font-size:12.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--blau)}
+.tel2{display:inline-flex;align-items:center;min-height:44px;margin-top:8px;font-size:clamp(30px,3.2vw,42px);font-weight:800;letter-spacing:-.03em;color:var(--navy);text-decoration:none;font-variant-numeric:tabular-nums}
+.tel2:hover{color:var(--blau)}
+.kon-dl{margin:28px 0 0;border-top:1px solid var(--linie)}
+.kon-dl div{display:grid;grid-template-columns:150px minmax(0,1fr);gap:16px;padding:16px 0;border-bottom:1px solid var(--linie)}
+.kon-dl dt{font-size:12.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#6B7490;padding-top:4px}
+.kon-dl dd{margin:0;font-weight:600;color:var(--navy)}
+.kon-dl a{text-decoration:none}
+.kon-dl a:hover{text-decoration:underline;text-underline-offset:4px}
+.f2{grid-column:7/span 6;display:grid;grid-template-columns:1fr 1fr;gap:30px 28px;align-content:start}
+.f2 label{display:block;font-weight:600;font-size:14.5px;color:var(--navy)}
+.f2 label input,.f2 label textarea{display:block;margin-top:4px}
+.f2 .req{color:#6B7490;font-weight:500}
+.f2 input,.f2 textarea{font:inherit;font-weight:400;font-size:17px;padding:12px 0 13px;border:0;border-bottom:1.5px solid #7580A4;border-radius:0;background:transparent;min-height:50px;width:100%;color:var(--nacht);transition:border-color 160ms ease,box-shadow 160ms ease}
+.f2 input:hover,.f2 textarea:hover{border-bottom-color:var(--navy)}
+.f2 input:focus,.f2 textarea:focus{outline:none;border-bottom-color:var(--blau);box-shadow:0 1.5px 0 var(--blau)}
+.f2 input:focus-visible,.f2 textarea:focus-visible{outline:none;box-shadow:0 1.5px 0 var(--blau)}
+.f2 ::placeholder{color:#6A7085;opacity:1}
+.f2 textarea{resize:vertical;min-height:120px}
+.f2 [aria-invalid="true"]{border-bottom-color:var(--rot);border-bottom-width:2px}
+.f2 .full{grid-column:1/-1}
+.f2 .err{grid-column:1/-1;margin:-18px 0 0;font-size:14px;font-weight:700;color:var(--rot)}
+.f2 button{grid-column:1/-1;font:inherit;font-weight:700;font-size:17px;background:var(--blau);color:#fff;border:0;border-radius:4px;min-height:60px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;padding:0 26px;transition:background 160ms ease,transform 160ms var(--ease-out)}
+.f2 button:hover{background:var(--tief)}
+.f2 button:active{transform:scale(.99)}
+.f2 button svg{width:22px;height:22px}
+.f2 .form-note{grid-column:1/-1;margin:-12px 0 0;font-size:14px;color:#6B7490}
+.f2 .status{grid-column:1/-1;margin:0;font-size:15px;font-weight:600;padding:12px 14px;border:1.5px solid var(--navy);border-radius:4px;background:#fff;color:var(--navy)}
+.f2 .status:empty{display:none}
+.f2 .status-err{border-color:var(--rot);color:var(--rot)}
+
+@media (max-width:980px){.kon2-text,.f2{grid-column:1/-1}}
+@media (max-width:640px){.kon-dl div{grid-template-columns:1fr;gap:4px}.f2{grid-template-columns:1fr}}
+
+/* ============================================================
+   REDESIGN Footer (.fu). Ans Ende des <style>-Blocks, nach kontakt.css.
+   Entfernt wurde die alte footer-Regelgruppe (footer, footer .wrap, footer ul,
+   footer a). .ext bleibt (Pfeil-Icon an externen Links).
+   ============================================================ */
+/* Footer */
+.fu{background:var(--navy);color:var(--hell);font-size:15px}
+.fu .wrap{padding-top:clamp(72px,8vw,120px);padding-bottom:calc(36px + env(safe-area-inset-bottom,0px))}
+.fu-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:32px;padding-bottom:clamp(48px,5vw,72px);border-bottom:1px solid rgba(255,255,255,.2)}
+.fu-name{font-weight:800;font-size:clamp(34px,4vw,52px);letter-spacing:-.035em;line-height:1;color:#fff}
+.fu-sub{margin-top:10px;font-size:15px;color:var(--hell)}
+.fu-akt{display:flex;flex-wrap:wrap;gap:10px}
+.fu-btn{display:inline-flex;align-items:center;min-height:52px;padding:0 22px;border-radius:4px;font-weight:700;text-decoration:none;color:#fff;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.4);transition:background 160ms ease,box-shadow 160ms ease}
+.fu-btn:hover{box-shadow:inset 0 0 0 1.5px #fff}
+.fu-btn.voll{background:var(--blau);box-shadow:none}
+.fu-btn.voll:hover{background:var(--tief)}
+.fu-cols{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:32px 24px;padding:clamp(40px,4vw,56px) 0}
+.fu-cols h3{font-size:12.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#fff;margin:0 0 14px}
+.fu-cols address{font-style:normal;line-height:1.75}
+.fu-cols ul{list-style:none;margin:0;padding:0}
+.fu-cols a{color:#fff;display:inline-flex;align-items:center;min-height:36px;text-decoration:none}
+.fu-cols a:hover{text-decoration:underline;text-underline-offset:4px}
+.fu-bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 24px;padding-top:22px;border-top:1px solid rgba(255,255,255,.2);font-size:13.5px}
+
+@media (max-width:980px){.fu-cols{grid-template-columns:1fr 1fr}}
+@media (max-width:640px){.fu-cols{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -852,41 +883,41 @@ footer a{color:#fff;display:inline-flex;align-items:center;min-height:44px;text-
   </div>
   </section>
 
-  <section id="kontakt" class="grau block" aria-labelledby="h-kontakt">
-    <div class="wrap kontakt">
-      <div>
-        <h2 id="h-kontakt">Kapazit&auml;t anfragen</h2>
-        <p>Sagen Sie uns, welche Linie oder welches Volumen Sie abdecken m&uuml;ssen. Wir melden uns <span class="ph">[innerhalb eines Werktags]</span> mit einer Einsch&auml;tzung.</p>
-        <dl>
-          <dt>Firmensitz und Betriebsst&auml;tte</dt>
-          <dd>HS Transport GmbH<br>Gamstra&szlig;e 16, 83313 Siegsdorf</dd>
-          <dt>Telefon, rund um die Uhr</dt>
-          <dd><a class="tel" href="tel:+4986626682425">+49 8662 6682425</a></dd>
-          <dt>E-Mail</dt>
-          <dd><a href="mailto:info@h-s-transport.de">info@h-s-transport.de</a></dd>
-          <dt>Ansprechpartner</dt>
-          <dd><span class="ph">[Name f&uuml;r Auftraggeber-Anfragen]</span></dd>
-        </dl>
-      </div>
-      <form id="anfrage" novalidate aria-label="Anfrageformular f&uuml;r Auftraggeber">
-        <label class="full">Firma <span class="req">(n&ouml;tig)</span>
-          <input name="firma" type="text" autocomplete="organization" aria-describedby="err-firma" required></label>
-        <p class="err" id="err-firma" hidden>Bitte den Firmennamen angeben.</p>
-        <label>Ansprechpartner <span class="req">(n&ouml;tig)</span>
-          <input name="person" type="text" autocomplete="name" aria-describedby="err-person" required></label>
-        <label>Telefon<input name="telefon" type="tel" inputmode="tel" autocomplete="tel"></label>
-        <p class="err" id="err-person" hidden>Bitte einen Ansprechpartner angeben.</p>
-        <label class="full">E-Mail <span class="req">(n&ouml;tig)</span>
-          <input name="email" type="email" inputmode="email" autocomplete="email" aria-describedby="err-email" required></label>
-        <p class="err" id="err-email" hidden>Bitte eine E-Mail-Adresse angeben, an die wir antworten k&ouml;nnen.</p>
-        <label class="full">Ihr Anliegen <span class="req">(n&ouml;tig)</span>
-          <textarea name="anliegen" rows="4" maxlength="1200" aria-describedby="err-anliegen" required placeholder="Welche Linie, welches Volumen, ab wann?"></textarea></label>
-        <p class="err" id="err-anliegen" hidden>Bitte kurz beschreiben, worum es geht.</p>
-        <button type="submit">Anfrage per E-Mail senden</button>
-        <p class="status" id="form-status" role="status" aria-live="polite" tabindex="-1"></p>
-        <p class="form-note">Das Formular &ouml;ffnet Ihr E-Mail-Programm mit der fertigen Anfrage. Es werden keine Daten auf dieser Seite gespeichert.</p>
-      </form>
-    </div>
+  <section id="kontakt" class="r-sec r-grau" aria-labelledby="h-kontakt">
+  <div class="wrap">
+  <p class="r-label rv">Kontakt</p>
+  <div class="r-12 kon2">
+  <div class="kon2-text">
+  <h2 id="h-kontakt" class="r-h2 rv">Kapazität anfragen</h2>
+  <p class="r-lead rv d1">Sagen Sie uns, welche Linie oder welches Volumen Sie abdecken müssen. Wir melden uns <span class="ph">[innerhalb eines Werktags]</span> mit einer Einschätzung.</p>
+  <p class="tel2-l rv d1">Telefon, rund um die Uhr</p>
+  <a class="tel2 rv d1" href="tel:+4986626682425">+49 8662 6682425</a>
+  <dl class="kon-dl rv d2">
+  <div><dt>Firmensitz und Betriebsstätte</dt><dd>HS Transport GmbH<br>Gamstraße 16, 83313 Siegsdorf</dd></div>
+  <div><dt>E-Mail</dt><dd><a href="mailto:info@h-s-transport.de">info@h-s-transport.de</a></dd></div>
+  <div><dt>Ansprechpartner</dt><dd><span class="ph">[Name für Auftraggeber-Anfragen]</span></dd></div>
+  </dl>
+  </div>
+  <form id="anfrage" class="f2 rv d1" novalidate aria-label="Anfrageformular für Auftraggeber">
+  <label class="full">Firma <span class="req">(nötig)</span>
+  <input name="firma" type="text" autocomplete="organization" aria-describedby="err-firma" required></label>
+  <p class="err" id="err-firma" hidden>Bitte den Firmennamen angeben.</p>
+  <label>Ansprechpartner <span class="req">(nötig)</span>
+  <input name="person" type="text" autocomplete="name" aria-describedby="err-person" required></label>
+  <label>Telefon<input name="telefon" type="tel" inputmode="tel" autocomplete="tel"></label>
+  <p class="err" id="err-person" hidden>Bitte einen Ansprechpartner angeben.</p>
+  <label class="full">E-Mail <span class="req">(nötig)</span>
+  <input name="email" type="email" inputmode="email" autocomplete="email" aria-describedby="err-email" required></label>
+  <p class="err" id="err-email" hidden>Bitte eine E-Mail-Adresse angeben, an die wir antworten können.</p>
+  <label class="full">Ihr Anliegen <span class="req">(nötig)</span>
+  <textarea name="anliegen" rows="4" maxlength="1200" aria-describedby="err-anliegen" required placeholder="Welche Linie, welches Volumen, ab wann?"></textarea></label>
+  <p class="err" id="err-anliegen" hidden>Bitte kurz beschreiben, worum es geht.</p>
+  <button type="submit">Anfrage per E-Mail senden<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button>
+  <p class="status" id="form-status" role="status" aria-live="polite" tabindex="-1"></p>
+  <p class="form-note">Das Formular öffnet Ihr E-Mail-Programm mit der fertigen Anfrage. Es werden keine Daten auf dieser Seite gespeichert.</p>
+  </form>
+  </div>
+  </div>
   </section>
 </main>
 
@@ -943,15 +974,53 @@ footer a{color:#fff;display:inline-flex;align-items:center;min-height:44px;text-
   <a href="#kontakt" data-ziel="kontakt"><span class="halte-ring"></span><span class="vh">Kontakt</span></a>
 </nav>
 
-<footer>
-  <div class="wrap">
-    <span>&copy; 2026 HS Transport GmbH, Siegsdorf</span>
-    <ul>
-      <li><a href="https://www.h-s-transport.de/impressum.html">Impressum<span class="vh"> (auf der bisherigen Website)</span><svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square" aria-hidden="true"><path d="M3.2 8.8 8.8 3.2M4.6 3.2h4.2v4.2"/></svg></a></li>
-      <li><a href="https://www.h-s-transport.de/datenschutz.html">Datenschutz<span class="vh"> (auf der bisherigen Website)</span><svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square" aria-hidden="true"><path d="M3.2 8.8 8.8 3.2M4.6 3.2h4.2v4.2"/></svg></a></li>
-      <li><a href="https://www.instagram.com/hstransport_gmbh/">Instagram<span class="vh"> (externe Seite)</span><svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square" aria-hidden="true"><path d="M3.2 8.8 8.8 3.2M4.6 3.2h4.2v4.2"/></svg></a></li>
-    </ul>
-  </div>
+<footer class="fu">
+<div class="wrap">
+<div class="fu-top">
+<div>
+<p class="fu-name">HS Transport</p>
+<p class="fu-sub">GmbH, Siegsdorf · Wechselbrücken. Systemverkehr. Jeden Tag.</p>
+</div>
+<div class="fu-akt">
+<a class="fu-btn voll" href="#kontakt">Kapazität anfragen</a>
+<a class="fu-btn" href="https://wa.me/4915121217148">Per WhatsApp bewerben</a>
+</div>
+</div>
+<div class="fu-cols">
+<div>
+<h3>Firmensitz</h3>
+<address>HS Transport GmbH<br>Gamstraße 16<br>83313 Siegsdorf</address>
+</div>
+<div>
+<h3>Kontakt</h3>
+<ul>
+<li><a href="tel:+4986626682425"><span class="num">08662 6682425</span></a></li>
+<li><a href="mailto:info@h-s-transport.de">info@h-s-transport.de</a></li>
+</ul>
+</div>
+<div>
+<h3>Seite</h3>
+<ul>
+<li><a href="#leistungen">Leistungen</a></li>
+<li><a href="#karriere">Karriere</a></li>
+<li><a href="#standorte">Standorte</a></li>
+<li><a href="#kontakt">Kontakt</a></li>
+</ul>
+</div>
+<div>
+<h3>Rechtliches</h3>
+<ul>
+<li><a href="https://www.h-s-transport.de/impressum.html">Impressum<span class="vh"> (auf der bisherigen Website)</span><svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square" aria-hidden="true"><path d="M3.2 8.8 8.8 3.2M4.6 3.2h4.2v4.2"/></svg></a></li>
+<li><a href="https://www.h-s-transport.de/datenschutz.html">Datenschutz<span class="vh"> (auf der bisherigen Website)</span><svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square" aria-hidden="true"><path d="M3.2 8.8 8.8 3.2M4.6 3.2h4.2v4.2"/></svg></a></li>
+<li><a href="https://www.instagram.com/hstransport_gmbh/">Instagram<span class="vh"> (externe Seite)</span><svg class="ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square" aria-hidden="true"><path d="M3.2 8.8 8.8 3.2M4.6 3.2h4.2v4.2"/></svg></a></li>
+</ul>
+</div>
+</div>
+<div class="fu-bottom">
+<span>© 2026 HS Transport GmbH, Siegsdorf</span>
+<span>Entwurf von Vincent – nicht die offizielle Website der HS Transport GmbH</span>
+</div>
+</div>
 </footer>
 
 <!--
@@ -1573,7 +1642,7 @@ window.addEventListener('DOMContentLoaded', function () {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   if (!('IntersectionObserver' in window)) return;
   var ziele = Array.prototype.slice.call(
-    document.querySelectorAll('#leistungen .rv, #leistungen .cur, #karriere .rv, #karriere .cur, #standorte .rv, #standorte .cur, #ueber-uns .rv, #ueber-uns .cur'));
+    document.querySelectorAll('#leistungen .rv, #leistungen .cur, #karriere .rv, #karriere .cur, #standorte .rv, #standorte .cur, #ueber-uns .rv, #ueber-uns .cur, #kontakt .rv, #kontakt .cur'));
   if (!ziele.length) return;
   document.documentElement.classList.add('rv-on');
   var io = new IntersectionObserver(function (es) {
