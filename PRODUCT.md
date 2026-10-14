@@ -45,7 +45,7 @@ Offene Stellen:
 - **CS Logistics** ist ein Einzelunternehmen des Gründers für Beratung und Vermittlung in Transport und Logistik. Es ist bewusst nachrangig: höchstens ein kurzer Hinweis im Über-uns-Bereich oder im Footer, **kein eigenes Logo in der Navigation** und keine eigene Sektion.
 - Kein Backend: Auftraggeber-Formular läuft über `mailto:` und bleibt schlank (Firma, Ansprechpartner, Kontakt, Anliegen). Abhol- und Zielort-Felder sind gestrichen, sie gehören zum falschen Geschäftsmodell.
 - Kein Google-Maps-Embed. Standorte als SVG-Karte oder Liste.
-- Keine Bilder von der alten Seite hotlinken, keine Stockfotos. Fotos bleiben beschriftete Platzhalter-Flächen mit Motivangabe.
+- Keine Bilder von der alten Seite hotlinken, keine Stockfotos. **Ausnahme seit 14.10.2026:** Für „Was wir fahren“, „Fahrer gesucht“ und „Von wo wir fahren“ sind die Fotos aus `fotos-original/` freigegeben (Zuschnitte laut `redesign-handoff/fotos.md`). Fotos mit großen Fremdlogos (DHL, Dachser, Fercam, Lermer) und der Kühlauflieger bleiben draußen.
 - Ton: direkt und bodenständig, Fahrer-Sprache statt Marketing-Floskeln. **Du** für Bewerber, **Sie** für Auftraggeber.
 - **Keine Aussagen gegen Subunternehmer, Partner oder zugekaufte Kapazität** (Stand 08.10.2026). Subunternehmer sind in der Branche üblich, und HS Transport arbeitet selbst im Unternehmerverbund mit einem Partner. Formulierungen wie „keine zugekaufte Kapazität“, „kein Subunternehmer-Karussell“ oder „mit eigenen Fahrzeugen statt …“ sind damit ausgeschlossen. Der eigene Fuhrpark darf als Tatsache genannt werden, aber nicht als Abgrenzung.
 - Für später vorbereitet, aber auskommentiert: JSON-LD für Organization/LocalBusiness und JobPosting für beide Stellen.
@@ -59,7 +59,7 @@ Offene Stellen:
 - Firmengeschichte und Team-Text.
 - Namentliche Ansprechpartner für Bewerbung und für Auftraggeber.
 - Welches der beiden Ziele Vorrang hat: Fahrer gewinnen oder Aufträge gewinnen. Der Entwurf arbeitet bis zur Klärung mit Fahrern zuerst.
-- Fotos: noch keine vorhanden.
+- Fotos für die übrigen Sektionen (über `fotos-original/` hinaus).
 - Ob **alle 30 LKW Eigentum** der HS Transport GmbH sind oder ein Teil geleast, gemietet oder ueber den Unternehmerverbund gefahren wird. Bis zur Klaerung heisst es auf der Seite nur „30 LKW im Fuhrpark“, nicht „im eigenen Fuhrpark“.
 - Farbe der eigenen Wechselbrücken. Arbeitsannahme bis zur Klärung: hellgrau-weißer Kofferaufbau mit Schriftzug in Navy `#2A3977`.
 - Inhalte, die im Laderaum der Eröffnungsszene stehen sollen (Vincent liefert nach; vorläufig die zwei Wege Jobs und Leistungen).
@@ -83,7 +83,7 @@ Offene Stellen:
 - Logo liegt **nur als Raster** vor: `/images/logo.png`, 1346 × 178, RGBA. Keine SVG-Fassung auffindbar. Motiv: zwei graue Keile als Fahrtlinien, dunkelblauer 3D-Block, „HST" in Metallic-Grau mit Verlauf, „ransport" in Hellgrau, „GmbH" in blauer Schreibschrift. Nicht hotlinken, nicht als Raster übernehmen — bis zu einer SVG-Datei bleibt jeder Schriftzug Platzhalter.
 - CS-Logistics-Logo: `/images/cs-logo.png`, 450 × 120, Schwarz mit reinem Blau `#0000FF`. Wird laut Firma ohnehin nicht prominent gezeigt.
 - Direkte Auskunft der Firma (06.10.2026): 30 LKW im Fuhrpark (die alte Seite nannte 20, der korrekte Wert ist 30), CS Logistics als Einzelunternehmen des Gründers, Fahrerstellen an beiden Standorten, info@h-s-transport.de als Kontaktadresse.
-- **Keine nutzbaren Fotos vorhanden.** Eigene LKW mit Wechselbrücke, Multiwechsler, Team und Betriebshof müssen von der Firma kommen. Bis dahin beschriftete Platzhalter-Flächen.
+- **Fotos:** `fotos-original/` (50 Aufnahmen eigener Fahrzeuge und des Betriebshofs) ist für Leistungen, Karriere und Standorte freigegeben. Team-Fotos fehlen weiterhin.
 - Keine Referenzen, Testimonials, Zertifikate oder Kennzahlen über die oben genannten hinaus. Nichts davon darf ergänzt werden.
 
 ## Product Principles
@@ -166,33 +166,22 @@ Alle Fahrzeugteile auf der Seite folgen denselben echten Massen, damit Draufsich
 
 **Haltepunkte mit weissem Aussenring.** Seit der Zug länger ist, liegt er häufig unter einem Haltepunkt. Der weisse Ring hält den Punkt über Fahrbahn *und* Fahrzeug lesbar.
 
-**Standorte: handgezeichnete Illustration.** Vier Wege sind davor verworfen worden — die aus Grundformen gebaute SVG (zu grob), das Standbild aus dem Hero-Video (gefiel nicht) und zwei Abpaus-Versuche: aus dem Videobild (rund 20 px Bewegungsunschärfe an der Fahrerhausfront) und aus Foto 01 (scharf, aber Fahrgestell im tiefen Schatten). Es gilt `bilder/lkw-seitenansicht-ohne-branding.svg`, viewBox 940 × 252.
+**Standorte: Gliederzug-Zeichnung überholt (14.10.2026).** Die Abschnitte zur handgezeichneten Seitenansicht (Planenflächen, ausgemessene Prozentwerte, Fahrbahnlinie, `cqw`-Schriften, Karten unter 1024 px) gelten nicht mehr. `bilder/lkw-seitenansicht-ohne-branding.svg` bleibt im Repo, wird aber nicht mehr eingebunden. Ihre Masse oben gelten nur noch für die Draufsicht der Scroll-Strasse.
 
-**Die Zeichnung wird nicht verändert.** Sie ist als eigene Datei eingebunden und wird über `<img>` geladen, nicht inline — so bleibt sie austauschbar und die C2PA-Metadaten belasten das HTML nicht.
+## Standorte: Lagekarte
 
-**Die Standorte stehen ohne Kasten direkt auf der Plane**, wie eine Beschriftung auf einer echten Wechselbrücke. Die dunkelblauen Kästen und die nachgebauten Falten sind verworfen: Sie passten farblich nicht zur anthrazitfarbenen Plane und verdeckten deren Details.
+Ersatz für die Zeichnung ist eine Lagekarte als Inline-SVG (`redesign-handoff/standorte.html`): Gradnetz 9–13° O / 48–50° N, Main, Donau, schematischer Alpenrand, Orientierungsstädte (Würzburg, Nürnberg, Stuttgart, Augsburg, München, Regensburg), Maßstab 100 km, Nordpfeil, Rodgau (B) und Siegsdorf (A) mit Koordinaten und „rund 500 km“ auf der Verbindungslinie. Kein Kartendienst, kein Embed.
 
-**Alle Masse sind aus der Zeichnung ausgemessen, nicht geschätzt.** Rahmenpfosten x 12/373 (Anhänger) und 432/793 (Motorwagen), Planenfläche dazwischen, Spannschlösser ab y 162, Bodenschiene y 168–176, Räder Mitte y 214 mit Reifenradius 26, also Unterkante y 240.
-
-**Das Textfeld hält je 22 Zeichnungseinheiten Abstand zu beiden Pfosten** — nicht nur links. Der Pfosten ist hell (`#adb5b9`); reicht das Feld bis an ihn heran, fällt die Rollenzeile auf 3,4:1. Mit dem Abstand liegt der schlechteste gemessene Wert bei 7,4:1. Daraus: `left 4.3617% / 49.0426%`, `top 19.8413%`, `width 32.9787%`, `height 42.8571%`.
-
-**Kein prozentuales `padding` in diesen Feldern.** Prozentuale Innenabstände rechnen gegen die Breite des umgebenden Blocks, nicht gegen das Element — 6,2 % wurden so zu 70 px statt 27 px. Der Abstand steckt deshalb in `left` und `width`.
-
-**Die Fahrbahnlinie liegt auf `top: 95.2381%`** des Bildes, das sind die 240 von 252 Einheiten der Reifenunterkante. Bild und Linie stecken dafür in einer eigenen Hülle `.zug-bahn`: Im Hochformat stehen die Standorte als Karten in derselben Figur, ohne die Hülle würde die Prozentangabe gegen die dann höhere Figur rechnen und die Linie um rund 300 px abrutschen. Der Bodenschatten der Zeichnung (`cy 241`) liegt auf der Linie und bleibt stehen.
-
-**Keine Planen-Animation.** Die Planen sind dauerhaft offen. In diesem Abschnitt läuft kein GSAP; der einzige ScrollTrigger der Seite gehört zum Hero.
-
-**Schriftgrössen über `cqw`.** Die Flächen sind `container-type: inline-size`, die Texte skalieren mit der Flächenbreite statt mit dem Viewport. Jede Angabe hat einen px-Wert davor als Rückfall.
-
-**Siegsdorf steht im Markup zuerst**, Firmensitz vor Betriebsstätte. Am Zug sitzt es trotzdem rechts, weil die Flächen absolut platziert sind — die Reihenfolge im Dokument ist davon unabhängig, und im Hochformat stapeln sich die Karten in dieser Reihenfolge.
-
-**Unter 1024 px** steht die Zeichnung als schmales Band und die beiden Standorte darunter als Karten. Grund: Die Planenflächen sind 38 % der Bildbreite; bei 390 px Viewport bleiben davon 132 × 45 px, darin ist keine Adresse unterzubringen. Die Karten tragen dort die dunkle Laderaumfarbe, damit der Bezug zum Fahrzeug bleibt.
+- Links Text mit Adressliste (Siegsdorf zuerst, Firmensitz), rechts die Karte. **Unter 980 px** steht die Karte unter dem Text.
+- **Unter 640 px** sind die Orientierungsstädte (`.karte-ref`) ausgeblendet, damit Rodgau und Siegsdorf lesbar bleiben.
+- Unter der Sektion ein breites Fotoband vom Betriebshof Siegsdorf mit Bergen (`bilder/standorte-berge-*.webp`).
+- Einblenden wie in den beiden anderen Redesign-Sektionen (`.rv`, `.cur`), aus bei `prefers-reduced-motion`.
 
 
 ## Offene Punkte
 
 **HST-Logo: Nachbau, kein Original.** `bilder/logo-hst.svg` ist ein Nachbau nach den Fotos 03 und 07, angelegt als Übergangslösung bis die Vektordatei vom Folierer vorliegt. Abweichungen zum Original: „HST" und „ransport" stehen in Manrope statt der Originalgrotesk, „GmbH" ist eine einlinig nachgezeichnete Schreibschrift. **Zum Austausch nur diese eine Datei ersetzen und das Seitenverhältnis 640 : 160 beibehalten**, sonst verrutscht jede Platzierung.
 
-Im Abschnitt „Von wo wir fahren" wird das Logo **nicht** gebraucht — die Planen sind dort offen, es ist kein Schriftzug zu sehen. Die Datei liegt für das Hero-Video bereit, wo der generische Schriftzug noch im Bild steht.
+Im Abschnitt „Von wo wir fahren" wird das Logo **nicht** gebraucht — dort steht seit 14.10.2026 die Lagekarte. Die Datei liegt für das Hero-Video bereit, wo der generische Schriftzug noch im Bild steht.
 
 **Noch offen:** Im Hero-Video trägt der Zug weiterhin den erfundenen Schriftzug. Dort ist er bisher nicht ersetzt, weil er sich über die ganze Laufzeit bewegt — das wäre eine Nachbearbeitung des Videos, keine Überlagerung.

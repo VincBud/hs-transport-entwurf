@@ -96,44 +96,6 @@ section.block{padding-top:clamp(56px,7vw,104px);padding-bottom:clamp(56px,7vw,10
 .zahl span{display:block;margin-top:7px;font-size:15px;color:var(--hell)}
 .zahlen img{border-radius:16px;aspect-ratio:4/3;object-fit:cover;object-position:50% 44%;width:100%;height:auto}
 
-/* Standorte als Gliederzug. Die Zeichnung liegt als eigene Datei vor und
-   wird nicht veraendert. Alle Prozentwerte sind aus ihr ausgemessen:
-   Rahmenpfosten x 12/373 und 432/793, Planenflaeche zwischen den Pfosten,
-   Spannschloesser ab y 162, Bodenschiene y 168-176, Reifenunterkante y 240.
-   Beim Austausch der Zeichnung alles neu vermessen. */
-.zug{position:relative;margin:0 0 26px}
-.zug-bahn{position:relative}
-.zug-bild{display:block;width:100%;height:auto}
-/* Die Schrift steht ohne Kasten auf der Plane. Im Textfeld ist die Plane
-   durchgehend dunkel (hellster Wert RGB 61) - weiss kommt dort auf 10,7:1. */
-/* Der Abstand zu den Rahmenpfosten steckt im left/width, nicht in einem
-   prozentualen padding - das wuerde gegen die Figurbreite rechnen und waere
-   dreimal zu gross. Je 22 Zeichnungseinheiten Abstand links und rechts: der
-   Pfosten ist hell (#adb5b9), direkt daneben faellt der Kontrast ab. */
-.zug-text{position:absolute;container-type:inline-size;
-  display:flex;flex-direction:column;justify-content:center;
-  color:var(--weiss);pointer-events:none}
-.zug-text.rodgau   {left: 4.3617%;top:19.8413%;width:32.9787%;height:42.8571%}
-.zug-text.siegsdorf{left:49.0426%;top:19.8413%;width:32.9787%;height:42.8571%}
-.zug-text .rolle{font-size:10px;font-size:2.8cqw;font-weight:700;letter-spacing:.13em;
-  text-transform:uppercase;color:#D6DBE6;line-height:1.2}
-.zug-text h3{color:var(--weiss);font-size:23px;font-size:6.6cqw;letter-spacing:-.02em;
-  margin:4px 0 7px;line-height:1.04}
-.zug-text address{font-style:normal;font-size:14px;font-size:3.95cqw;line-height:1.45;color:#E7EAF1}
-.zug-text .ph{pointer-events:auto}
-/* Fahrbahn genau auf der Reifenunterkante (y 240 von 252). Der Bodenschatten
-   der Zeichnung liegt mit cy 241 darauf und bleibt stehen. */
-.zug-fahrbahn{position:absolute;left:0;right:0;top:95.2381%;height:0;
-  border-top:3px solid var(--navy)}
-.zug-fahrbahn::after{content:"";position:absolute;left:0;right:0;top:8px;height:2px;
-  background:repeating-linear-gradient(90deg,rgba(42,57,119,.32) 0 16px,transparent 16px 34px)}
-/* Der Zug gehoert zum Einleitungstext - oben steht in der Zeichnung ohnehin
-   leerer Raum bis y 44. */
-#standorte .sec-kopf{margin-bottom:6px}
-.gebiete{margin:26px 0 0;display:flex;gap:16px;align-items:baseline;flex-wrap:wrap}
-.gebiete dt{font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--blau)}
-.gebiete dd{margin:0;font-weight:600;color:var(--navy)}
-
 /* Ueber uns */
 .ueber{display:grid;grid-template-columns:.95fr 1.05fr;gap:clamp(24px,4vw,56px);align-items:center}
 .ueber img{border-radius:16px;aspect-ratio:3/4;object-fit:cover;object-position:50% 50%;width:100%;height:auto}
@@ -339,18 +301,6 @@ footer a{color:#fff;display:inline-flex;align-items:center;min-height:44px;text-
 }
 
 /* Responsive */
-/* Unter 1024 px ist die Planenflaeche zu schmal fuer eine Adresse (132 x 45 px
-   bei 390 px Viewport). Dort steht die Zeichnung als Band und die Standorte
-   darunter als Karten. Die Fahrbahnlinie bleibt auf der Reifenunterkante. */
-@media (max-width:1023px){
-  .zug{margin-bottom:0}
-  .zug-text.siegsdorf,.zug-text.rodgau{position:relative;left:auto;top:auto;
-    width:auto;height:auto;margin-top:14px;padding:16px 18px;border-radius:8px;
-    background:#141B33;pointer-events:auto;container-type:normal}
-  .zug-text .rolle{font-size:11px;color:#AEB8D6}
-  .zug-text h3{font-size:25px;margin:4px 0 8px}
-  .zug-text address{font-size:16px;color:#DDE1EA}
-}
 @media (max-width:980px){
   .zahlen .wrap,.ueber,.kontakt{grid-template-columns:1fr}
   .ueber img{aspect-ratio:4/3}
@@ -389,7 +339,7 @@ footer a{color:#fff;display:inline-flex;align-items:center;min-height:44px;text-
    haben: .leistungen-liste, .leistung*, .stellen, .stelle*, .liste,
    .bewerb*, .ohne, .wege, .nacht-hinweis sowie .karte und .btn*
    (letztere standen nur in diesen Sektionen).
-   .sec-kopf bleibt - das benutzen noch Kennzahlen und Standorte.
+   .sec-kopf bleibt - das benutzen noch die Kennzahlen.
    ============================================================ */
 
 /* Gemeinsame Bausteine */
@@ -501,6 +451,39 @@ footer a{color:#fff;display:inline-flex;align-items:center;min-height:44px;text-
 @media (prefers-reduced-motion:reduce){
   .svc-slide,.svc-slide img,.svc-i h3,.weg svg{transition:none}
 }
+
+/* ============================================================
+   REDESIGN „Von wo wir fahren“ (#standorte) – Lagekarte statt LKW.
+   Setzt redesign.css voraus (.r-sec, .r-label, .r-h2, .r-lead, .r-12, .rv, .cur).
+   Ans Ende des <style>-Blocks, nach redesign.css.
+   Entfernt wurden .zug*, .gebiete (alt) und #standorte .sec-kopf – nur diese Sektion hat sie benutzt.
+   ============================================================ */
+
+/* Aus dem Redesign-Bestand, für diese Sektion nötig */
+.r-grau{background:var(--grau)}
+.gebiete2{margin:clamp(48px,5vw,72px) 0 0;padding-top:22px;border-top:1px solid var(--linie);display:flex;gap:12px 40px;align-items:baseline;flex-wrap:wrap}
+.gebiete2 dt{font-size:12.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--blau)}
+.gebiete2 dd{margin:0;font-weight:600;color:var(--navy)}
+.band{margin-top:clamp(72px,8vw,128px);aspect-ratio:21/8;overflow:hidden}
+.band img{width:100%;height:100%;object-fit:cover;object-position:50% 40%;display:block}
+@media (max-width:980px){.band{aspect-ratio:3/2}}
+
+/* Standorte: Lagekarte */
+.ort{align-items:start}
+.ort-text{grid-column:1/span 5}
+.ort-text .r-h2{font-size:clamp(38px,4.6vw,64px)}
+.ort-text .r-lead{margin-top:24px}
+.ort-liste{margin-top:48px;border-top:1px solid var(--linie)}
+.ort-i{display:grid;grid-template-columns:28px minmax(0,1fr);gap:12px;padding:22px 0;border-bottom:1px solid var(--linie)}
+.ort-k{font-size:13px;font-weight:800;letter-spacing:.12em;color:var(--blau);padding-top:6px}
+.ort-rolle{font-size:12.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#6B7490}
+.ort-i h3{margin-top:6px;font-size:clamp(24px,2.2vw,30px);color:var(--navy);letter-spacing:-.03em}
+.ort-i address{margin-top:8px;font-style:normal;font-size:16px;line-height:1.6}
+.ort-text .gebiete2{margin-top:32px;padding-top:0;border-top:0;flex-direction:column;gap:8px}
+.ort-karte{grid-column:7/span 6;margin:0}
+.karte-svg{display:block;width:100%;height:auto;font-family:var(--f)}
+@media (max-width:980px){.ort-text,.ort-karte{grid-column:1/-1}.ort-karte{margin-top:48px}}
+@media (max-width:640px){.karte-ref{display:none}}
 </style>
 </head>
 <body>
@@ -757,63 +740,84 @@ footer a{color:#fff;display:inline-flex;align-items:center;min-height:44px;text-
     </div>
   </section>
 
-  <section id="standorte" class="grau block" aria-labelledby="h-standorte">
-    <div class="wrap">
-      <div class="sec-kopf">
-        <h2 id="h-standorte">Von wo wir fahren</h2>
-        <p>Zwei Betriebsst&auml;tten, rund 500 Kilometer auseinander &ndash; S&uuml;d und Mitte aus einer Hand disponiert.</p>
-      </div>
-      <!-- Gliederzug in Seitenansicht. Die beiden Wechselbruecken sind echte
-           HTML-Kaesten; beim Scrollen rafft sich die Plane zur Seite und gibt
-           den Standort frei. Siegsdorf steht im Markup zuerst (Firmensitz),
-           am Desktop tauscht `order` die beiden, damit die vordere Bruecke
-           auf dem Motorwagen Siegsdorf ist. -->
-      <!-- Standbild aus dem Hero-Video als breites Band. Auf den beiden
-           Planenflaechen liegt je eine Flaeche: dunkler Laderaum, die Plane
-           an der linken Seite zusammengerafft, darin der Standort als echtes
-           HTML. Unter 1024 px steht das Bild allein und die Standorte
-           darunter als Karten - dort waeren die Flaechen nur 109 px breit. -->
-      <!-- Handgezeichnete Illustration des Gliederzugs. Auf den beiden
-           Planenflaechen liegt je ein Kasten: dunkler Laderaum, Plane links
-           zusammengerafft, darin der Standort als echtes HTML. Die Prozente
-           gehoeren zu genau dieser Zeichnung (viewBox 940x252); die unteren
-           6 % jeder Bruecke sind Bodenschiene und bleiben textfrei.
-           Unter 1024 px steht die Zeichnung als schmales Band ueber Karten. -->
-      <!-- Die Standorte stehen direkt auf der Plane, wie eine Beschriftung
-           auf einer echten Wechselbruecke: weisse Schrift, kein Kasten. Die
-           Textfelder sind aus der Zeichnung ausgemessen (Rahmenpfosten x
-           19/373 und 439/793), sie enden ueber den Spannschloessern bei
-           y 162. Die Fahrbahnlinie liegt auf y 240 - dort enden die Reifen.
-           Unter 1024 px steht die Zeichnung als Band ueber zwei Karten. -->
-      <figure class="zug">
-        <!-- Bild und Fahrbahn in einer eigenen Huelle: so bleibt die Linie
-             auch dann auf der Reifenunterkante, wenn die Standorte darunter
-             als Karten stehen und die Figur dadurch hoeher wird. -->
-        <div class="zug-bahn">
-          <img class="zug-bild" src="bilder/lkw-seitenansicht-ohne-branding.svg" width="940" height="252"
-               loading="lazy" decoding="async"
-               alt="Gliederzug der HS Transport GmbH in Seitenansicht: wei&szlig;es Fahrerhaus mit zwei dunklen Wechselbr&uuml;cken">
-          <div class="zug-fahrbahn" aria-hidden="true"></div>
-        </div>
-
-        <div class="zug-text siegsdorf">
-          <span class="rolle">Firmensitz und Betriebsst&auml;tte</span>
-          <h3>Siegsdorf</h3>
-          <address>HS Transport GmbH<br>Gamstra&szlig;e 16<br>83313 Siegsdorf</address>
-        </div>
-
-        <div class="zug-text rodgau">
-          <span class="rolle">Betriebsst&auml;tte</span>
-          <h3>Rodgau</h3>
-          <address>Rodgau<br><span class="ph">[Stra&szlig;e und Hausnummer]</span></address>
-        </div>
-      </figure>
-
-      <dl class="gebiete">
-        <dt>Weitere Einsatzgebiete</dt>
-        <dd>Altenstadt &middot; <span class="ph">[Butzbach oder Langg&ouml;ns &ndash; bitte kl&auml;ren, die alte Seite nennt beides]</span></dd>
-      </dl>
-    </div>
+  <section id="standorte" class="r-sec r-grau" aria-labelledby="h-standorte" style="padding-bottom: 0">
+  <div class="wrap">
+  <p class="r-label rv">Standorte</p>
+  <div class="r-12 ort">
+  <div class="ort-text">
+  <h2 id="h-standorte" class="r-h2 rv">Von wo wir fahren</h2>
+  <p class="r-lead rv d1">Zwei Betriebsstätten, rund 500 Kilometer auseinander – Süd und Mitte aus einer Hand disponiert.</p>
+  <div class="ort-liste rv d1">
+  <div class="ort-i"><span class="ort-k">A</span><div><p class="ort-rolle">Firmensitz und Betriebsstätte</p><h3>Siegsdorf</h3><address>HS Transport GmbH, Gamstraße 16, 83313 Siegsdorf</address></div></div>
+  <div class="ort-i"><span class="ort-k">B</span><div><p class="ort-rolle">Betriebsstätte</p><h3>Rodgau</h3><address>Rodgau · <span class="ph">[Straße und Hausnummer]</span></address></div></div>
+  </div>
+  <dl class="gebiete2 rv d2">
+  <dt>Weitere Einsatzgebiete</dt>
+  <dd>Altenstadt · <span class="ph">[Butzbach oder Langgöns – bitte klären, die alte Seite nennt beides]</span></dd>
+  </dl>
+  </div>
+  <figure class="ort-karte cur">
+  <svg viewBox="-64 -30 724 744" role="img" aria-label="Lage der Betriebsstätten Rodgau und Siegsdorf auf einem Gradnetz mit Main, Donau und Alpenrand" class="karte-svg">
+  <rect x="0" y="0" width="625" height="684" fill="#FFFFFF"/>
+  <g stroke="#2A3977" stroke-opacity=".1" stroke-width="1">
+  <line x1="100" y1="0" x2="100" y2="684"/><line x1="225" y1="0" x2="225" y2="684"/><line x1="350" y1="0" x2="350" y2="684"/><line x1="475" y1="0" x2="475" y2="684"/><line x1="600" y1="0" x2="600" y2="684"/>
+  <line x1="0" y1="190" x2="625" y2="190"/><line x1="0" y1="380" x2="625" y2="380"/><line x1="0" y1="570" x2="625" y2="570"/>
+  </g>
+  <g fill="none" stroke="#2A3977" stroke-linejoin="round" stroke-linecap="round" stroke-width="1.2">
+  <path stroke-opacity=".26" d="M150 684 L170 662 L184 670 L200 650 L214 664 L232 646 L250 660 L268 640 L286 656 L304 642 L322 658 L344 636 L362 652 L382 638 L400 654 L420 634 L440 650 L458 632 L478 648 L498 630 L518 646 L540 628 L560 642 L582 626 L602 640 L625 630"/>
+  <path stroke-opacity=".16" d="M178 684 L196 672 L214 680 L232 662 L250 676 L268 656 L286 672 L304 658 L322 674 L344 652 L362 668 L382 654 L400 670 L420 650 L440 666 L458 648 L478 664 L498 646 L518 662 L540 644 L560 658 L582 642 L602 656 L625 646"/>
+  <path stroke-opacity=".09" d="M214 684 L232 678 L250 684 L268 672 L286 684 L304 674 L322 684 L344 668 L362 682 L382 670 L400 684 L420 666 L440 680 L458 664 L478 678 L498 662 L518 676 L540 660 L560 674 L582 658 L602 672 L625 662"/>
+  </g>
+  <text x="178" y="628" stroke="#FFFFFF" stroke-width="4" stroke-linejoin="round" paint-order="stroke" fill="#6B7490" font-size="11" font-weight="700" letter-spacing="3">ALPEN</text>
+  <g fill="none" stroke="#2748AC" stroke-opacity=".38" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M336 211 L295 196 L254 180 L236 205 L234 255 L210 238 L165 236 L140 214 L119 196 L90 165 L60 169 L30 178 L0 186"/>
+  <path d="M70 580 L128 553 L180 520 L224 494 L280 455 L322 433 L360 432 L402 426 L440 410 L459 395 L487 376 L520 392 L546 403 L595 412 L625 428"/>
+  </g>
+  <g fill="#2748AC" font-size="12" font-style="italic" font-weight="600" stroke="#FFFFFF" stroke-width="4" stroke-linejoin="round" paint-order="stroke">
+  <text x="244" y="262">Main</text>
+  <text x="262" y="486">Donau</text>
+  </g>
+  <g class="karte-ref" fill="#8890AD">
+  <circle cx="216" cy="230" r="3"/><circle cx="360" cy="295" r="3"/><circle cx="122" cy="422" r="3"/><circle cx="337" cy="500" r="3"/><circle cx="422" cy="543" r="3"/><circle cx="487" cy="378" r="3"/>
+  </g>
+  <g class="karte-ref" fill="#6B7490" font-size="12" font-weight="600" stroke="#FFFFFF" stroke-width="4" stroke-linejoin="round" paint-order="stroke">
+  <text x="224" y="226">Würzburg</text>
+  <text x="368" y="291">Nürnberg</text>
+  <text x="130" y="418">Stuttgart</text>
+  <text x="345" y="512">Augsburg</text>
+  <text x="430" y="555">München</text>
+  <text x="495" y="370">Regensburg</text>
+  </g>
+  <g stroke="#2A3977" stroke-width="1.5">
+  <line x1="24" y1="44" x2="195" y2="44"/><line x1="24" y1="38" x2="24" y2="50"/><line x1="109.5" y1="40" x2="109.5" y2="48"/><line x1="195" y1="38" x2="195" y2="50"/>
+  </g>
+  <text x="24" y="30" fill="#2A3977" font-size="11" font-weight="700" letter-spacing="1.5">0</text>
+  <text x="195" y="30" text-anchor="end" fill="#2A3977" font-size="11" font-weight="700" letter-spacing="1.5">100 KM</text>
+  <path d="M592 18 L601 46 L592 40 L583 46 Z" fill="#2A3977"/>
+  <text x="592" y="64" text-anchor="middle" fill="#2A3977" font-size="11" font-weight="800" letter-spacing="1">N</text>
+  <rect x="0" y="0" width="625" height="684" fill="none" stroke="#2A3977" stroke-opacity=".3"/>
+  <g fill="#6B7490" font-size="12" font-weight="700" letter-spacing="1.5">
+  <text x="100" y="706" text-anchor="middle">9°O</text><text x="225" y="706" text-anchor="middle">10°O</text><text x="350" y="706" text-anchor="middle">11°O</text><text x="475" y="706" text-anchor="middle">12°O</text><text x="600" y="706" text-anchor="middle">13°O</text>
+  <text x="-10" y="194" text-anchor="end">50°N</text><text x="-10" y="384" text-anchor="end">49°N</text><text x="-10" y="574" text-anchor="end">48°N</text>
+  </g>
+  <line x1="86" y1="186" x2="555" y2="604" stroke="#2A3977" stroke-width="2.5"/>
+  <g transform="translate(300 377) rotate(41.7)">
+  <rect x="-62" y="-13" width="124" height="26" fill="#FFFFFF"/>
+  <text x="0" y="5" text-anchor="middle" fill="#2A3977" font-size="12.5" font-weight="700" letter-spacing="2">RUND 500 KM</text>
+  </g>
+  <circle cx="86" cy="186" r="22" fill="#2748AC" fill-opacity=".12"/>
+  <circle cx="86" cy="186" r="9" fill="#2A3977" stroke="#FFFFFF" stroke-width="3"/>
+  <text x="112" y="172" stroke="#FFFFFF" stroke-width="4" stroke-linejoin="round" paint-order="stroke" fill="#2A3977" font-size="22" font-weight="800">Rodgau</text>
+  <text x="112" y="194" stroke="#FFFFFF" stroke-width="4" stroke-linejoin="round" paint-order="stroke" fill="#6B7490" font-size="12" font-weight="700" letter-spacing="1.5">B · 50,02° N  8,89° O</text>
+  <circle cx="555" cy="604" r="22" fill="#2748AC" fill-opacity=".12"/>
+  <circle cx="555" cy="604" r="9" fill="#2A3977" stroke="#FFFFFF" stroke-width="3"/>
+  <text x="522" y="590" stroke="#FFFFFF" stroke-width="4" stroke-linejoin="round" paint-order="stroke" text-anchor="end" fill="#2A3977" font-size="22" font-weight="800">Siegsdorf</text>
+  <text x="522" y="612" stroke="#FFFFFF" stroke-width="4" stroke-linejoin="round" paint-order="stroke" text-anchor="end" fill="#6B7490" font-size="12" font-weight="700" letter-spacing="1.5">A · 47,82° N  12,64° O</text>
+  </svg>
+  </figure>
+  </div>
+  </div>
+  <div class="band cur"><img src="bilder/standorte-berge-1400.webp" srcset="bilder/standorte-berge-900.webp 900w, bilder/standorte-berge-1400.webp 1400w" sizes="100vw" width="1200" height="700" alt="Zugmaschine der HS Transport GmbH auf dem Betriebshof, dahinter die Berge" loading="lazy" decoding="async"></div>
   </section>
 
   <section id="ueber-uns" class="hell block" aria-labelledby="h-ueber">
@@ -1518,7 +1522,7 @@ window.addEventListener('DOMContentLoaded', function () {
 });
 </script>
 <script>
-/* Redesign „Was wir fahren“ + „Fahrer gesucht“.
+/* Redesign „Was wir fahren“, „Fahrer gesucht“, „Von wo wir fahren“.
    Eigener <script>-Block vor </body>, nach den bestehenden Skripten.
    Ohne JS: alle Inhalte sichtbar, erstes Leistungsbild steht. */
 
@@ -1552,7 +1556,7 @@ window.addEventListener('DOMContentLoaded', function () {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   if (!('IntersectionObserver' in window)) return;
   var ziele = Array.prototype.slice.call(
-    document.querySelectorAll('#leistungen .rv, #leistungen .cur, #karriere .rv, #karriere .cur'));
+    document.querySelectorAll('#leistungen .rv, #leistungen .cur, #karriere .rv, #karriere .cur, #standorte .rv, #standorte .cur'));
   if (!ziele.length) return;
   document.documentElement.classList.add('rv-on');
   var io = new IntersectionObserver(function (es) {
