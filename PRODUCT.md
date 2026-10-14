@@ -155,3 +155,44 @@ Das Hero-Video ist 16:9, ein Handy ist etwa 9:19,5. Beide Formate lassen sich ni
 **Die Überschrift bekommt eine eigene Fläche.** Im sichtbaren Ausschnitt ist die Rückwand hell; weiße Schrift käme dort selbst bei 0,32 Abdunklung nur auf 2,90:1. Statt stärker abzudunkeln liegt "Was wir fahren" auf `rgba(26,30,46,.86)` — 10,66:1 auch über reinem Weiß. So kann die Abdunklung bei 0,16 und der Weichzeichner bei 0,8 px bleiben.
 
 **Entwurfs-Hinweis.** Bleibt oben kleben, der Header rastet darunter ein. Seine Höhe misst ein eigenes Skript in `--hinweis`; der CSS-Rückfallwert 49 px gilt nur ohne JavaScript und stimmt für zweizeiligen Umbruch ab 360 px Breite.
+
+## Fahrzeugzeichnungen: ein Massraster für beide Ansichten
+
+Alle Fahrzeugteile auf der Seite folgen denselben echten Massen, damit Draufsicht und Seitenansicht zueinander passen: Fahrerhaus 2,3 m, Wechselbrücke 7,45 m lang und 2,67 m hoch, Lücke 1,0 m, Breite 2,55 m, Ladekante 1,25 m über der Fahrbahn, Rad 1,05 m. Wer eine Zeichnung ändert, rechnet sie aus diesen Zahlen neu — nicht nach Augenmass.
+
+**Scroll-Strasse, Draufsicht.** Das Fahrerhaus zeigt in der Zeichnung nach **unten**, also in Fahrtrichtung bei zunehmendem Scroll. Die Winkelformel `atan2(-dx, dy * sy)` bleibt dabei unverändert; sie dreht die Grundrichtung „nach unten" auf die Tangente und stimmt in beide Kurvenrichtungen. Wird die Zeichnung je wieder gedreht, fährt der Zug rückwärts.
+
+**Zwei Sprites, kein starres Bild.** Motorwagen (28 × 107 px) und Anhänger (28 × 93 px) sitzen auf je eigenen Punkten des Pfads, der Anhänger 100 px Pfadlänge dahinter, jeder mit dem Winkel seines eigenen Punktes. Ein durchgehendes Bild über die ganze Zuglänge von gut 200 px würde die Kurven schneiden. Die Fahrbahn ist dafür von 34 auf 40 px Strichstärke gewachsen — mehr geht nicht, ohne dass der Glanz die 76 px des Streifens verlässt.
+
+**Haltepunkte mit weissem Aussenring.** Seit der Zug länger ist, liegt er häufig unter einem Haltepunkt. Der weisse Ring hält den Punkt über Fahrbahn *und* Fahrzeug lesbar.
+
+**Standorte: handgezeichnete Illustration.** Vier Wege sind davor verworfen worden — die aus Grundformen gebaute SVG (zu grob), das Standbild aus dem Hero-Video (gefiel nicht) und zwei Abpaus-Versuche: aus dem Videobild (rund 20 px Bewegungsunschärfe an der Fahrerhausfront) und aus Foto 01 (scharf, aber Fahrgestell im tiefen Schatten). Es gilt `bilder/lkw-seitenansicht-ohne-branding.svg`, viewBox 940 × 252.
+
+**Die Zeichnung wird nicht verändert.** Sie ist als eigene Datei eingebunden und wird über `<img>` geladen, nicht inline — so bleibt sie austauschbar und die C2PA-Metadaten belasten das HTML nicht.
+
+**Die Standorte stehen ohne Kasten direkt auf der Plane**, wie eine Beschriftung auf einer echten Wechselbrücke. Die dunkelblauen Kästen und die nachgebauten Falten sind verworfen: Sie passten farblich nicht zur anthrazitfarbenen Plane und verdeckten deren Details.
+
+**Alle Masse sind aus der Zeichnung ausgemessen, nicht geschätzt.** Rahmenpfosten x 12/373 (Anhänger) und 432/793 (Motorwagen), Planenfläche dazwischen, Spannschlösser ab y 162, Bodenschiene y 168–176, Räder Mitte y 214 mit Reifenradius 26, also Unterkante y 240.
+
+**Das Textfeld hält je 22 Zeichnungseinheiten Abstand zu beiden Pfosten** — nicht nur links. Der Pfosten ist hell (`#adb5b9`); reicht das Feld bis an ihn heran, fällt die Rollenzeile auf 3,4:1. Mit dem Abstand liegt der schlechteste gemessene Wert bei 7,4:1. Daraus: `left 4.3617% / 49.0426%`, `top 19.8413%`, `width 32.9787%`, `height 42.8571%`.
+
+**Kein prozentuales `padding` in diesen Feldern.** Prozentuale Innenabstände rechnen gegen die Breite des umgebenden Blocks, nicht gegen das Element — 6,2 % wurden so zu 70 px statt 27 px. Der Abstand steckt deshalb in `left` und `width`.
+
+**Die Fahrbahnlinie liegt auf `top: 95.2381%`** des Bildes, das sind die 240 von 252 Einheiten der Reifenunterkante. Bild und Linie stecken dafür in einer eigenen Hülle `.zug-bahn`: Im Hochformat stehen die Standorte als Karten in derselben Figur, ohne die Hülle würde die Prozentangabe gegen die dann höhere Figur rechnen und die Linie um rund 300 px abrutschen. Der Bodenschatten der Zeichnung (`cy 241`) liegt auf der Linie und bleibt stehen.
+
+**Keine Planen-Animation.** Die Planen sind dauerhaft offen. In diesem Abschnitt läuft kein GSAP; der einzige ScrollTrigger der Seite gehört zum Hero.
+
+**Schriftgrössen über `cqw`.** Die Flächen sind `container-type: inline-size`, die Texte skalieren mit der Flächenbreite statt mit dem Viewport. Jede Angabe hat einen px-Wert davor als Rückfall.
+
+**Siegsdorf steht im Markup zuerst**, Firmensitz vor Betriebsstätte. Am Zug sitzt es trotzdem rechts, weil die Flächen absolut platziert sind — die Reihenfolge im Dokument ist davon unabhängig, und im Hochformat stapeln sich die Karten in dieser Reihenfolge.
+
+**Unter 1024 px** steht die Zeichnung als schmales Band und die beiden Standorte darunter als Karten. Grund: Die Planenflächen sind 38 % der Bildbreite; bei 390 px Viewport bleiben davon 132 × 45 px, darin ist keine Adresse unterzubringen. Die Karten tragen dort die dunkle Laderaumfarbe, damit der Bezug zum Fahrzeug bleibt.
+
+
+## Offene Punkte
+
+**HST-Logo: Nachbau, kein Original.** `bilder/logo-hst.svg` ist ein Nachbau nach den Fotos 03 und 07, angelegt als Übergangslösung bis die Vektordatei vom Folierer vorliegt. Abweichungen zum Original: „HST" und „ransport" stehen in Manrope statt der Originalgrotesk, „GmbH" ist eine einlinig nachgezeichnete Schreibschrift. **Zum Austausch nur diese eine Datei ersetzen und das Seitenverhältnis 640 : 160 beibehalten**, sonst verrutscht jede Platzierung.
+
+Im Abschnitt „Von wo wir fahren" wird das Logo **nicht** gebraucht — die Planen sind dort offen, es ist kein Schriftzug zu sehen. Die Datei liegt für das Hero-Video bereit, wo der generische Schriftzug noch im Bild steht.
+
+**Noch offen:** Im Hero-Video trägt der Zug weiterhin den erfundenen Schriftzug. Dort ist er bisher nicht ersetzt, weil er sich über die ganze Laufzeit bewegt — das wäre eine Nachbearbeitung des Videos, keine Überlagerung.

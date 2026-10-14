@@ -30,7 +30,7 @@ html{scroll-behavior:smooth;scroll-padding-top:calc(var(--kopf) + 16px);-webkit-
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important}
-  .btn:active,.call:active,.menu-btn:active,form button:active,.thumb a:active{transform:none}
+,.menu-btn:active,form button:active,.thumb a:active{transform:none}
 }
 body{margin:0;background:var(--weiss);color:var(--nacht);font-family:var(--f);
   font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
@@ -65,9 +65,6 @@ nav a{text-decoration:none;display:inline-flex;align-items:center;min-height:44p
 @media (hover:hover) and (pointer:fine){
   nav a:hover{color:var(--blau)}
   .call:hover{background:var(--tief)!important}
-  .btn-blau:hover{background:var(--tief)}
-  .btn-linie:hover{background:var(--navy);color:#fff}
-  .btn-hell:hover{background:#fff;color:var(--navy)}
   footer a:hover,.kontakt dd a:hover{text-decoration:underline;text-underline-offset:4px}
 }
 .call{background:var(--blau);color:#fff!important;padding:0 18px!important;border-radius:8px;font-weight:700;
@@ -77,15 +74,6 @@ nav a{text-decoration:none;display:inline-flex;align-items:center;min-height:44p
   font:inherit;font-weight:700;padding:0 14px;min-height:44px;cursor:pointer;
   transition:background 160ms ease,color 160ms ease,transform 160ms var(--ease-out)}
 .menu-btn:active{transform:scale(.97)}
-
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:52px;padding:13px 24px;
-  font-weight:700;text-decoration:none;border-radius:9px;border:2px solid transparent;text-align:center;
-  transition:background 170ms ease,color 170ms ease,border-color 170ms ease,transform 160ms var(--ease-out)}
-.btn:active{transform:scale(.97)}
-.btn-blau{background:var(--blau);color:#fff}
-.btn-linie{border-color:var(--navy);color:var(--navy)}
-.btn-hell{border-color:rgba(255,255,255,.5);color:#fff}
-.btns{display:flex;flex-wrap:wrap;gap:11px}
 
 section.block{padding-top:clamp(56px,7vw,104px);padding-bottom:clamp(56px,7vw,104px)}
 .hell{background:var(--weiss)}
@@ -99,12 +87,6 @@ section.block{padding-top:clamp(56px,7vw,104px);padding-bottom:clamp(56px,7vw,10
 .sec-kopf p{margin-top:14px;font-size:18.5px;color:var(--text)}
 .dunkel .sec-kopf p{color:var(--hell)}
 
-.karte{background:var(--weiss);border:1px solid var(--kante);border-radius:16px;
-  padding:clamp(20px,2.4vw,28px);box-shadow:0 8px 24px rgba(22,32,62,.06)}
-.dunkel .karte{border-color:transparent;box-shadow:0 14px 34px rgba(9,16,42,.26)}
-.karte h3{font-size:clamp(18px,1.9vw,22px);color:var(--navy)}
-.karte p{margin-top:9px;color:var(--text);font-size:16px}
-
 /* Kennzahlen */
 .zahlen .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(24px,4vw,56px);align-items:center}
 .zahlen-raster{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(16px,2vw,24px)}
@@ -114,37 +96,41 @@ section.block{padding-top:clamp(56px,7vw,104px);padding-bottom:clamp(56px,7vw,10
 .zahl span{display:block;margin-top:7px;font-size:15px;color:var(--hell)}
 .zahlen img{border-radius:16px;aspect-ratio:4/3;object-fit:cover;object-position:50% 44%;width:100%;height:auto}
 
-/* Leistungen */
-.leistungen-liste{display:grid;gap:14px}
-.leistung{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:start}
-.leistung-nr{font-size:13px;font-weight:800;letter-spacing:.12em;color:var(--blau);padding-top:4px;min-width:3ch}
-.leistung h3{font-size:clamp(18px,1.9vw,22px);color:var(--navy)}
-.leistung p{margin-top:7px;color:var(--text);font-size:16px}
-
-/* Karriere */
-.stellen{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,2vw,24px);align-items:start}
-.stelle .meta{display:grid;grid-template-columns:auto 1fr;gap:5px 14px;font-size:14px;margin:14px 0}
-.stelle .meta dt{color:#6B7490;font-weight:600}
-.stelle .meta dd{margin:0;font-weight:700;color:var(--navy)}
-.liste{margin:0;padding:0;list-style:none;display:grid;gap:9px;font-size:15.5px;color:var(--text)}
-.liste li{padding-left:17px;position:relative}
-.liste li::before{content:"";position:absolute;left:0;top:.62em;width:9px;height:2px;background:var(--blau);border-radius:1px}
-.bewerb{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(16px,2vw,24px);margin-top:clamp(16px,2vw,24px);align-items:stretch}
-.bewerb img{border-radius:16px;aspect-ratio:4/5;object-fit:cover;object-position:50% 52%;width:100%;height:100%;min-height:0}
-.bewerb-text{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.2);border-radius:16px;
-  padding:clamp(20px,2.6vw,32px);display:flex;flex-direction:column;justify-content:center}
-.bewerb-text h3{font-size:clamp(19px,2.1vw,25px)}
-.ohne{display:block;margin-top:12px;font-weight:800;color:#fff}
-.wege{display:grid;gap:10px;margin-top:20px}
-.nacht-hinweis{margin-top:20px;font-size:15.5px;color:var(--hell);max-width:54em}
-
-/* Standorte */
-.orte{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,2vw,24px)}
-.ort .rolle{font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--blau)}
-.ort h3{margin-top:6px;font-size:clamp(20px,2.1vw,25px);color:var(--navy)}
-.ort address{font-style:normal;margin-top:10px;color:var(--text);line-height:1.55}
-.gebiete{margin:clamp(16px,2vw,24px) 0 0;background:var(--weiss);border:1px solid var(--kante);border-radius:16px;
-  padding:18px 22px;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;align-items:baseline}
+/* Standorte als Gliederzug. Die Zeichnung liegt als eigene Datei vor und
+   wird nicht veraendert. Alle Prozentwerte sind aus ihr ausgemessen:
+   Rahmenpfosten x 12/373 und 432/793, Planenflaeche zwischen den Pfosten,
+   Spannschloesser ab y 162, Bodenschiene y 168-176, Reifenunterkante y 240.
+   Beim Austausch der Zeichnung alles neu vermessen. */
+.zug{position:relative;margin:0 0 26px}
+.zug-bahn{position:relative}
+.zug-bild{display:block;width:100%;height:auto}
+/* Die Schrift steht ohne Kasten auf der Plane. Im Textfeld ist die Plane
+   durchgehend dunkel (hellster Wert RGB 61) - weiss kommt dort auf 10,7:1. */
+/* Der Abstand zu den Rahmenpfosten steckt im left/width, nicht in einem
+   prozentualen padding - das wuerde gegen die Figurbreite rechnen und waere
+   dreimal zu gross. Je 22 Zeichnungseinheiten Abstand links und rechts: der
+   Pfosten ist hell (#adb5b9), direkt daneben faellt der Kontrast ab. */
+.zug-text{position:absolute;container-type:inline-size;
+  display:flex;flex-direction:column;justify-content:center;
+  color:var(--weiss);pointer-events:none}
+.zug-text.rodgau   {left: 4.3617%;top:19.8413%;width:32.9787%;height:42.8571%}
+.zug-text.siegsdorf{left:49.0426%;top:19.8413%;width:32.9787%;height:42.8571%}
+.zug-text .rolle{font-size:10px;font-size:2.8cqw;font-weight:700;letter-spacing:.13em;
+  text-transform:uppercase;color:#D6DBE6;line-height:1.2}
+.zug-text h3{color:var(--weiss);font-size:23px;font-size:6.6cqw;letter-spacing:-.02em;
+  margin:4px 0 7px;line-height:1.04}
+.zug-text address{font-style:normal;font-size:14px;font-size:3.95cqw;line-height:1.45;color:#E7EAF1}
+.zug-text .ph{pointer-events:auto}
+/* Fahrbahn genau auf der Reifenunterkante (y 240 von 252). Der Bodenschatten
+   der Zeichnung liegt mit cy 241 darauf und bleibt stehen. */
+.zug-fahrbahn{position:absolute;left:0;right:0;top:95.2381%;height:0;
+  border-top:3px solid var(--navy)}
+.zug-fahrbahn::after{content:"";position:absolute;left:0;right:0;top:8px;height:2px;
+  background:repeating-linear-gradient(90deg,rgba(42,57,119,.32) 0 16px,transparent 16px 34px)}
+/* Der Zug gehoert zum Einleitungstext - oben steht in der Zeichnung ohnehin
+   leerer Raum bis y 44. */
+#standorte .sec-kopf{margin-bottom:6px}
+.gebiete{margin:26px 0 0;display:flex;gap:16px;align-items:baseline;flex-wrap:wrap}
 .gebiete dt{font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--blau)}
 .gebiete dd{margin:0;font-weight:600;color:var(--navy)}
 
@@ -318,10 +304,10 @@ footer a{color:#fff;display:inline-flex;align-items:center;min-height:44px;text-
    Unter 1024 px vollstaendig ausgeblendet.
    ============================================================ */
 .strasse,.halte{display:none}
-.strasse-bahn .fahrbahn{fill:none;stroke:var(--navy);stroke-opacity:.14;stroke-width:34;stroke-linecap:round}
+.strasse-bahn .fahrbahn{fill:none;stroke:var(--navy);stroke-opacity:.14;stroke-width:40;stroke-linecap:round}
 .strasse-bahn .mittel-grau{fill:none;stroke:var(--navy);stroke-opacity:.26;stroke-width:2;stroke-dasharray:6 10}
 .strasse-bahn .glanz{fill:none;stroke:var(--blau);stroke-opacity:.18;stroke-width:44;stroke-linecap:round}
-.strasse-bahn .gefahren{fill:none;stroke:var(--blau);stroke-width:34;stroke-linecap:round}
+.strasse-bahn .gefahren{fill:none;stroke:var(--blau);stroke-width:40;stroke-linecap:round}
 .strasse-bahn .mittel-hell{fill:none;stroke:#fff;stroke-opacity:.55;stroke-width:2;stroke-dasharray:6 10}
 
 @media (min-width:1024px){
@@ -331,27 +317,42 @@ footer a{color:#fff;display:inline-flex;align-items:center;min-height:44px;text-
   .strasse{display:block;position:fixed;top:0;right:0;width:var(--strasse);height:100vh;z-index:9;
     pointer-events:none;opacity:0;transition:opacity 260ms ease}
   .strasse-bahn{width:100%;height:100%;display:block}
-  .strasse-lkw{position:absolute;left:0;top:0;width:26px;height:70px;transform-origin:50% 50%;
-    will-change:transform;filter:drop-shadow(0 2px 4px rgba(16,24,48,.3))}
+  .strasse-lkw,.strasse-haenger{position:absolute;left:0;top:0;transform-origin:50% 50%;
+    will-change:transform;filter:drop-shadow(0 2px 5px rgba(16,24,48,.34))}
+  .strasse-lkw{width:28px;height:107px}
+  .strasse-haenger{width:28px;height:93px}
   .halte{display:block;position:fixed;top:0;right:0;width:var(--strasse);height:100vh;z-index:10;
     pointer-events:none;opacity:0;transition:opacity 260ms ease}
   .strasse.sichtbar,.halte.sichtbar{opacity:1}
   .halte a{position:absolute;width:44px;height:44px;margin:-22px 0 0 -22px;pointer-events:auto;
     display:grid;place-items:center;text-decoration:none;border-radius:50%}
-  .halte-ring{width:13px;height:13px;border-radius:50%;background:#fff;box-shadow:0 0 0 2px rgba(42,57,119,.5);
+  .halte-ring{width:13px;height:13px;border-radius:50%;background:#fff;box-shadow:0 0 0 2px var(--navy);
     transition:background 200ms ease,box-shadow 200ms ease,transform 200ms var(--ease-out)}
-  .halte a.erreicht .halte-ring{background:var(--blau);box-shadow:0 0 0 2px var(--blau),0 0 0 6px rgba(39,72,172,.22);transform:scale(1.1)}
+  /* Weisser Aussenring, damit der Haltepunkt auch dann lesbar bleibt,
+     wenn der Zug gerade darunter durchfaehrt. */
+  .halte a.erreicht .halte-ring{background:var(--blau);transform:scale(1.1);
+    box-shadow:0 0 0 2px #fff,0 0 0 4px var(--blau),0 0 0 8px rgba(39,72,172,.22)}
   .halte a:focus-visible{outline:3px solid var(--navy);outline-offset:2px}
 }
 @media (prefers-reduced-motion:reduce){
-  .strasse-lkw{display:none}
+  .strasse-lkw,.strasse-haenger{display:none}
 }
 
 /* Responsive */
+/* Unter 1024 px ist die Planenflaeche zu schmal fuer eine Adresse (132 x 45 px
+   bei 390 px Viewport). Dort steht die Zeichnung als Band und die Standorte
+   darunter als Karten. Die Fahrbahnlinie bleibt auf der Reifenunterkante. */
+@media (max-width:1023px){
+  .zug{margin-bottom:0}
+  .zug-text.siegsdorf,.zug-text.rodgau{position:relative;left:auto;top:auto;
+    width:auto;height:auto;margin-top:14px;padding:16px 18px;border-radius:8px;
+    background:#141B33;pointer-events:auto;container-type:normal}
+  .zug-text .rolle{font-size:11px;color:#AEB8D6}
+  .zug-text h3{font-size:25px;margin:4px 0 8px}
+  .zug-text address{font-size:16px;color:#DDE1EA}
+}
 @media (max-width:980px){
   .zahlen .wrap,.ueber,.kontakt{grid-template-columns:1fr}
-  .stellen,.orte,.bewerb{grid-template-columns:1fr}
-  .bewerb img{aspect-ratio:16/10}
   .ueber img{aspect-ratio:4/3}
 }
 @media (max-width:900px){
@@ -379,8 +380,126 @@ footer a{color:#fff;display:inline-flex;align-items:center;min-height:44px;text-
 @media (max-width:640px){
   .zahlen-raster{grid-template-columns:1fr 1fr}
   form{grid-template-columns:1fr}
-  .leistung{grid-template-columns:1fr;gap:4px}
-  .leistung-nr{padding-top:0}
+}
+
+/* ============================================================
+   REDESIGN „Was wir fahren“ + „Fahrer gesucht“
+   Nutzt nur die bestehenden :root-Variablen aus index.html.
+   Entfernt wurden die Regeln, die nur diese beiden Sektionen benutzt
+   haben: .leistungen-liste, .leistung*, .stellen, .stelle*, .liste,
+   .bewerb*, .ohne, .wege, .nacht-hinweis sowie .karte und .btn*
+   (letztere standen nur in diesen Sektionen).
+   .sec-kopf bleibt - das benutzen noch Kennzahlen und Standorte.
+   ============================================================ */
+
+/* Gemeinsame Bausteine */
+.r-sec{position:relative;padding-top:clamp(88px,10vw,152px);padding-bottom:clamp(88px,10vw,152px)}
+.r-hell{background:var(--weiss)}
+.r-navy{background:var(--navy);color:#fff}
+.r-navy :where(a,button):focus-visible{outline-color:var(--weiss);box-shadow:0 0 0 3px var(--navy)}
+.r-label{display:flex;align-items:center;gap:18px;margin:0 0 clamp(40px,5vw,72px);font-size:12.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--blau);line-height:1}
+.r-label::after{content:"";flex:1;height:1px;background:var(--linie)}
+.r-navy .r-label{color:var(--hell)}
+.r-navy .r-label::after{background:rgba(255,255,255,.2)}
+.r-h2{font-size:clamp(38px,5.4vw,70px);font-weight:800;letter-spacing:-.035em;line-height:1;color:var(--navy);margin:0;text-wrap:balance}
+.r-lead{font-size:clamp(18px,1.55vw,20.5px);line-height:1.55;color:var(--text);max-width:34em}
+.r-navy .r-lead{color:var(--hell)}
+.r-head{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:24px;row-gap:20px;align-items:end;margin-bottom:clamp(48px,6vw,96px)}
+.r-head .r-h2{grid-column:1/span 7}
+.r-head .r-lead{grid-column:8/span 5;padding-bottom:6px}
+.r-12{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:24px}
+.r-img{display:block;width:100%;height:100%;object-fit:cover;border-radius:4px}
+
+/* Leistungen */
+.svc{align-items:start}
+.svc-fig{grid-column:1/span 5;position:sticky;top:calc(var(--kopf) + 40px);margin:0}
+.svc-bild{position:relative;aspect-ratio:4/5;overflow:hidden;border-radius:4px;background:#DCE1EC}
+.svc-slide{position:absolute;inset:0;opacity:0;transition:opacity .8s var(--ease-out)}
+.svc-slide img{width:100%;height:100%;object-fit:cover;transform:scale(1.045);transition:transform 1.6s var(--ease-out)}
+/* Funktionaler Verlauf nur unter der Bildzeile, damit die weiße Schrift lesbar bleibt */
+.svc-slide::after{content:"";position:absolute;left:0;right:0;bottom:0;height:34%;background:linear-gradient(0deg,rgba(14,20,38,.62),rgba(14,20,38,0))}
+.svc-slide span{position:absolute;left:24px;right:24px;bottom:20px;z-index:1;display:flex;justify-content:space-between;align-items:baseline;gap:12px;color:#fff;font-size:12.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase}
+.svc-slide.on{opacity:1}
+.svc-slide.on img{transform:none}
+.svc-liste{grid-column:7/span 6;list-style:none;margin:0;padding:0}
+.svc-i{display:grid;grid-template-columns:72px minmax(0,1fr);column-gap:8px;padding:clamp(36px,4.2vw,60px) 0 clamp(44px,5.4vw,80px);border-top:1px solid var(--linie)}
+.svc-i:last-child{border-bottom:1px solid var(--linie)}
+.svc-nr{font-size:13px;font-weight:800;letter-spacing:.12em;color:var(--blau);padding-top:.85em;font-variant-numeric:tabular-nums}
+.svc-i h3{font-size:clamp(25px,2.5vw,34px);font-weight:800;letter-spacing:-.028em;line-height:1.08;color:var(--navy);transition:color .45s var(--ease-out)}
+.svc-i p{margin-top:16px;font-size:17px;line-height:1.6;color:var(--text);max-width:31em}
+/* Inaktive Zeilen gedämpft – #8890AD auf Weiß 3,3:1, nur für Überschriften ab 25 px */
+.js-svc .svc-i:not(.on) h3{color:#8890AD}
+.svc-m{display:none}
+
+/* Karriere */
+.kar-top{align-items:end}
+.kar-text{grid-column:1/span 7}
+.kar-h2{font-size:clamp(46px,7.2vw,100px);font-weight:800;letter-spacing:-.042em;line-height:.94;color:#fff;margin:0}
+.kar-h2 span{display:block}
+.kar-text .r-lead{margin-top:clamp(24px,2.6vw,36px)}
+.kar-bild{grid-column:9/span 4;aspect-ratio:4/5;margin-top:calc(-1 * clamp(88px,10vw,152px) - 120px);position:relative;z-index:2}
+.stellen2{display:grid;grid-template-columns:1fr 1fr;margin-top:clamp(64px,7vw,112px);border-top:1px solid rgba(255,255,255,.22)}
+.stelle2{padding:clamp(32px,3.4vw,48px) clamp(24px,3.4vw,56px) 8px 0}
+.stelle2 + .stelle2{padding-left:clamp(24px,3.4vw,56px);padding-right:0;border-left:1px solid rgba(255,255,255,.22)}
+.stelle2 h3{font-size:clamp(23px,2.2vw,30px);font-weight:800;letter-spacing:-.025em;line-height:1.12;color:#fff}
+.spec{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin:24px 0 26px;border-top:1px solid rgba(255,255,255,.14);border-bottom:1px solid rgba(255,255,255,.14)}
+.spec div{padding:14px 12px 14px 0}
+.spec div + div{padding-left:14px;border-left:1px solid rgba(255,255,255,.14)}
+.spec dt{font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--hell)}
+.spec dd{margin:6px 0 0;font-weight:700;font-size:15.5px;line-height:1.35;color:#fff}
+.liste2{margin:0;padding:0;list-style:none;display:grid;gap:12px;font-size:16px;color:var(--hell)}
+.liste2 li{padding-left:22px;position:relative}
+.liste2 li::before{content:"";position:absolute;left:0;top:.8em;width:11px;height:1.5px;background:#fff}
+.bew2{margin-top:clamp(72px,8vw,128px);align-items:stretch}
+.bew2-bild{grid-column:1/span 5;aspect-ratio:4/5}
+.bew2-text{grid-column:7/span 6;display:flex;flex-direction:column;justify-content:center}
+.bew2-text h3{font-size:clamp(30px,3.4vw,46px);font-weight:800;letter-spacing:-.032em;line-height:1.04;color:#fff}
+.bew2-text p{margin-top:18px;font-size:17px;color:var(--hell);max-width:30em}
+.bew2-text .ohne2{margin-top:22px;font-size:clamp(20px,1.8vw,24px);font-weight:800;letter-spacing:-.02em;color:#fff}
+.wege2{display:grid;margin-top:32px;border-top:1px solid rgba(255,255,255,.22)}
+.weg{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:72px;padding:0 4px;border-bottom:1px solid rgba(255,255,255,.22);color:#fff;text-decoration:none;font-weight:700;font-size:clamp(17px,1.5vw,19px)}
+.weg svg{width:22px;height:22px;flex:none;transition:transform .35s var(--ease-out)}
+.weg-wa{background:var(--blau);padding:0 24px;margin-top:-1px;border-radius:4px;border-bottom-color:transparent}
+.weg small{font-weight:600;font-size:14px;color:var(--hell);margin-left:10px;font-variant-numeric:tabular-nums}
+@media (hover:hover) and (pointer:fine){
+  .weg:hover svg{transform:translateX(5px)}
+  .weg-wa:hover{background:var(--tief)}
+}
+.nacht2{display:grid;grid-template-columns:132px minmax(0,1fr);gap:28px;align-items:center;margin-top:clamp(56px,6vw,96px);padding-top:28px;border-top:1px solid rgba(255,255,255,.22)}
+.nacht2 img{width:132px;height:132px;object-fit:cover;border-radius:4px}
+.nacht2 p{font-size:17px;color:var(--hell);max-width:42em}
+
+/* Bewegung: Klassen setzt redesign.js nur bei Scroll-Fähigkeit und ohne reduzierte Bewegung */
+.rv-on .rv{opacity:0;transform:translateY(26px);transition:opacity .9s var(--ease-out),transform 1.1s var(--ease-out)}
+.rv-on .rv.in{opacity:1;transform:none}
+.rv-on .cur{clip-path:inset(0 100% 0 0);transition:clip-path 1.25s cubic-bezier(.65,0,.15,1)}
+.rv-on .cur.in{clip-path:inset(0 0 0 0)}
+.rv-on .d1{transition-delay:.08s}.rv-on .d2{transition-delay:.16s}
+
+@media (max-width:980px){
+  .r-head .r-h2,.r-head .r-lead{grid-column:1/-1}
+  .svc-fig{display:none}
+  .svc-liste{grid-column:1/-1}
+  .svc-m{display:block;margin-top:24px;width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:4px}
+  .js-svc .svc-i:not(.on) h3{color:var(--navy)}
+  .kar-text,.kar-bild,.bew2-bild,.bew2-text{grid-column:1/-1}
+  .kar-bild{margin-top:48px;aspect-ratio:4/3}
+  .stellen2{grid-template-columns:1fr}
+  .stelle2,.stelle2 + .stelle2{padding:32px 0 8px;border-left:0}
+  .stelle2 + .stelle2{margin-top:24px;border-top:1px solid rgba(255,255,255,.22)}
+  .bew2-bild{aspect-ratio:4/3}
+  .bew2-text{margin-top:40px}
+}
+@media (max-width:640px){
+  .r-label{margin-bottom:32px}
+  .svc-i{grid-template-columns:44px minmax(0,1fr)}
+  .spec{grid-template-columns:1fr}
+  .spec div + div{padding-left:0;border-left:0;border-top:1px solid rgba(255,255,255,.14)}
+  .nacht2{grid-template-columns:88px minmax(0,1fr);gap:18px}
+  .nacht2 img{width:88px;height:88px}
+}
+@media (prefers-reduced-motion:reduce){
+  .svc-slide,.svc-slide img,.svc-i h3,.weg svg{transition:none}
 }
 </style>
 </head>
@@ -509,80 +628,132 @@ footer a{color:#fff;display:inline-flex;align-items:center;min-height:44px;text-
     </div>
   </section>
 
-  <section id="leistungen" class="hell block" aria-labelledby="h-leistungen">
+  <section id="leistungen" class="r-sec r-hell" aria-labelledby="h-leistungen">
     <div class="wrap">
-      <div class="sec-kopf">
-        <h2 id="h-leistungen">Was wir fahren</h2>
-        <p>Linienkapazit&auml;t f&uuml;r Wechselbr&uuml;cken &ndash; planbar, t&auml;glich bedient, von zwei Betriebsst&auml;tten aus.</p>
+      <p class="r-label rv">Leistungen</p>
+      <div class="r-head">
+        <h2 id="h-leistungen" class="r-h2 rv">Was wir fahren</h2>
+        <p class="r-lead rv d1">Linienkapazit&auml;t f&uuml;r Wechselbr&uuml;cken &ndash; planbar, t&auml;glich bedient, von zwei Betriebsst&auml;tten aus.</p>
       </div>
-      <div class="leistungen-liste">
-        <div class="leistung karte"><span class="leistung-nr">01</span><div>
-          <h3>T&auml;glicher Systemlinienverkehr</h3>
-          <p>Feste Linien, jeden Tag bedient.
-          <span class="ph">[F&uuml;r welche Auftraggeber und Netzwerke wir fahren]</span></p></div></div>
-        <div class="leistung karte"><span class="leistung-nr">02</span><div>
-          <h3>Kombiverkehr Schiene&ndash;Stra&szlig;e</h3>
-          <p>Vor- und Nachlauf zum Terminal. Die Wechselbr&uuml;cke macht den langen Weg auf der Schiene, wir die beiden Enden.
-          <span class="ph">[Umfang und Terminals pr&uuml;fen]</span></p></div></div>
-        <div class="leistung karte"><span class="leistung-nr">03</span><div>
-          <h3>Nationales WAB-Trucking</h3>
-          <p>Wechselbr&uuml;cken-Trucking deutschlandweit, disponiert von Siegsdorf und Rodgau aus.</p></div></div>
-        <div class="leistung karte"><span class="leistung-nr">04</span><div>
-          <h3>Sattelverkehr</h3>
-          <p>Neben den Wechselbr&uuml;cken f&auml;hrt HS Transport auch Sattelz&uuml;ge.
-          <span class="ph">[Aufliegertypen, K&uuml;hlverkehr ja/nein, Anteil am Gesamtvolumen &ndash; von der Firma noch offen]</span></p></div></div>
-        <div class="leistung karte"><span class="leistung-nr">05</span><div>
-          <h3>Telematik auf jedem Fahrzeug</h3>
-          <p>Laufende Standortortung und Analyse der Fahrzeugdaten. Sie wissen, wo Ihre Br&uuml;cke steht, ohne anrufen zu m&uuml;ssen.</p></div></div>
+      <div class="r-12 svc">
+        <!-- Klebt am Desktop links und wechselt mit der aktiven Zeile (redesign.js).
+             Unter 980 px ausgeblendet, dort steht je ein Bild in der Zeile (.svc-m). -->
+        <figure class="svc-fig" aria-hidden="true">
+          <div class="svc-bild cur">
+            <div class="svc-slide on"><img src="bilder/leistung-01-systemlinie-900.webp" srcset="bilder/leistung-01-systemlinie-560.webp 560w, bilder/leistung-01-systemlinie-900.webp 900w, bilder/leistung-01-systemlinie-1400.webp 1400w" sizes="(max-width:980px) 0px, 40vw" alt="" decoding="async"><span><b>01 / 05</b>Systemlinienverkehr</span></div>
+            <div class="svc-slide"><img src="bilder/leistung-02-kombi-900.webp" srcset="bilder/leistung-02-kombi-560.webp 560w, bilder/leistung-02-kombi-900.webp 900w, bilder/leistung-02-kombi-1400.webp 1400w" sizes="(max-width:980px) 0px, 40vw" alt="" loading="lazy" decoding="async"><span><b>02 / 05</b>Kombiverkehr</span></div>
+            <div class="svc-slide"><img src="bilder/leistung-03-wab-900.webp" srcset="bilder/leistung-03-wab-560.webp 560w, bilder/leistung-03-wab-900.webp 900w, bilder/leistung-03-wab-1400.webp 1400w" sizes="(max-width:980px) 0px, 40vw" alt="" loading="lazy" decoding="async"><span><b>03 / 05</b>WAB-Trucking</span></div>
+            <div class="svc-slide"><img src="bilder/leistung-04-sattel-900.webp" srcset="bilder/leistung-04-sattel-560.webp 560w, bilder/leistung-04-sattel-900.webp 900w, bilder/leistung-04-sattel-1400.webp 1400w" sizes="(max-width:980px) 0px, 40vw" alt="" loading="lazy" decoding="async"><span><b>04 / 05</b>Sattelverkehr</span></div>
+            <div class="svc-slide"><img src="bilder/leistung-05-telematik-900.webp" srcset="bilder/leistung-05-telematik-560.webp 560w, bilder/leistung-05-telematik-900.webp 900w, bilder/leistung-05-telematik-1400.webp 1400w" sizes="(max-width:980px) 0px, 40vw" alt="" loading="lazy" decoding="async"><span><b>05 / 05</b>Telematik</span></div>
+          </div>
+        </figure>
+        <ol class="svc-liste">
+          <li class="svc-i rv">
+            <span class="svc-nr">01</span>
+            <div>
+              <h3>T&auml;glicher Systemlinienverkehr</h3>
+              <p>Feste Linien, jeden Tag bedient. <span class="ph">[F&uuml;r welche Auftraggeber und Netzwerke wir fahren]</span></p>
+              <img class="svc-m" src="bilder/leistung-01-systemlinie-900.webp" srcset="bilder/leistung-01-systemlinie-560.webp 560w, bilder/leistung-01-systemlinie-900.webp 900w" sizes="(max-width:980px) 100vw, 0px" alt="H&auml;ngerzug der HS Transport GmbH mit zwei Wechselbr&uuml;cken in der Abendd&auml;mmerung" loading="lazy" decoding="async">
+            </div>
+          </li>
+          <li class="svc-i rv">
+            <span class="svc-nr">02</span>
+            <div>
+              <h3>Kombiverkehr Schiene&ndash;Stra&szlig;e</h3>
+              <p>Vor- und Nachlauf zum Terminal. Die Wechselbr&uuml;cke macht den langen Weg auf der Schiene, wir die beiden Enden. <span class="ph">[Umfang und Terminals pr&uuml;fen]</span></p>
+              <img class="svc-m" src="bilder/leistung-02-kombi-900.webp" srcset="bilder/leistung-02-kombi-560.webp 560w, bilder/leistung-02-kombi-900.webp 900w" sizes="(max-width:980px) 100vw, 0px" alt="Wei&szlig;er MAN der HS Transport GmbH mit leerem Wechselbr&uuml;cken-Fahrgestell auf einem Feldweg" loading="lazy" decoding="async">
+            </div>
+          </li>
+          <li class="svc-i rv">
+            <span class="svc-nr">03</span>
+            <div>
+              <h3>Nationales WAB-Trucking</h3>
+              <p>Wechselbr&uuml;cken-Trucking deutschlandweit, disponiert von Siegsdorf und Rodgau aus.</p>
+              <img class="svc-m" src="bilder/leistung-03-wab-900.webp" srcset="bilder/leistung-03-wab-560.webp 560w, bilder/leistung-03-wab-900.webp 900w" sizes="(max-width:980px) 100vw, 0px" alt="H&auml;ngerzug der HS Transport GmbH mit Wechselbr&uuml;cken auf einem Schotterplatz" loading="lazy" decoding="async">
+            </div>
+          </li>
+          <li class="svc-i rv">
+            <span class="svc-nr">04</span>
+            <div>
+              <h3>Sattelverkehr</h3>
+              <p>Neben den Wechselbr&uuml;cken f&auml;hrt HS Transport auch Sattelz&uuml;ge. <span class="ph">[Aufliegertypen, K&uuml;hlverkehr ja/nein, Anteil am Gesamtvolumen &ndash; von der Firma noch offen]</span></p>
+              <img class="svc-m" src="bilder/leistung-04-sattel-900.webp" srcset="bilder/leistung-04-sattel-560.webp 560w, bilder/leistung-04-sattel-900.webp 900w" sizes="(max-width:980px) 100vw, 0px" alt="Sattelzugmaschine der HS Transport GmbH in Seitenansicht vor einem Bauernhaus" loading="lazy" decoding="async">
+            </div>
+          </li>
+          <li class="svc-i rv">
+            <span class="svc-nr">05</span>
+            <div>
+              <h3>Telematik auf jedem Fahrzeug</h3>
+              <p>Laufende Standortortung und Analyse der Fahrzeugdaten. Sie wissen, wo Ihre Br&uuml;cke steht, ohne anrufen zu m&uuml;ssen.</p>
+              <img class="svc-m" src="bilder/leistung-05-telematik-900.webp" srcset="bilder/leistung-05-telematik-560.webp 560w, bilder/leistung-05-telematik-900.webp 900w" sizes="(max-width:980px) 100vw, 0px" alt="Gliederzug der HS Transport GmbH im Kreisverkehr, von oben gesehen" loading="lazy" decoding="async">
+            </div>
+          </li>
+        </ol>
       </div>
     </div>
   </section>
 
-  <section id="karriere" class="dunkel block" aria-labelledby="h-karriere">
+  <section id="karriere" class="r-sec r-navy kar" aria-labelledby="h-karriere">
     <div class="wrap">
-      <div class="sec-kopf">
-        <h2 id="h-karriere">Fahrer gesucht. Fair behandelt.</h2>
-        <p>Zwei Stellen sind offen, ab sofort. Du brauchst kein Anschreiben und keinen Lebenslauf im PDF &ndash; melde dich, wie es dir passt.</p>
+      <div class="r-12 kar-top">
+        <div class="kar-text">
+          <p class="r-label rv">Karriere</p>
+          <h2 id="h-karriere" class="kar-h2 rv"><span>Fahrer gesucht.</span> <span>Fair behandelt.</span></h2>
+          <p class="r-lead rv d1">Zwei Stellen sind offen, ab sofort. Du brauchst kein Anschreiben und keinen Lebenslauf im PDF &ndash; melde dich, wie es dir passt.</p>
+        </div>
+        <!-- Ragt am Desktop 120 px in die weiße Leistungen-Sektion hinein (weicher Übergang). -->
+        <div class="kar-bild cur"><img class="r-img" src="bilder/karriere-blau-900.webp" srcset="bilder/karriere-blau-560.webp 560w, bilder/karriere-blau-900.webp 900w, bilder/karriere-blau-1400.webp 1400w" sizes="(max-width:980px) 100vw, 32vw" alt="Blauer MAN der HS Transport GmbH, Front mit Schriftzug" loading="lazy" decoding="async"></div>
       </div>
-      <div class="stellen">
-        <article class="stelle karte">
+
+      <div class="stellen2">
+        <article class="stelle2 rv">
           <h3>LKW-Fahrer (m/w/d) mit Wechselbr&uuml;ckenerfahrung</h3>
-          <dl class="meta"><dt>F&uuml;hrerschein</dt><dd>Klasse CE</dd>
-            <dt>Standort</dt><dd>Siegsdorf und Rodgau</dd><dt>Start</dt><dd>ab sofort</dd></dl>
-          <ul class="liste">
+          <dl class="spec">
+            <div><dt>F&uuml;hrerschein</dt><dd>Klasse CE</dd></div>
+            <div><dt>Standort</dt><dd>Siegsdorf und Rodgau</dd></div>
+            <div><dt>Start</dt><dd>ab sofort</dd></div>
+          </dl>
+          <ul class="liste2">
             <li>Erfahrung mit Wechselbr&uuml;cken, oder die Bereitschaft, sie bei uns zu lernen.</li>
             <li><span class="ph">[Was du verdienst &ndash; Stundenlohn oder Monatsgehalt, Zuschl&auml;ge, Spesen]</span></li>
             <li><span class="ph">[Welche Touren, welche Zeiten, wie viele Tage du daheim bist]</span></li>
             <li><span class="ph">[Wie die Einarbeitung l&auml;uft und wer dich einweist]</span></li>
           </ul>
         </article>
-        <article class="stelle karte">
+        <article class="stelle2 rv d1">
           <h3>Disponent/in (m/w/d) im G&uuml;terkraftverkehr</h3>
-          <dl class="meta"><dt>F&uuml;hrerschein</dt><dd>Klasse CE erw&uuml;nscht</dd>
-            <dt>Standort</dt><dd>Siegsdorf</dd><dt>Start</dt><dd>ab sofort</dd></dl>
-          <ul class="liste">
+          <dl class="spec">
+            <div><dt>F&uuml;hrerschein</dt><dd>Klasse CE erw&uuml;nscht</dd></div>
+            <div><dt>Standort</dt><dd>Siegsdorf</dd></div>
+            <div><dt>Start</dt><dd>ab sofort</dd></div>
+          </dl>
+          <ul class="liste2">
             <li>Disposition des t&auml;glichen Systemlinienverkehrs von Siegsdorf aus.</li>
             <li><span class="ph">[Wie das Dispo-Team aufgestellt ist und mit welcher Software ihr arbeitet]</span></li>
             <li><span class="ph">[Was die Stelle bietet &ndash; Gehalt, Arbeitszeiten, Entwicklung]</span></li>
           </ul>
         </article>
       </div>
-      <div class="bewerb">
-        <img src="bilder/karriere-640.webp" srcset="bilder/karriere-440.webp 440w, bilder/karriere-640.webp 640w, bilder/karriere-900.webp 900w" sizes="(max-width:980px) 100vw, 48vw" width="750" height="1600" loading="lazy" decoding="async" alt="Actros der HS Transport GmbH mit ge&ouml;ffneter Fahrert&uuml;r">
-        <div class="bewerb-text">
-          <h3>So bewirbst du dich</h3>
-          <p style="margin-top:10px">Schick uns eine WhatsApp mit deinem Namen und dem, was du f&auml;hrst &ndash; oder ruf einfach an.
-          <span class="ohne">Kein Anschreiben n&ouml;tig.</span></p>
-          <p style="margin-top:10px">Ansprechpartner: <span class="ph">[Name und Durchwahl f&uuml;r Bewerbungen]</span></p>
-          <div class="wege">
-            <a class="btn btn-blau" href="https://wa.me/4915121217148">Per WhatsApp bewerben</a>
-            <a class="btn btn-hell" href="tel:+4986626682425">Anrufen: <span class="num">08662 6682425</span></a>
-            <a class="btn btn-hell" href="mailto:info@h-s-transport.de?subject=Bewerbung%20als%20Fahrer">Bewerbung per E-Mail</a>
+
+      <div class="r-12 bew2">
+        <div class="bew2-bild cur"><img class="r-img" src="bilder/karriere-640.webp" srcset="bilder/karriere-440.webp 440w, bilder/karriere-640.webp 640w, bilder/karriere-900.webp 900w" sizes="(max-width:980px) 100vw, 40vw" width="750" height="1600" alt="Actros der HS Transport GmbH mit ge&ouml;ffneter Fahrert&uuml;r" loading="lazy" decoding="async"></div>
+        <div class="bew2-text">
+          <h3 class="rv">So bewirbst du dich</h3>
+          <p class="rv d1">Schick uns eine WhatsApp mit deinem Namen und dem, was du f&auml;hrst &ndash; oder ruf einfach an.</p>
+          <p class="ohne2 rv d1">Kein Anschreiben n&ouml;tig.</p>
+          <p class="rv d2">Ansprechpartner: <span class="ph">[Name und Durchwahl f&uuml;r Bewerbungen]</span></p>
+          <div class="wege2 rv d2">
+            <a class="weg weg-wa" href="https://wa.me/4915121217148">Per WhatsApp bewerben<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a>
+            <a class="weg" href="tel:+4986626682425"><span>Anrufen:<small class="num">08662 6682425</small></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a>
+            <a class="weg" href="mailto:info@h-s-transport.de?subject=Bewerbung%20als%20Fahrer">Bewerbung per E-Mail<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a>
           </div>
         </div>
       </div>
-      <p class="nacht-hinweis">In Rodgau suchen wir au&szlig;erdem Wechselbr&uuml;ckenfahrer f&uuml;r Nachteins&auml;tze.
-      <span class="ph">[Welche N&auml;chte, welche Touren, welcher Zuschlag]</span></p>
+
+      <div class="nacht2 rv">
+        <img src="bilder/karriere-nacht-280.webp" srcset="bilder/karriere-nacht-280.webp 280w, bilder/karriere-nacht-560.webp 560w" sizes="132px" width="132" height="132" alt="Wei&szlig;er MAN der HS Transport GmbH bei Nacht und Nebel" loading="lazy" decoding="async">
+        <p>In Rodgau suchen wir au&szlig;erdem Wechselbr&uuml;ckenfahrer f&uuml;r Nachteins&auml;tze. <span class="ph">[Welche N&auml;chte, welche Touren, welcher Zuschlag]</span></p>
+      </div>
     </div>
   </section>
 
@@ -592,18 +763,52 @@ footer a{color:#fff;display:inline-flex;align-items:center;min-height:44px;text-
         <h2 id="h-standorte">Von wo wir fahren</h2>
         <p>Zwei Betriebsst&auml;tten, rund 500 Kilometer auseinander &ndash; S&uuml;d und Mitte aus einer Hand disponiert.</p>
       </div>
-      <div class="orte">
-        <div class="ort karte">
+      <!-- Gliederzug in Seitenansicht. Die beiden Wechselbruecken sind echte
+           HTML-Kaesten; beim Scrollen rafft sich die Plane zur Seite und gibt
+           den Standort frei. Siegsdorf steht im Markup zuerst (Firmensitz),
+           am Desktop tauscht `order` die beiden, damit die vordere Bruecke
+           auf dem Motorwagen Siegsdorf ist. -->
+      <!-- Standbild aus dem Hero-Video als breites Band. Auf den beiden
+           Planenflaechen liegt je eine Flaeche: dunkler Laderaum, die Plane
+           an der linken Seite zusammengerafft, darin der Standort als echtes
+           HTML. Unter 1024 px steht das Bild allein und die Standorte
+           darunter als Karten - dort waeren die Flaechen nur 109 px breit. -->
+      <!-- Handgezeichnete Illustration des Gliederzugs. Auf den beiden
+           Planenflaechen liegt je ein Kasten: dunkler Laderaum, Plane links
+           zusammengerafft, darin der Standort als echtes HTML. Die Prozente
+           gehoeren zu genau dieser Zeichnung (viewBox 940x252); die unteren
+           6 % jeder Bruecke sind Bodenschiene und bleiben textfrei.
+           Unter 1024 px steht die Zeichnung als schmales Band ueber Karten. -->
+      <!-- Die Standorte stehen direkt auf der Plane, wie eine Beschriftung
+           auf einer echten Wechselbruecke: weisse Schrift, kein Kasten. Die
+           Textfelder sind aus der Zeichnung ausgemessen (Rahmenpfosten x
+           19/373 und 439/793), sie enden ueber den Spannschloessern bei
+           y 162. Die Fahrbahnlinie liegt auf y 240 - dort enden die Reifen.
+           Unter 1024 px steht die Zeichnung als Band ueber zwei Karten. -->
+      <figure class="zug">
+        <!-- Bild und Fahrbahn in einer eigenen Huelle: so bleibt die Linie
+             auch dann auf der Reifenunterkante, wenn die Standorte darunter
+             als Karten stehen und die Figur dadurch hoeher wird. -->
+        <div class="zug-bahn">
+          <img class="zug-bild" src="bilder/lkw-seitenansicht-ohne-branding.svg" width="940" height="252"
+               loading="lazy" decoding="async"
+               alt="Gliederzug der HS Transport GmbH in Seitenansicht: wei&szlig;es Fahrerhaus mit zwei dunklen Wechselbr&uuml;cken">
+          <div class="zug-fahrbahn" aria-hidden="true"></div>
+        </div>
+
+        <div class="zug-text siegsdorf">
           <span class="rolle">Firmensitz und Betriebsst&auml;tte</span>
           <h3>Siegsdorf</h3>
           <address>HS Transport GmbH<br>Gamstra&szlig;e 16<br>83313 Siegsdorf</address>
         </div>
-        <div class="ort karte">
+
+        <div class="zug-text rodgau">
           <span class="rolle">Betriebsst&auml;tte</span>
           <h3>Rodgau</h3>
           <address>Rodgau<br><span class="ph">[Stra&szlig;e und Hausnummer]</span></address>
         </div>
-      </div>
+      </figure>
+
       <dl class="gebiete">
         <dt>Weitere Einsatzgebiete</dt>
         <dd>Altenstadt &middot; <span class="ph">[Butzbach oder Langg&ouml;ns &ndash; bitte kl&auml;ren, die alte Seite nennt beides]</span></dd>
@@ -678,19 +883,35 @@ footer a{color:#fff;display:inline-flex;align-items:center;min-height:44px;text-
     <path class="gefahren" d="M38 0C38 90 52 110 52 200C52 290 24 310 24 400C24 490 52 510 52 600C52 690 24 710 24 800C24 890 38 910 38 1000"/>
     <path class="mittel-hell" d="M38 0C38 90 52 110 52 200C52 290 24 310 24 400C24 490 52 510 52 600C52 690 24 710 24 800C24 890 38 910 38 1000"/>
   </svg>
-  <svg class="strasse-lkw" viewBox="0 0 26 70" focusable="false">
-    <g fill="#1A2340">
-      <rect x="0.8" y="9" width="3.6" height="7" rx="1.2"/><rect x="21.6" y="9" width="3.6" height="7" rx="1.2"/>
-      <rect x="0.8" y="27" width="3.6" height="8" rx="1.2"/><rect x="21.6" y="27" width="3.6" height="8" rx="1.2"/>
-      <rect x="0.8" y="52" width="3.6" height="8" rx="1.2"/><rect x="21.6" y="52" width="3.6" height="8" rx="1.2"/>
+  <!-- Draufsicht in Fahrtrichtung: Fahrerhaus unten. Masse aus den echten
+       Fahrzeugmassen - Fahrerhaus 2,3 m, Wechselbruecke 7,45 m, Breite 2,55 m. -->
+  <svg class="strasse-lkw" viewBox="0 0 28 107" focusable="false">
+    <g fill="#0E1426">
+      <rect x="0.4" y="10" width="3.2" height="8" rx="1.25"/><rect x="24.4" y="10" width="3.2" height="8" rx="1.25"/>
+      <rect x="0.4" y="56" width="3.2" height="8" rx="1.25"/><rect x="24.4" y="56" width="3.2" height="8" rx="1.25"/>
+      <rect x="0.4" y="66" width="3.2" height="8" rx="1.25"/><rect x="24.4" y="66" width="3.2" height="8" rx="1.25"/>
+      <rect x="0.9" y="90" width="2.6" height="7" rx="1"/><rect x="24.5" y="90" width="2.6" height="7" rx="1"/>
     </g>
-    <rect x="3.2" y="1.6" width="19.6" height="16.4" rx="3.2" fill="#FFFFFF" stroke="#2A3977" stroke-width="1.2"/>
-    <rect x="6.2" y="4" width="13.6" height="4.8" rx="1.5" fill="#2A3977" opacity=".32"/>
-    <rect x="2.6" y="19.4" width="20.8" height="19" rx="1.8" fill="#1A2340"/>
-    <rect x="4.4" y="21" width="17.2" height="1.6" rx=".8" fill="#8E99B8" opacity=".55"/>
-    <rect x="11.8" y="38.4" width="2.4" height="5.4" rx="1" fill="#2A3977"/>
-    <rect x="2.6" y="43.4" width="20.8" height="23" rx="1.8" fill="#1A2340"/>
-    <rect x="4.4" y="45" width="17.2" height="1.6" rx=".8" fill="#8E99B8" opacity=".55"/>
+    <rect x="2" y="1.2" width="24" height="81.8" rx="1.5" fill="#141A2E" stroke="#C9D0E4" stroke-width=".9"/>
+    <rect x="4.2" y="3.2" width="19.6" height="1.5" rx=".75" fill="#C9D0E4" opacity=".55"/>
+    <rect x="4.2" y="79.3" width="19.6" height="1.5" rx=".75" fill="#C9D0E4" opacity=".55"/>
+    <rect x="13.3" y="20" width="1.4" height="46" rx=".7" fill="#C9D0E4" opacity=".16"/>
+    <rect x="0" y="91" width="3.4" height="2" rx="1" fill="#2A3977"/>
+    <rect x="24.6" y="91" width="3.4" height="2" rx="1" fill="#2A3977"/>
+    <rect x="2.4" y="83" width="23.2" height="22.6" rx="5" fill="#FFFFFF" stroke="#2A3977" stroke-width="1.2"/>
+    <rect x="6.8" y="85.4" width="14.4" height="2.4" rx="1.2" fill="#2A3977" opacity=".26"/>
+    <rect x="5.4" y="98.4" width="17.2" height="4.6" rx="2.2" fill="#2A3977"/>
+  </svg>
+  <svg class="strasse-haenger" viewBox="0 0 28 93" focusable="false">
+    <rect x="12.6" y="0" width="2.8" height="12" rx="1.3" fill="#2A3977"/>
+    <g fill="#0E1426">
+      <rect x="0.4" y="20" width="3.2" height="8" rx="1.25"/><rect x="24.4" y="20" width="3.2" height="8" rx="1.25"/>
+      <rect x="0.4" y="72" width="3.2" height="8" rx="1.25"/><rect x="24.4" y="72" width="3.2" height="8" rx="1.25"/>
+    </g>
+    <rect x="2" y="10.2" width="24" height="81.8" rx="1.5" fill="#141A2E" stroke="#C9D0E4" stroke-width=".9"/>
+    <rect x="4.2" y="12.2" width="19.6" height="1.5" rx=".75" fill="#C9D0E4" opacity=".55"/>
+    <rect x="4.2" y="88.3" width="19.6" height="1.5" rx=".75" fill="#C9D0E4" opacity=".55"/>
+    <rect x="13.3" y="29" width="1.4" height="46" rx=".7" fill="#C9D0E4" opacity=".16"/>
   </svg>
 </div>
 <nav class="halte" aria-label="Seitenfortschritt">
@@ -1179,8 +1400,9 @@ window.addEventListener('DOMContentLoaded', function () {
   var strasse = document.querySelector('.strasse');
   var halte   = document.querySelector('.halte');
   var lkw     = document.querySelector('.strasse-lkw');
+  var haenger = document.querySelector('.strasse-haenger');
   var bahn    = document.querySelector('.strasse-bahn');
-  if (!strasse || !halte || !lkw || !bahn) return;
+  if (!strasse || !halte || !lkw || !haenger || !bahn) return;
 
   var breit = window.matchMedia('(min-width: 1024px)');
   var ruhig = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -1232,6 +1454,17 @@ window.addEventListener('DOMContentLoaded', function () {
     });
   }
 
+  /* Die viewBox wird senkrecht gestreckt (preserveAspectRatio="none"),
+     deshalb muss dy fuer den Winkel mitskaliert werden - sonst stehen die
+     Fahrzeuge in den Kurven schief. */
+  function setzen(el, t, hx, hy) {
+    var p = beiAnteil(t);
+    var w = Math.atan2(-p.dx, p.dy * sy) * 180 / Math.PI;
+    var hoehe = strasse.getBoundingClientRect().height;
+    var py = Math.min(hoehe - hy, Math.max(hy, p.y * sy));
+    el.style.transform = 'translate(' + (p.x - hx) + 'px,' + (py - hy) + 'px) rotate(' + w.toFixed(2) + 'deg)';
+  }
+
   function zeichnen() {
     /* Unter 1024 px wird die Tabelle nie gebaut - dann hier nichts tun,
        sonst wirft beiAnteil() bei jedem Scroll-Frame. */
@@ -1240,15 +1473,12 @@ window.addEventListener('DOMContentLoaded', function () {
     var rest = laenge * (1 - t);
     waechst.forEach(function (el) { el.style.strokeDashoffset = rest; });
     if (!ruhig.matches) {
-      var p = beiAnteil(t);
-      /* Die viewBox wird senkrecht gestreckt (preserveAspectRatio="none"),
-         deshalb muss dy fuer den Winkel mitskaliert werden - sonst steht
-         der LKW in den Kurven schief. */
-      var w = Math.atan2(-p.dx, p.dy * sy) * 180 / Math.PI;
-      /* Am Anfang und Ende so begrenzen, dass der LKW ganz im Bild bleibt. */
-      var hoehe = strasse.getBoundingClientRect().height;
-      var py = Math.min(hoehe - 38, Math.max(38, p.y * sy));
-      lkw.style.transform = 'translate(' + (p.x - 13) + 'px,' + (py - 35) + 'px) rotate(' + w.toFixed(2) + 'deg)';
+      /* Motorwagen auf t, Anhaenger 100 px Pfadlaenge dahinter - jeder mit
+         dem Winkel seines eigenen Punktes. Ein starres Bild ueber die ganze
+         Zuglaenge wuerde die Kurven schneiden. */
+      var zugab = 100 / (laenge * sy);
+      setzen(lkw, t, 14, 53.5);
+      setzen(haenger, Math.max(0, t - zugab), 14, 46.5);
     }
     Array.prototype.forEach.call(halte.querySelectorAll('a'), function (a) {
       a.classList.toggle('erreicht', t >= (a.__t || 0) - 0.004);
@@ -1285,6 +1515,62 @@ window.addEventListener('DOMContentLoaded', function () {
   start();
   /* Nach dem Laden der Bilder aendert sich die Dokumenthoehe. */
   window.addEventListener('load', function () { setTimeout(start, 250); });
+});
+</script>
+<script>
+/* Redesign „Was wir fahren“ + „Fahrer gesucht“.
+   Eigener <script>-Block vor </body>, nach den bestehenden Skripten.
+   Ohne JS: alle Inhalte sichtbar, erstes Leistungsbild steht. */
+
+/* 1) Leistungen: das klebende Bild links folgt der Zeile, die gerade
+      die Bildschirmmitte (55 %) passiert hat. Nur Klassenwechsel. */
+window.addEventListener('DOMContentLoaded', function () {
+  var items = Array.prototype.slice.call(document.querySelectorAll('.svc-i'));
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.svc-slide'));
+  if (!items.length || !slides.length) return;
+  document.documentElement.classList.add('js-svc');
+  var cur = -1, laeuft = false;
+  function upd() {
+    laeuft = false;
+    var linie = window.innerHeight * 0.55, a = 0;
+    items.forEach(function (it, i) { if (it.getBoundingClientRect().top < linie) a = i; });
+    if (a === cur) return;
+    cur = a;
+    items.forEach(function (it, i) { it.classList.toggle('on', i === a); });
+    slides.forEach(function (s, i) { s.classList.toggle('on', i === a); });
+  }
+  window.addEventListener('scroll', function () {
+    if (!laeuft) { laeuft = true; requestAnimationFrame(upd); }
+  }, { passive: true });
+  window.addEventListener('resize', upd, { passive: true });
+  upd();
+});
+
+/* 2) Ruhiges Einblenden (.rv) und Planen-Aufdeckung für Bilder (.cur).
+      Einmalig je Element, nie bei reduzierter Bewegung. */
+window.addEventListener('DOMContentLoaded', function () {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (!('IntersectionObserver' in window)) return;
+  var ziele = Array.prototype.slice.call(
+    document.querySelectorAll('#leistungen .rv, #leistungen .cur, #karriere .rv, #karriere .cur'));
+  if (!ziele.length) return;
+  document.documentElement.classList.add('rv-on');
+  var io = new IntersectionObserver(function (es) {
+    es.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      (e.target.rvZiel || e.target).classList.add('in');
+      io.unobserve(e.target);
+    });
+  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.1 });
+  ziele.forEach(function (el) {
+    /* Die .cur-Bilder starten mit clip-path:inset(0 100% 0 0). Chrome rechnet die
+       eigene clip-path eines Elements in seine Sichtbarkeit ein - so ein Bild meldet
+       nie "sichtbar" und bliebe fuer immer zugeklappt. Darum beobachten wir bei .cur
+       den unbeschnittenen Elternknoten und setzen .in am Bild selbst. */
+    var beobachtet = el.classList.contains('cur') && el.parentNode ? el.parentNode : el;
+    beobachtet.rvZiel = el;
+    io.observe(beobachtet);
+  });
 });
 </script>
 </body>

@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 160" role="img" aria-label="HSTransport GmbH">
+<!--
+  Nachbau des HST-Logos nach den Originalfotos 03 und 07 in fotos-original/.
+  UEBERGANGSLOESUNG, bis die Vektordatei vom Folierer vorliegt: dann diese
+  Datei ersetzen und das Seitenverhaeltnis 640:160 beibehalten, sonst
+  verrutscht die Platzierung auf den Bruecken.
+-->
+<defs>
+  <linearGradient id="hst-silber" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#F6F8FB"/><stop offset=".5" stop-color="#CBD1DC"/>
+    <stop offset="1" stop-color="#8C94A8"/>
+  </linearGradient>
+  <linearGradient id="hst-keil" x1="0" y1="1" x2=".85" y2="0">
+    <stop offset="0" stop-color="#99A2B5"/><stop offset=".45" stop-color="#D4DAE4"/>
+    <stop offset="1" stop-color="#F4F7FB"/>
+  </linearGradient>
+</defs>
+
+<!-- Keil: kurzer Arm nach links, langer nach rechts oben, blaue Stirnkante -->
+<path d="M74 104 L74 132 L6 146 Z" fill="url(#hst-keil)"/>
+<path d="M74 66 L632 12 L74 104 Z" fill="url(#hst-keil)"/>
+<path d="M74 66 L64 72 L64 138 L74 132 Z" fill="#2B3778"/>
+
+<g font-family="Manrope, 'Segoe UI', system-ui, sans-serif" fill="url(#hst-silber)">
+  <text id="t-hst"  x="78"  y="140" font-size="80" font-weight="800" letter-spacing="-3.5">HST</text>
+  <text id="t-rest" x="230" y="140" font-size="61" font-weight="500" letter-spacing="-1.6">ransport</text>
+</g>
+
+<!-- "GmbH" einlinig gezeichnet, Schraeglage ueber skewX -->
+<g id="t-gmbh" transform="translate(486 78) skewX(-16) scale(.62)"
+   fill="none" stroke="#7C87A8" stroke-width="8.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M60 20C52 8 32 8 22 22 10 38 10 62 22 74c10 10 26 8 33-4 4-7 5-15 3-22l16 0"/>
+  <path d="M74 78c2-16 6-28 10-30 5-2 6 4 4 12-2 8-3 13-4 18"/>
+  <path d="M84 62c4-10 10-16 15-14 5 2 4 10 2 18-1 5-2 9-2 12"/>
+  <path d="M118 8c-4 24-9 50-11 64-1 6 3 9 8 6 6-4 10-12 9-18-1-5-6-6-10-2"/>
+  <path d="M140 10c-4 24-9 50-12 70M162 8c-4 24-9 50-12 70M134 42c8-3 18-4 24-2"/>
+</g>
+</svg>
