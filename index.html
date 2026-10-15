@@ -2,7 +2,18 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<script>document.documentElement.classList.add('js')</script>
+<script>
+/* .js: Skripte laufen. .js-szene: die scrollgesteuerte Hero-Buehne wird
+   gebaut - schon hier entschieden, damit die Seite von Anfang an im
+   endgueltigen Layout steht und nicht beim Laden des Videos springt.
+   Keine Buehne bei reduzierter Bewegung, Save-Data oder langsamer Verbindung. */
+(function (h, n) {
+  h.classList.add('js');
+  if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (n && (n.saveData || /^(slow-2g|2g|3g)$/.test(n.effectiveType || ''))) return;
+  h.classList.add('js-szene');
+})(document.documentElement, navigator.connection);
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
 <title>Entwurf – HS Transport GmbH, Wechselbrücken und Systemverkehr</title>
@@ -223,6 +234,9 @@ section.block{padding-top:clamp(56px,7vw,104px);padding-bottom:clamp(56px,7vw,10
      Das Video wird auf 3:2 beschnitten - der Zug bleibt dabei ganz im Bild. */
   .js-szene .poster,.js-szene .film{width:100%;aspect-ratio:3/2;height:var(--band,auto);object-fit:cover;transform-origin:center}
   .js-szene .szene-kopfzone{display:contents}
+  /* Poster, Text und Button sitzen erst nach platzieren() (Skript) an ihrem
+     Platz - bis dahin unsichtbar statt sichtbar zu springen. */
+  .js-szene .szene-klebe:not(.platziert) :is(.poster,.film,.szene-ui,.szene-aktion){visibility:hidden}
   .js-szene .szene-ui{position:absolute;left:0;right:0;z-index:3;padding:0 var(--gutter);gap:9px;max-width:none}
   .js-szene .szene-aktion{position:absolute;left:0;right:0;z-index:3;padding:0 var(--gutter)}
   .js-szene .szene-sprung{width:100%;justify-content:center}
@@ -1249,9 +1263,10 @@ section.block{padding-top:clamp(56px,7vw,104px);padding-bottom:clamp(56px,7vw,10
 <script defer src="vendor/gsap-3.13.0/ScrollTrigger.min.js"></script>
 <script>
 /* Hero-Video, scrollgesteuert, mit Ladeetiketten auf der Ware am Ende.
-   Poster steht sofort. Das Video laedt nur mit JS, ohne reduzierte Bewegung
-   und bei brauchbarer Verbindung. Erst wenn es bespielbar ist, wird die
-   lange Buehne aktiviert - sonst scrollte man ins Leere. */
+   Ob die Buehne gebaut wird, entscheidet das Skript im <head> (.js-szene).
+   Sie steht sofort mit dem Poster; das Video blendet ueber, sobald es
+   bespielbar ist. Fehlt GSAP oder scheitert das Video, faellt die Seite
+   auf den ruhigen Hero zurueck. */
 window.addEventListener('DOMContentLoaded', function () {
   var buehne = document.querySelector('.szene-buehne');
   var klebe  = document.querySelector('.szene-klebe');
@@ -1264,14 +1279,9 @@ window.addEventListener('DOMContentLoaded', function () {
   if (!buehne || !klebe || !film || !bild || !titel || !kopfText || !aktion) return;
   if (!etiketten.length) return;
   var versatz = 0;
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  if (!window.gsap || !window.ScrollTrigger) return;
-
-  var netz = navigator.connection;
-  if (netz) {
-    if (netz.saveData) return;
-    if (/^(slow-2g|2g|3g)$/.test(netz.effectiveType || '')) return;
-  }
+  var wurzel = document.documentElement;
+  if (!wurzel.classList.contains('js-szene')) return;
+  if (!window.gsap || !window.ScrollTrigger) { wurzel.classList.remove('js-szene'); return; }
 
   film.src = window.matchMedia('(min-width: 900px)').matches
     ? 'video/hero-1280.mp4' : 'video/hero-1152.mp4';
@@ -1290,12 +1300,13 @@ window.addEventListener('DOMContentLoaded', function () {
     window.addEventListener(e, entsperren, { once: true, passive: true });
   });
 
+  /* Sobald das Video bespielbar ist: einblenden und auf den Stand der
+     Zeitachse setzen (der Nutzer kann schon gescrollt haben). */
   film.addEventListener('loadeddata', function () {
     film.classList.add('bereit');
-    gsap.registerPlugin(ScrollTrigger);
-    document.documentElement.classList.add('js-szene');
-    aufbauen();
+    if (videoNachziehen) videoNachziehen();
   }, { once: true });
+  film.addEventListener('error', zurueck, { once: true });
 
   function hochformat() { return window.matchMedia('(orientation: portrait)').matches; }
 
@@ -1410,9 +1421,10 @@ window.addEventListener('DOMContentLoaded', function () {
     etiketten.forEach(function (e) {
       gsap.set(e, { rotation: parseFloat(e.dataset.dreh) || 0, transformOrigin: '50% 50%' });
     });
+    klebe.classList.add('platziert');
   }
 
-  var tl = null;
+  var tl = null, videoNachziehen = null;
   function aufbauen() {
     platzieren();
     var z = { t: 0 };
@@ -1420,6 +1432,7 @@ window.addEventListener('DOMContentLoaded', function () {
        mit ">= 2" gingen die letzten Scrub-Werte verloren, und das Video
        blieb nach schnellem Scrollen auf einem Zwischenbild stehen. */
     var setzen = function () { if (film.readyState >= 1) film.currentTime = z.t; };
+    videoNachziehen = setzen;
 
     tl = gsap.timeline({
       scrollTrigger: { trigger: buehne, start: 'top top', end: 'bottom bottom',
@@ -1519,16 +1532,35 @@ window.addEventListener('DOMContentLoaded', function () {
     letzteB = b; letzteH = h; letztesHoch = hoch;
     clearTimeout(warte);
     warte = setTimeout(function () {
-      if (tl.scrollTrigger) tl.scrollTrigger.kill();
-      tl.kill();
-      gsap.set(etiketten.concat([titel, kopfText, aktion]), { clearProps: 'all' });
-      gsap.set(['.film', '.poster'], { clearProps: 'all' });
-      film.style.filter = '';
-      gsap.set(['.szene-tiefe', '.szene-himmel'], { clearProps: 'all' });
+      if (!tl) return;
+      abbauen();
       aufbauen();
       ScrollTrigger.refresh();
     }, 200);
   }, { passive: true });
+
+  function abbauen() {
+    if (tl.scrollTrigger) tl.scrollTrigger.kill();
+    tl.kill();
+    gsap.set(etiketten.concat([titel, kopfText, aktion]), { clearProps: 'all' });
+    gsap.set(['.film', '.poster'], { clearProps: 'all' });
+    film.style.filter = '';
+    gsap.set(['.szene-tiefe', '.szene-himmel'], { clearProps: 'all' });
+  }
+
+  /* Video nicht ladbar: zurueck zum ruhigen Hero (springt dann einmal). */
+  function zurueck() {
+    if (tl) { abbauen(); tl = null; }
+    videoNachziehen = null;
+    clearTimeout(warte);
+    bild.style.removeProperty('--band');
+    klebe.classList.remove('platziert', 'eng', 'klein');
+    wurzel.classList.remove('js-szene');
+    ScrollTrigger.refresh();
+  }
+
+  gsap.registerPlugin(ScrollTrigger);
+  aufbauen();
 });
 </script>
 <script>
