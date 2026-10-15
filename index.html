@@ -1449,9 +1449,20 @@ window.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  var warte;
+  /* Auf Touch-Geraeten feuert resize auch, wenn beim Scrollen die
+     Adressleiste ein- oder ausfaehrt. Die Buehne rechnet mit svh und
+     haengt davon nicht ab - ein Neuaufbau mitten im Scrollen liesse
+     Etiketten und Text springen. Neu gebaut wird nur, wenn sich Breite
+     oder Ausrichtung aendern oder die Hoehe deutlich. */
+  var warte, grob = window.matchMedia('(pointer: coarse)');
+  var letzteB = window.innerWidth, letzteH = window.innerHeight, letztesHoch = hochformat();
+  var LEISTE_MAX = 160;   /* groesste Hoehenaenderung durch Browserleisten, px */
   window.addEventListener('resize', function () {
     if (!tl) return;
+    var b = window.innerWidth, h = window.innerHeight, hoch = hochformat();
+    if (grob.matches && b === letzteB && hoch === letztesHoch &&
+        Math.abs(h - letzteH) < LEISTE_MAX) return;
+    letzteB = b; letzteH = h; letztesHoch = hoch;
     clearTimeout(warte);
     warte = setTimeout(function () {
       if (tl.scrollTrigger) tl.scrollTrigger.kill();
