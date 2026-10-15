@@ -1301,10 +1301,12 @@ window.addEventListener('DOMContentLoaded', function () {
   });
 
   /* Sobald das Video bespielbar ist: einblenden und auf den Stand der
-     Zeitachse setzen (der Nutzer kann schon gescrollt haben). */
+     Zeitachse setzen (der Nutzer kann schon gescrollt haben). Erst im
+     naechsten Frame - ein Sprung direkt im loadeddata-Handler blieb in
+     Chrome haengen (seeking ohne Ende, Bild kam nie). */
   film.addEventListener('loadeddata', function () {
     film.classList.add('bereit');
-    if (videoNachziehen) videoNachziehen();
+    requestAnimationFrame(function () { if (videoNachziehen) videoNachziehen(); });
   }, { once: true });
   film.addEventListener('error', zurueck, { once: true });
 

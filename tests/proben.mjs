@@ -21,16 +21,18 @@ async function seite(vp, { videoVerzoegerung = 0, init } = {}) {
     if (fs.existsSync(d)) return route.fulfill({ status: 200, headers: JSON.parse(fs.readFileSync(d + '.json', 'utf8')), body: fs.readFileSync(d) });
     return route.continue();
   });
-  if (videoVerzoegerung) await ctx.route(/\.mp4/, async (r) => { await new Promise((ok) => setTimeout(ok, videoVerzoegerung)); r.continue(); });
+  let url = URL_;
+  if (videoVerzoegerung) { const l = await starteServer(0, { videoVerzoegerung }); url = `http://127.0.0.1:${l.address().port}/index.html`; ctx.on('close', () => l.close()); }
   if (init) await ctx.addInitScript(init);
   const page = await ctx.newPage();
-  return { ctx, page };
+  return { ctx, page, url };
 }
 const warte = (p, ms) => p.waitForTimeout(ms);
 const js = (p) => p.waitForFunction(() => document.documentElement.classList.contains('js-szene') && document.querySelector('.film').classList.contains('bereit') && document.querySelector('.film').readyState >= 2, null, { timeout: 30000 });
 const out = {};
 
 // 1) Reload mitten in der Seite, dann zurück in die Hero-Bühne.
+console.error('Probe 1');
 for (const vp of [[1440, 900], [390, 844]]) {
   const { ctx, page } = await seite(vp);
   await page.goto(URL_); await js(page); await warte(page, 500);
@@ -47,9 +49,10 @@ for (const vp of [[1440, 900], [390, 844]]) {
 }
 
 // 2) Video kommt spät (4 s), Nutzer ist schon weiter unten: springt der Inhalt?
+console.error('Probe 2');
 for (const vp of [[1440, 900], [390, 844]]) {
-  const { ctx, page } = await seite(vp, { videoVerzoegerung: 4000 });
-  await page.goto(URL_, { waitUntil: 'domcontentloaded' }); await warte(page, 800);
+  const { ctx, page, url } = await seite(vp, { videoVerzoegerung: 4000 });
+  await page.goto(url, { waitUntil: 'domcontentloaded' }); await warte(page, 800);
   const ziel = await page.evaluate(() => document.getElementById('leistungen').offsetTop);
   await page.evaluate((y) => scrollTo({ top: y, behavior: 'instant' }), ziel); await warte(page, 300);
   const vor = await page.evaluate(() => ({ y: scrollY, leistungenImViewport: Math.round(document.getElementById('leistungen').getBoundingClientRect().top) }));
@@ -60,6 +63,7 @@ for (const vp of [[1440, 900], [390, 844]]) {
 }
 
 // 3) Haltepunkte oben unsichtbar, aber klick- und fokussierbar?
+console.error('Probe 3');
 {
   const { ctx, page } = await seite([1440, 900]);
   await page.goto(URL_); await js(page); await warte(page, 800);
@@ -80,6 +84,7 @@ for (const vp of [[1440, 900], [390, 844]]) {
 }
 
 // 4) Layout-Arbeit pro Scroll-Frame (Desktop, nach dem Hero).
+console.error('Probe 4');
 for (const vp of [[1440, 900], [390, 844]]) {
   const { ctx, page } = await seite(vp);
   await page.goto(URL_); await js(page); await warte(page, 800);
@@ -102,6 +107,7 @@ for (const vp of [[1440, 900], [390, 844]]) {
 }
 
 // 5) Mobile Adressleiste: nur die Höhe ändert sich um 60 px - baut der Hero neu auf?
+console.error('Probe 5');
 {
   const zaehler = () => {
     let g; window.__neu = 0;
@@ -120,14 +126,15 @@ for (const vp of [[1440, 900], [390, 844]]) {
 }
 
 // 6) Layout-Verschiebung beim Laden (CLS) bis das Video da ist, Video 3 s verzoegert.
+console.error('Probe 6');
 for (const vp of [[1440, 900], [390, 844]]) {
-  const { ctx, page } = await seite(vp, { videoVerzoegerung: 3000, init: () => {
+  const { ctx, page, url } = await seite(vp, { videoVerzoegerung: 3000, init: () => {
     window.__cls = 0; window.__shifts = [];
     new PerformanceObserver((l) => { for (const e of l.getEntries()) if (!e.hadRecentInput) { window.__cls += e.value;
       window.__shifts.push(Math.round(performance.now()) + 'ms ' + e.value.toFixed(4) + ' ' + (e.sources || []).map((s) => s.node && (s.node.className || s.node.nodeName)).join(',')); } })
       .observe({ type: 'layout-shift', buffered: true });
   } });
-  await page.goto(URL_, { waitUntil: 'domcontentloaded' });
+  await page.goto(url, { waitUntil: 'domcontentloaded' });
   await warte(page, 300);
   await page.screenshot({ path: path.join(HIER, 'out', `vor-video-${vp[0]}.png`) });
   await js(page); await warte(page, 800);
@@ -136,9 +143,10 @@ for (const vp of [[1440, 900], [390, 844]]) {
 }
 
 // 7) Nutzer scrollt in die Buehne, bevor das Video da ist: zeigt es danach den richtigen Stand?
+console.error('Probe 7');
 for (const vp of [[1440, 900], [390, 844]]) {
-  const { ctx, page } = await seite(vp, { videoVerzoegerung: 3000 });
-  await page.goto(URL_, { waitUntil: 'domcontentloaded' }); await warte(page, 500);
+  const { ctx, page, url } = await seite(vp, { videoVerzoegerung: 3000 });
+  await page.goto(url, { waitUntil: 'domcontentloaded' }); await warte(page, 500);
   const y = await page.evaluate(() => { const b = document.querySelector('.szene-buehne'); return Math.round(b.getBoundingClientRect().top + scrollY + (b.offsetHeight - innerHeight) * 0.6); });
   await page.evaluate((y) => scrollTo({ top: y, behavior: 'instant' }), y); await warte(page, 800);
   await js(page); await warte(page, 1500);
@@ -147,6 +155,7 @@ for (const vp of [[1440, 900], [390, 844]]) {
 }
 
 // 8) Video nicht ladbar (404): ruhiger Hero, keine JS-Fehler.
+console.error('Probe 8');
 for (const vp of [[1440, 900], [390, 844]]) {
   const { ctx, page } = await seite(vp);
   await ctx.route(/\.mp4/, (r) => r.fulfill({ status: 404, body: 'x' }));

@@ -17,8 +17,16 @@ const TYPEN = {
 };
 const TEXT = /^(text\/|application\/json|image\/svg)/;
 
-export function starteServer(port = 0) {
+// videoVerzoegerung: erste Video-Anfrage um so viele ms verzoegern (simuliert
+// langsames Laden, ohne Range-Anfragen ueber Playwright umzuleiten).
+export function starteServer(port = 0, { videoVerzoegerung = 0 } = {}) {
+  let verzoegert = false;
   const server = http.createServer((req, res) => {
+    if (videoVerzoegerung && !verzoegert && req.url.includes('.mp4')) {
+      verzoegert = true;
+      setTimeout(() => server.emit('request', req, res), videoVerzoegerung);
+      return;
+    }
     const url = new URL(req.url, 'http://x');
     let datei = path.join(WURZEL, decodeURIComponent(url.pathname));
     if (!datei.startsWith(WURZEL)) { res.writeHead(403).end(); return; }
