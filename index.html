@@ -355,7 +355,7 @@ section.block{padding-top:clamp(56px,7vw,104px);padding-bottom:clamp(56px,7vw,10
 .r-label::after{content:"";flex:1;height:1px;background:var(--linie)}
 .r-navy .r-label{color:var(--hell)}
 .r-navy .r-label::after{background:var(--linie-navy-20)}
-.r-h2{font-size:clamp(38px,5.4vw,70px);font-weight:800;letter-spacing:-.035em;line-height:1;color:var(--navy);margin:0;text-wrap:balance}
+.r-h2{font-size:clamp(38px,5.4vw,70px);font-weight:800;letter-spacing:-.035em;line-height:1.08;color:var(--navy);margin:0;text-wrap:balance}
 .r-lead{font-size:clamp(18px,1.55vw,20.5px);line-height:1.55;color:var(--text);max-width:34em}
 .r-navy .r-lead{color:var(--hell)}
 .r-head{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:24px;row-gap:20px;align-items:end;margin-bottom:clamp(48px,6vw,96px)}
@@ -388,7 +388,7 @@ section.block{padding-top:clamp(56px,7vw,104px);padding-bottom:clamp(56px,7vw,10
 /* Karriere */
 .kar-top{align-items:end}
 .kar-text{grid-column:1/span 7}
-.kar-h2{font-size:clamp(46px,7.2vw,100px);font-weight:800;letter-spacing:-.042em;line-height:.94;color:#fff;margin:0}
+.kar-h2{font-size:clamp(46px,7.2vw,100px);font-weight:800;letter-spacing:-.042em;line-height:1.08;color:#fff;margin:0}
 .kar-h2 span{display:block}
 .kar-text .r-lead{margin-top:clamp(24px,2.6vw,36px)}
 .kar-bild{grid-column:9/span 4;aspect-ratio:4/5;margin-top:calc(-1 * clamp(88px,10vw,152px) - 120px);position:relative;z-index:2}
@@ -407,7 +407,7 @@ section.block{padding-top:clamp(56px,7vw,104px);padding-bottom:clamp(56px,7vw,10
 .bew2{margin-top:clamp(72px,8vw,128px);align-items:stretch}
 .bew2-bild{grid-column:1/span 5;aspect-ratio:4/5}
 .bew2-text{grid-column:7/span 6;display:flex;flex-direction:column;justify-content:center}
-.bew2-text h3{font-size:clamp(30px,3.4vw,46px);font-weight:800;letter-spacing:-.032em;line-height:1.04;color:#fff}
+.bew2-text h3{font-size:clamp(30px,3.4vw,46px);font-weight:800;letter-spacing:-.032em;line-height:1.08;color:#fff}
 .bew2-text p{margin-top:18px;font-size:17px;color:var(--hell);max-width:30em}
 .bew2-text .ohne2{margin-top:22px;font-size:clamp(20px,1.8vw,24px);font-weight:800;letter-spacing:-.02em;color:#fff}
 .wege2{display:grid;margin-top:32px;border-top:1px solid var(--linie-navy)}
@@ -419,8 +419,7 @@ section.block{padding-top:clamp(56px,7vw,104px);padding-bottom:clamp(56px,7vw,10
   .weg:hover svg{transform:translateX(5px)}
   .weg-wa:hover{background:var(--tief)}
 }
-.nacht2{display:grid;grid-template-columns:132px minmax(0,1fr);gap:28px;align-items:center;margin-top:clamp(56px,6vw,96px);padding-top:28px;border-top:1px solid var(--linie-navy)}
-.nacht2 img{width:132px;height:132px;object-fit:cover;border-radius:4px}
+.nacht2{margin-top:clamp(56px,6vw,96px);padding-top:28px;border-top:1px solid var(--linie-navy)}
 .nacht2 p{font-size:17px;color:var(--hell);max-width:42em}
 
 /* Bewegung: .rv-on setzt das Einblende-Skript unten nur mit IntersectionObserver und ohne reduzierte Bewegung */
@@ -449,8 +448,6 @@ section.block{padding-top:clamp(56px,7vw,104px);padding-bottom:clamp(56px,7vw,10
   .svc-i{grid-template-columns:44px minmax(0,1fr)}
   .spec{grid-template-columns:1fr}
   .spec div + div{padding-left:0;border-left:0;border-top:1px solid var(--linie-navy-zart)}
-  .nacht2{grid-template-columns:88px minmax(0,1fr);gap:18px}
-  .nacht2 img{width:88px;height:88px}
 }
 @media (prefers-reduced-motion:reduce){
   .svc-slide,.svc-slide img,.svc-i h3,.weg svg{transition:none}
@@ -489,7 +486,7 @@ section.block{padding-top:clamp(56px,7vw,104px);padding-bottom:clamp(56px,7vw,10
 /* Über uns – Zitat führt, Bild klein */
 .ueb3{align-items:end}
 .ueb3-zitat{grid-column:1/span 8;margin:0}
-.ueb3-zitat h2{text-indent:-.42em;font-size:clamp(36px,4.8vw,66px);font-weight:800;letter-spacing:-.038em;line-height:1.02;color:var(--navy);text-wrap:balance}
+.ueb3-zitat h2{text-indent:-.42em;font-size:clamp(36px,4.8vw,66px);font-weight:800;letter-spacing:-.038em;line-height:1.08;color:var(--navy);text-wrap:balance}
 .ueb3-bild{grid-column:10/span 3;margin:0;aspect-ratio:4/5}
 .ueb3-fuss{margin-top:clamp(56px,6vw,88px);padding-top:28px;border-top:1px solid var(--linie);row-gap:28px}
 .ueb3-text{grid-column:1/span 5;font-size:18px;line-height:1.6;color:var(--text)}
@@ -554,7 +551,7 @@ section.block{padding-top:clamp(56px,7vw,104px);padding-bottom:clamp(56px,7vw,10
 .fu{background:var(--navy);color:var(--hell);font-size:15px}
 .fu .wrap{padding-top:clamp(72px,8vw,120px);padding-bottom:calc(36px + env(safe-area-inset-bottom,0px))}
 .fu-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:32px;padding-bottom:clamp(48px,5vw,72px);border-bottom:1px solid var(--linie-navy-20)}
-.fu-name{font-weight:800;font-size:clamp(34px,4vw,52px);letter-spacing:-.035em;line-height:1;color:#fff}
+.fu-name{font-weight:800;font-size:clamp(34px,4vw,52px);letter-spacing:-.035em;line-height:1.08;color:#fff}
 .fu-sub{margin-top:10px;font-size:15px;color:var(--hell)}
 .fu-akt{display:flex;flex-wrap:wrap;gap:10px}
 .fu-btn{display:inline-flex;align-items:center;min-height:52px;padding:0 22px;border-radius:4px;font-weight:700;text-decoration:none;color:#fff;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.4);transition:background 160ms ease,box-shadow 160ms ease}
@@ -766,7 +763,7 @@ section.block{padding-top:clamp(56px,7vw,104px);padding-bottom:clamp(56px,7vw,10
           <p class="r-lead rv d1">Zwei Stellen sind offen, ab sofort. Du brauchst kein Anschreiben und keinen Lebenslauf im PDF &ndash; melde dich, wie es dir passt.</p>
         </div>
         <!-- Ragt am Desktop 120 px in die weiße Leistungen-Sektion hinein (weicher Übergang). -->
-        <div class="kar-bild cur"><img class="r-img" src="bilder/karriere-blau-900.webp" srcset="bilder/karriere-blau-560.webp 560w, bilder/karriere-blau-900.webp 900w, bilder/karriere-blau-1400.webp 1400w" sizes="(max-width:980px) 100vw, 32vw" alt="Blauer MAN der HS Transport GmbH, Front mit Schriftzug" loading="lazy" decoding="async"></div>
+        <div class="kar-bild cur"><img class="r-img" src="bilder/karriere-man-weiss-900.webp" srcset="bilder/karriere-man-weiss-560.webp 560w, bilder/karriere-man-weiss-900.webp 900w, bilder/karriere-man-weiss-960.webp 960w" sizes="(max-width:980px) 100vw, 32vw" alt="Neuer wei&szlig;er MAN der HS Transport GmbH auf einem Feldweg" loading="lazy" decoding="async"></div>
       </div>
 
       <div class="stellen2">
@@ -815,7 +812,6 @@ section.block{padding-top:clamp(56px,7vw,104px);padding-bottom:clamp(56px,7vw,10
       </div>
 
       <div class="nacht2 rv">
-        <img src="bilder/karriere-nacht-280.webp" srcset="bilder/karriere-nacht-280.webp 280w, bilder/karriere-nacht-560.webp 560w" sizes="132px" width="132" height="132" alt="Wei&szlig;er MAN der HS Transport GmbH bei Nacht und Nebel" loading="lazy" decoding="async">
         <p>In Rodgau suchen wir au&szlig;erdem Wechselbr&uuml;ckenfahrer f&uuml;r Nachteins&auml;tze. <span class="ph">[Welche N&auml;chte, welche Touren, welcher Zuschlag]</span></p>
       </div>
     </div>
