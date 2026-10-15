@@ -1375,7 +1375,11 @@ window.addEventListener('DOMContentLoaded', function () {
 
     tl = gsap.timeline({
       scrollTrigger: { trigger: buehne, start: 'top top', end: 'bottom bottom',
-                       scrub: 0.5, invalidateOnRefresh: true }
+                       scrub: 0.5, invalidateOnRefresh: true,
+                       /* Beim Refresh springt die Zeitachse ohne Callbacks auf die
+                          Scrollposition (z. B. nach einem Reload mitten in der
+                          Seite). Das Video muss diesen Stand trotzdem zeigen. */
+                       onRefresh: setzen }
     });
 
     /* Hochformat bekommt einen laengeren Scrollweg: Text und Button treten
