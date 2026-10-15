@@ -9,5 +9,6 @@ exclude:
   - fotos-original/
   - video-original/
   - screenshots/
+  - assets-archiv/
   - skills-lock.json
   - "*.md"
