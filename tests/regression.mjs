@@ -31,6 +31,9 @@ const VIEWPORTS = [
   { name: '390', width: 390, height: 844, mobil: true },
   { name: '360', width: 360, height: 800, mobil: true },
 ].filter((v) => !arg('nur') || arg('nur').split(',').includes(v.name));
+// Unter 768 px gibt es keine Video-Szene, sondern den Handy-Hero (.hero-m).
+const HANDY = 768;
+const mitSzene = (vp) => vp.width >= HANDY;
 const SZENARIEN = (arg('szenarien') || 'standard,rueckwaerts,schnell,groesse,nojs,ruhig,savedata,langsam,cdn,reload').split(',');
 
 fs.rmSync(ZIEL, { recursive: true, force: true });
@@ -80,7 +83,8 @@ async function neueSeite(vp, opt = {}) {
     }, opt.netz);
   }
   const page = await context.newPage();
-  const log = { fehler: [], konsole: [], anfragenFehler: [] };
+  const log = { fehler: [], konsole: [], anfragenFehler: [], medien: [] };
+  page.on('request', (r) => { if (/\.mp4|hero-poster/.test(r.url())) log.medien.push(r.url().replace(/^http:\/\/127\.0\.0\.1:\d+/, '')); });
   page.on('pageerror', (e) => log.fehler.push(e.message));
   page.on('console', (m) => { if (m.type() === 'error' || m.type() === 'warning') log.konsole.push(m.type() + ': ' + m.text()); });
   page.on('requestfailed', (r) => log.anfragenFehler.push(r.url().replace(/^http:\/\/127\.0\.0\.1:\d+/, '') + ' ' + (r.failure() || {}).errorText));
@@ -176,11 +180,16 @@ async function positionen(page) {
   return page.evaluate(() => {
     const b = document.querySelector('.szene-buehne');
     const max = document.documentElement.scrollHeight - innerHeight;
-    const start = Math.max(0, b.getBoundingClientRect().top + scrollY);
-    const weg = Math.max(0, b.offsetHeight - innerHeight);
-    const p = [];
-    [0, 0.15, 0.3, 0.45, 0.6, 0.75, 0.88, 1].forEach((f, i) => p.push({ name: 'hero-' + i, y: Math.round(start + weg * f) }));
     const top = (s) => Math.round(document.querySelector(s).getBoundingClientRect().top + scrollY);
+    const p = [];
+    if (b.offsetHeight) {
+      const start = Math.max(0, b.getBoundingClientRect().top + scrollY);
+      const weg = Math.max(0, b.offsetHeight - innerHeight);
+      [0, 0.15, 0.3, 0.45, 0.6, 0.75, 0.88, 1].forEach((f, i) => p.push({ name: 'hero-' + i, y: Math.round(start + weg * f) }));
+    } else {
+      p.push({ name: 'hero-m-0', y: 0 });
+      p.push({ name: 'hero-m-foto', y: top('.hero-m-foto') - 300 });
+    }
     p.push({ name: 'zahlen', y: top('.zahlen') - 40 });
     p.push({ name: 'leistungen', y: top('#leistungen') });
     p.push({ name: 'leistungen-mitte', y: top('#leistungen') + Math.round(document.querySelector('#leistungen').offsetHeight * 0.5) });
@@ -203,7 +212,7 @@ async function bild(page, id) {
 // ---------- Szenarien ----------
 async function standard(vp) {
   const { context, page, log } = await neueSeite(vp);
-  await laden(page, { videoErwartet: true });
+  await laden(page, { videoErwartet: mitSzene(vp) });
   const pos = await positionen(page);
   const werte = {};
   for (const p of pos) {
@@ -218,7 +227,7 @@ async function standard(vp) {
 
 async function rueckwaerts(vp, pos) {
   const { context, page, log } = await neueSeite(vp);
-  await laden(page, { videoErwartet: true });
+  await laden(page, { videoErwartet: mitSzene(vp) });
   await scrollen(page, pos[pos.length - 1].y); await ruhe(page);
   const werte = {};
   for (const p of [...pos].reverse()) {
@@ -232,25 +241,25 @@ async function rueckwaerts(vp, pos) {
 
 async function schnell(vp, pos) {
   const { context, page, log } = await neueSeite(vp);
-  await laden(page, { videoErwartet: true });
+  await laden(page, { videoErwartet: mitSzene(vp) });
   const ende = pos[pos.length - 1].y;
   // 60 Sprünge à 16 ms bis zum Ende, dann zurück in die Bühnenmitte.
   for (let i = 1; i <= 60; i++) { await scrollen(page, Math.round(ende * i / 60)); await page.waitForTimeout(16); }
   await ruhe(page);
   const werte = { ende: await messen(page) };
-  const mitte = pos.find((p) => p.name === 'hero-4');
+  const mitte = pos.find((p) => p.name === 'hero-4') || pos.find((p) => p.name === 'leistungen');
   for (let i = 1; i <= 30; i++) { await scrollen(page, Math.round(ende - (ende - mitte.y) * i / 30)); await page.waitForTimeout(16); }
   await ruhe(page);
-  werte['hero-4'] = await messen(page);
-  await bild(page, `${vp.name}-schnell-hero-4`);
+  werte[mitte.name] = await messen(page);
+  await bild(page, `${vp.name}-schnell-${mitte.name}`);
   speichere(`${vp.name}-schnell`, { werte, log });
   await context.close();
 }
 
 async function groesse(vp, pos) {
   const { context, page, log } = await neueSeite(vp);
-  await laden(page, { videoErwartet: true });
-  const p = pos.find((x) => x.name === 'hero-5');
+  await laden(page, { videoErwartet: mitSzene(vp) });
+  const p = pos.find((x) => x.name === 'hero-5') || pos.find((x) => x.name === 'hero-m-foto');
   await scrollen(page, p.y); await page.waitForTimeout(150);
   const andere = vp.mobil ? { width: vp.width + 40, height: vp.height - 120 } : { width: 1100, height: 760 };
   await page.setViewportSize(andere); await page.waitForTimeout(80);
@@ -258,8 +267,8 @@ async function groesse(vp, pos) {
   await page.setViewportSize({ width: vp.width, height: vp.height });
   await page.waitForTimeout(500);
   await scrollen(page, p.y); await ruhe(page);
-  const werte = { 'hero-5': await messen(page) };
-  await bild(page, `${vp.name}-groesse-hero-5`);
+  const werte = { [p.name]: await messen(page) };
+  await bild(page, `${vp.name}-groesse-${p.name}`);
   speichere(`${vp.name}-groesse`, { werte, log });
   await context.close();
 }
@@ -284,11 +293,11 @@ async function ohneVideo(vp, name, opt, schnappschuesse) {
 
 async function reload(vp, pos) {
   const { context, page, log } = await neueSeite(vp);
-  await laden(page, { videoErwartet: true });
+  await laden(page, { videoErwartet: mitSzene(vp) });
   const p = pos.find((x) => x.name === 'karriere');
   await scrollen(page, p.y); await ruhe(page);
   await page.reload({ waitUntil: 'load' });
-  await page.waitForFunction(() => document.documentElement.classList.contains('js-szene') && document.querySelector('.film').classList.contains('bereit') && document.querySelector('.film').readyState >= 2, null, { timeout: 30000 }).catch(() => {});
+  if (mitSzene(vp)) await page.waitForFunction(() => document.documentElement.classList.contains('js-szene') && document.querySelector('.film').classList.contains('bereit') && document.querySelector('.film').readyState >= 2, null, { timeout: 30000 }).catch(() => {});
   await ruhe(page);
   const werte = { karriere: await messen(page) };
   await bild(page, `${vp.name}-reload-karriere`);
@@ -333,7 +342,7 @@ function vergleiche(a, b, pfad) {
   if (a && b && typeof a === 'object' && typeof b === 'object') {
     for (const k of new Set([...Object.keys(a), ...Object.keys(b)])) {
       // rs (readyState) ist ein Zwischenstand des Dekoders, entscheidend ist t.
-      if (k === 'positionen' || k === 'anfragenFehler' || k === 'rs') continue;
+      if (k === 'positionen' || k === 'anfragenFehler' || k === 'medien' || k === 'rs') continue;
       vergleiche(a[k], b[k], pfad + '.' + k);
     }
     return;
@@ -341,6 +350,11 @@ function vergleiche(a, b, pfad) {
   if (JSON.stringify(a) !== JSON.stringify(b)) abw.push(`${pfad}: ${JSON.stringify(b)} -> ${JSON.stringify(a)}`);
 }
 for (const id of Object.keys(ergebnis)) vergleiche(ergebnis[id], ref[id], id);
+// Unabhaengig von der Referenz: unter 768 px darf kein Video und kein Poster laden.
+for (const id of Object.keys(ergebnis)) {
+  if (parseInt(id, 10) >= HANDY) continue;
+  if (ergebnis[id].log.medien.length) abw.push(`${id}: am Handy angefragt ${JSON.stringify(ergebnis[id].log.medien)}`);
+}
 for (const id of Object.keys(ergebnis)) {
   const neu = ergebnis[id].log.fehler.filter((f) => !(ref[id] ? ref[id].log.fehler : []).includes(f));
   if (neu.length) abw.push(`${id}: neue JS-Fehler ${JSON.stringify(neu)}`);
