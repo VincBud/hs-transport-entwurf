@@ -282,13 +282,9 @@ section.block{padding-top:clamp(56px,7vw,104px);padding-bottom:clamp(56px,7vw,10
 }
 
 /* ============================================================
-   REDESIGN „Was wir fahren“ + „Fahrer gesucht“
-   Nutzt nur die bestehenden :root-Variablen aus index.html.
-   Entfernt wurden die Regeln, die nur diese beiden Sektionen benutzt
-   haben: .leistungen-liste, .leistung*, .stellen, .stelle*, .liste,
-   .bewerb*, .ohne, .wege, .nacht-hinweis sowie .karte und .btn*
-   (letztere standen nur in diesen Sektionen).
-   .sec-kopf bleibt - das benutzen noch die Kennzahlen.
+   Seitenkörper ab „Was wir fahren“: gemeinsame Bausteine (.r-*),
+   Leistungen und Karriere. Die Abschnitte danach bauen darauf auf.
+   .sec-kopf oben gehört zu den Kennzahlen.
    ============================================================ */
 
 /* Gemeinsame Bausteine */
@@ -368,7 +364,7 @@ section.block{padding-top:clamp(56px,7vw,104px);padding-bottom:clamp(56px,7vw,10
 .nacht2 img{width:132px;height:132px;object-fit:cover;border-radius:4px}
 .nacht2 p{font-size:17px;color:var(--hell);max-width:42em}
 
-/* Bewegung: Klassen setzt redesign.js nur bei Scroll-Fähigkeit und ohne reduzierte Bewegung */
+/* Bewegung: .rv-on setzt das Einblende-Skript unten nur mit IntersectionObserver und ohne reduzierte Bewegung */
 .rv-on .rv{opacity:0;transform:translateY(26px);transition:opacity .9s var(--ease-out),transform 1.1s var(--ease-out)}
 .rv-on .rv.in{opacity:1;transform:none}
 .rv-on .cur{clip-path:inset(0 100% 0 0);transition:clip-path 1.25s cubic-bezier(.65,0,.15,1)}
@@ -402,10 +398,7 @@ section.block{padding-top:clamp(56px,7vw,104px);padding-bottom:clamp(56px,7vw,10
 }
 
 /* ============================================================
-   REDESIGN „Von wo wir fahren“ (#standorte) – Lagekarte statt LKW.
-   Setzt redesign.css voraus (.r-sec, .r-label, .r-h2, .r-lead, .r-12, .rv, .cur).
-   Ans Ende des <style>-Blocks, nach redesign.css.
-   Entfernt wurden .zug*, .gebiete (alt) und #standorte .sec-kopf – nur diese Sektion hat sie benutzt.
+   „Von wo wir fahren“ (#standorte) – Lagekarte als Inline-SVG.
    ============================================================ */
 
 /* Aus dem Redesign-Bestand, für diese Sektion nötig */
@@ -432,9 +425,7 @@ section.block{padding-top:clamp(56px,7vw,104px);padding-bottom:clamp(56px,7vw,10
 @media (max-width:640px){.karte-ref{display:none}}
 
 /* ============================================================
-   REDESIGN „Über uns“ (#ueber-uns). Setzt redesign.css voraus.
-   Ans Ende des <style>-Blocks, nach standorte.css.
-   Entfernt wurden .ueber, .sign, .cs (alt) – nur diese Sektion hat sie benutzt.
+   „Über uns“ (#ueber-uns) – Zitat führt, Foto klein.
    ============================================================ */
 /* Über uns – Zitat führt, Bild klein */
 .ueb3{align-items:end}
@@ -456,10 +447,7 @@ section.block{padding-top:clamp(56px,7vw,104px);padding-bottom:clamp(56px,7vw,10
 @media (max-width:640px){.ueb3-bild{grid-column:1/-1;aspect-ratio:4/3}}
 
 /* ============================================================
-   REDESIGN „Kapazität anfragen“ (#kontakt). Setzt redesign.css und standorte.css
-   voraus (.r-grau). Ans Ende des <style>-Blocks, nach ueberuns.css.
-   Entfernt wurden die alten globalen Regeln für form, label, input, textarea,
-   .req, .full, .err, .form-note, .status, .kontakt, .tel – nur #kontakt hat sie benutzt.
+   „Kapazität anfragen“ (#kontakt). Nutzt .r-grau aus dem Standorte-Block.
    ============================================================ */
 /* Kontakt */
 .kon2{row-gap:56px}
@@ -500,9 +488,7 @@ section.block{padding-top:clamp(56px,7vw,104px);padding-bottom:clamp(56px,7vw,10
 @media (max-width:640px){.kon-dl div{grid-template-columns:1fr;gap:4px}.f2{grid-template-columns:1fr}}
 
 /* ============================================================
-   REDESIGN Footer (.fu). Ans Ende des <style>-Blocks, nach kontakt.css.
-   Entfernt wurde die alte footer-Regelgruppe (footer, footer .wrap, footer ul,
-   footer a). .ext bleibt (Pfeil-Icon an externen Links).
+   Footer (.fu). Das Pfeil-Icon an externen Links ist .ext weiter oben.
    ============================================================ */
 /* Footer */
 .fu{background:var(--navy);color:var(--hell);font-size:15px}
@@ -660,7 +646,7 @@ section.block{padding-top:clamp(56px,7vw,104px);padding-bottom:clamp(56px,7vw,10
         <p class="r-lead rv d1">Linienkapazit&auml;t f&uuml;r Wechselbr&uuml;cken &ndash; planbar, t&auml;glich bedient, von zwei Betriebsst&auml;tten aus.</p>
       </div>
       <div class="r-12 svc">
-        <!-- Klebt am Desktop links und wechselt mit der aktiven Zeile (redesign.js).
+        <!-- Klebt am Desktop links und wechselt mit der aktiven Zeile (Skript unten).
              Unter 980 px ausgeblendet, dort steht je ein Bild in der Zeile (.svc-m). -->
         <figure class="svc-fig" aria-hidden="true">
           <div class="svc-bild cur">
@@ -1596,8 +1582,8 @@ window.addEventListener('DOMContentLoaded', function () {
 });
 </script>
 <script>
-/* Redesign „Was wir fahren“, „Fahrer gesucht“, „Von wo wir fahren“.
-   Eigener <script>-Block vor </body>, nach den bestehenden Skripten.
+/* Seitenkörper ab „Was wir fahren“: Bildwechsel in Leistungen und ruhiges
+   Einblenden bis einschließlich Kontakt.
    Ohne JS: alle Inhalte sichtbar, erstes Leistungsbild steht. */
 
 /* 1) Leistungen: das klebende Bild links folgt der Zeile, die gerade
