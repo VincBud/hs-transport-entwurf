@@ -1560,6 +1560,16 @@ window.addEventListener('DOMContentLoaded', function () {
   }
 
   gsap.registerPlugin(ScrollTrigger);
+  /* ScrollTrigger springt beim Refresh intern nach oben, um zu messen.
+     Mit scroll-behavior:smooth ist dieser Sprung animiert und noch nicht
+     angekommen - die Buehne wuerde um die Scrollposition verschoben
+     gemessen (Video nach dem load-Ereignis auf 10 s statt auf dem Stand).
+     Das Lesen des berechneten Stils erzwingt, dass "auto" sofort gilt. */
+  ScrollTrigger.addEventListener('refreshInit', function () {
+    wurzel.style.scrollBehavior = 'auto';
+    void getComputedStyle(wurzel).scrollBehavior;
+  });
+  ScrollTrigger.addEventListener('refresh', function () { wurzel.style.scrollBehavior = ''; });
   aufbauen();
 });
 </script>

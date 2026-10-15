@@ -119,6 +119,46 @@ for (const vp of [[1440, 900], [390, 844]]) {
   await ctx.close();
 }
 
+// 6) Layout-Verschiebung beim Laden (CLS) bis das Video da ist, Video 3 s verzoegert.
+for (const vp of [[1440, 900], [390, 844]]) {
+  const { ctx, page } = await seite(vp, { videoVerzoegerung: 3000, init: () => {
+    window.__cls = 0; window.__shifts = [];
+    new PerformanceObserver((l) => { for (const e of l.getEntries()) if (!e.hadRecentInput) { window.__cls += e.value;
+      window.__shifts.push(Math.round(performance.now()) + 'ms ' + e.value.toFixed(4) + ' ' + (e.sources || []).map((s) => s.node && (s.node.className || s.node.nodeName)).join(',')); } })
+      .observe({ type: 'layout-shift', buffered: true });
+  } });
+  await page.goto(URL_, { waitUntil: 'domcontentloaded' });
+  await warte(page, 300);
+  await page.screenshot({ path: path.join(HIER, 'out', `vor-video-${vp[0]}.png`) });
+  await js(page); await warte(page, 800);
+  out['cls-' + vp[0]] = await page.evaluate(() => ({ cls: +window.__cls.toFixed(4), shifts: window.__shifts }));
+  await ctx.close();
+}
+
+// 7) Nutzer scrollt in die Buehne, bevor das Video da ist: zeigt es danach den richtigen Stand?
+for (const vp of [[1440, 900], [390, 844]]) {
+  const { ctx, page } = await seite(vp, { videoVerzoegerung: 3000 });
+  await page.goto(URL_, { waitUntil: 'domcontentloaded' }); await warte(page, 500);
+  const y = await page.evaluate(() => { const b = document.querySelector('.szene-buehne'); return Math.round(b.getBoundingClientRect().top + scrollY + (b.offsetHeight - innerHeight) * 0.6); });
+  await page.evaluate((y) => scrollTo({ top: y, behavior: 'instant' }), y); await warte(page, 800);
+  await js(page); await warte(page, 1500);
+  out['frueheScroll-' + vp[0]] = await page.evaluate(() => ({ t: +document.querySelector('.film').currentTime.toFixed(2) }));
+  await ctx.close();
+}
+
+// 8) Video nicht ladbar (404): ruhiger Hero, keine JS-Fehler.
+for (const vp of [[1440, 900], [390, 844]]) {
+  const { ctx, page } = await seite(vp);
+  await ctx.route(/\.mp4/, (r) => r.fulfill({ status: 404, body: 'x' }));
+  const fehler = []; page.on('pageerror', (e) => fehler.push(e.message));
+  await page.goto(URL_); await warte(page, 2000);
+  out['videoFehlt-' + vp[0]] = await page.evaluate(() => ({ szene: document.documentElement.classList.contains('js-szene'),
+    buehneH: document.querySelector('.szene-buehne').offsetHeight, h1Sichtbar: getComputedStyle(document.querySelector('.szene-ui')).visibility }));
+  out['videoFehlt-' + vp[0]].fehler = fehler;
+  await page.screenshot({ path: path.join(HIER, 'out', `video-fehlt-${vp[0]}.png`) });
+  await ctx.close();
+}
+
 await browser.close(); server.close();
 fs.writeFileSync(path.join(HIER, 'out', 'proben.json'), JSON.stringify(out, null, 1));
 console.log(JSON.stringify(out, null, 1));
