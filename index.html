@@ -504,7 +504,8 @@ section.block{padding-top:clamp(56px,7vw,104px);padding-bottom:clamp(56px,7vw,10
 .f2 input,.f2 textarea{font:inherit;font-weight:400;font-size:17px;padding:12px 0 13px;border:0;border-bottom:1.5px solid #7580A4;border-radius:0;background:transparent;min-height:50px;width:100%;color:var(--nacht);transition:border-color 160ms ease,box-shadow 160ms ease}
 .f2 input:hover,.f2 textarea:hover{border-bottom-color:var(--navy)}
 .f2 input:focus,.f2 textarea:focus{outline:none;border-bottom-color:var(--blau);box-shadow:0 1.5px 0 var(--blau)}
-.f2 input:focus-visible,.f2 textarea:focus-visible{outline:none;box-shadow:0 1.5px 0 var(--blau)}
+/* Deutlicher Fokus: Rahmen um das Feld zusaetzlich zur blauen Unterlinie */
+.f2 input:focus-visible,.f2 textarea:focus-visible{outline:2px solid var(--blau);outline-offset:4px;box-shadow:0 1.5px 0 var(--blau)}
 .f2 ::placeholder{color:#6A7085;opacity:1}
 .f2 textarea{resize:vertical;min-height:120px}
 .f2 [aria-invalid="true"]{border-bottom-color:var(--rot);border-bottom-width:2px}
