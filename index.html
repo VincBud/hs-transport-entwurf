@@ -1197,8 +1197,10 @@ section.block{padding-top:clamp(56px,7vw,104px);padding-bottom:clamp(56px,7vw,10
 })();
 </script>
 
-<script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
-<script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
+<!-- GSAP 3.13.0 aus dem Repo statt vom CDN: kein fremder Server, keine
+     Abhaengigkeit von dessen Erreichbarkeit. Byte-gleich mit cdnjs. -->
+<script defer src="vendor/gsap-3.13.0/gsap.min.js"></script>
+<script defer src="vendor/gsap-3.13.0/ScrollTrigger.min.js"></script>
 <script>
 /* Hero-Video, scrollgesteuert, mit Ladeetiketten auf der Ware am Ende.
    Poster steht sofort. Das Video laedt nur mit JS, ohne reduzierte Bewegung
