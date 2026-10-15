@@ -237,6 +237,9 @@ section.block{padding-top:clamp(56px,7vw,104px);padding-bottom:clamp(56px,7vw,10
   .halte{display:block;position:fixed;top:0;right:0;width:var(--strasse);height:100vh;z-index:10;
     pointer-events:none;opacity:0;transition:opacity 260ms ease}
   .strasse.sichtbar,.halte.sichtbar{opacity:1}
+  /* Solange die Leiste ausgeblendet ist, sind die Haltepunkte weder klick-
+     noch fokussierbar. Beim Ausblenden erst nach dem Verblassen. */
+  .halte:not(.sichtbar) a{visibility:hidden;transition:visibility 0s linear 260ms}
   .halte a{position:absolute;width:44px;height:44px;margin:-22px 0 0 -22px;pointer-events:auto;
     display:grid;place-items:center;text-decoration:none;border-radius:50%}
   .halte-ring{width:13px;height:13px;border-radius:50%;background:#fff;box-shadow:0 0 0 2px var(--navy);
