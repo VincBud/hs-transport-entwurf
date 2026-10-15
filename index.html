@@ -1574,7 +1574,13 @@ window.addEventListener('DOMContentLoaded', function () {
   }
 
   window.addEventListener('scroll', anstossen, { passive: true });
-  window.addEventListener('resize', function () { setTimeout(start, 120); }, { passive: true });
+  /* Entprellt: beim Ziehen am Fenster kommen dutzende resize-Ereignisse,
+     die Stuetzpunkt-Tabelle wird nur einmal danach neu gebaut. */
+  var warteStart;
+  window.addEventListener('resize', function () {
+    clearTimeout(warteStart);
+    warteStart = setTimeout(start, 120);
+  }, { passive: true });
   if (breit.addEventListener) breit.addEventListener('change', start);
   start();
   /* Nach dem Laden der Bilder aendert sich die Dokumenthoehe. */
