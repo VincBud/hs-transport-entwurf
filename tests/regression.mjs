@@ -44,9 +44,11 @@ const browser = await chromium.launch({ executablePath: CHROME, headless: true,
 
 // ---------- Hilfen ----------
 async function cacheRoute(context, { cdnSperren = false } = {}) {
+  // GSAP-Ausfall gilt für CDN und lokale Kopie gleichermaßen.
+  if (cdnSperren) await context.route(/gsap|ScrollTrigger/, (route) => route.abort('failed'));
   await context.route(/^https?:\/\/(?!127\.0\.0\.1)/, async (route) => {
     const url = route.request().url();
-    if (cdnSperren && url.includes('cdnjs.cloudflare.com')) return route.abort('failed');
+    if (cdnSperren && /gsap|ScrollTrigger/.test(url)) return route.abort('failed');
     const key = crypto.createHash('sha1').update(url).digest('hex');
     const datei = path.join(CACHE, key);
     if (fs.existsSync(datei)) {
@@ -90,7 +92,7 @@ async function laden(page, opt = {}) {
   if (opt.js !== false) {
     await page.evaluate(() => document.fonts.ready);
     if (opt.videoErwartet) {
-      await page.waitForFunction(() => document.documentElement.classList.contains('js-szene'), null, { timeout: 30000 });
+      await page.waitForFunction(() => document.documentElement.classList.contains('js-szene') && document.querySelector('.film').classList.contains('bereit') && document.querySelector('.film').readyState >= 2, null, { timeout: 30000 });
     }
   }
   await page.mouse.move(1, 1).catch(() => {});
@@ -286,7 +288,7 @@ async function reload(vp, pos) {
   const p = pos.find((x) => x.name === 'karriere');
   await scrollen(page, p.y); await ruhe(page);
   await page.reload({ waitUntil: 'load' });
-  await page.waitForFunction(() => document.documentElement.classList.contains('js-szene'), null, { timeout: 30000 }).catch(() => {});
+  await page.waitForFunction(() => document.documentElement.classList.contains('js-szene') && document.querySelector('.film').classList.contains('bereit') && document.querySelector('.film').readyState >= 2, null, { timeout: 30000 }).catch(() => {});
   await ruhe(page);
   const werte = { karriere: await messen(page) };
   await bild(page, `${vp.name}-reload-karriere`);

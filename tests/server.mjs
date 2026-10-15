@@ -7,7 +7,8 @@ import path from 'node:path';
 import zlib from 'node:zlib';
 import { fileURLToPath } from 'node:url';
 
-const WURZEL = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+// HS_WURZEL: anderes Verzeichnis ausliefern (z. B. einen Schnappschuss eines Commits).
+const WURZEL = path.resolve(process.env.HS_WURZEL || path.join(path.dirname(fileURLToPath(import.meta.url)), '..'));
 const TYPEN = {
   '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': 'text/javascript',
   '.mjs': 'text/javascript', '.json': 'application/json', '.svg': 'image/svg+xml',

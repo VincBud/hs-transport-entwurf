@@ -27,7 +27,7 @@ async function seite(vp, { videoVerzoegerung = 0, init } = {}) {
   return { ctx, page };
 }
 const warte = (p, ms) => p.waitForTimeout(ms);
-const js = (p) => p.waitForFunction(() => document.documentElement.classList.contains('js-szene'), null, { timeout: 30000 });
+const js = (p) => p.waitForFunction(() => document.documentElement.classList.contains('js-szene') && document.querySelector('.film').classList.contains('bereit') && document.querySelector('.film').readyState >= 2, null, { timeout: 30000 });
 const out = {};
 
 // 1) Reload mitten in der Seite, dann zurück in die Hero-Bühne.
