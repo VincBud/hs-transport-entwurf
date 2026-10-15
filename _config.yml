@@ -1,0 +1,13 @@
+# GitHub Pages (Jekyll): interne Dateien nicht veroeffentlichen.
+# Ausgeliefert werden nur index.html, robots.txt, bilder/, video/ und vendor/.
+# Dateien und Ordner mit "." oder "_" am Anfang laesst Jekyll ohnehin weg.
+exclude:
+  - PRODUCT.md
+  - README.md
+  - tests/
+  - redesign-handoff/
+  - fotos-original/
+  - video-original/
+  - screenshots/
+  - skills-lock.json
+  - "*.md"
