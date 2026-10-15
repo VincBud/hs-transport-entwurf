@@ -53,7 +53,7 @@ input,textarea{caret-color:var(--navy)}
 
 .draft{background:var(--navy);color:#fff;font-size:13px;font-weight:600;text-align:center;padding:7px 16px;line-height:1.35;margin:0}
 
-header{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.94);backdrop-filter:none;
+header{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.94);
   border-bottom:1px solid var(--kante)}
 .head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 16px;
   padding-top:13px;padding-bottom:13px}
@@ -75,8 +75,6 @@ nav a{text-decoration:none;display:inline-flex;align-items:center;min-height:44p
 .menu-btn:active{transform:scale(.97)}
 
 section.block{padding-top:clamp(56px,7vw,104px);padding-bottom:clamp(56px,7vw,104px)}
-.hell{background:var(--weiss)}
-.grau{background:var(--grau)}
 .dunkel{background:var(--navy);color:#fff}
 .dunkel h2,.dunkel h3{color:#fff}
 .dunkel p{color:var(--hell)}
@@ -105,7 +103,7 @@ section.block{padding-top:clamp(56px,7vw,104px);padding-bottom:clamp(56px,7vw,10
    ============================================================ */
 .szene{
   --s-blau:#2748AC; --s-navy:#2A3977; --s-tief:#092579;
-  --s-nacht:#201F1E; --s-text:#4F4F4F; --s-weiss:#FFFFFF; --s-dunkel:#11131A; --s-tiefe:#16203E;
+  --s-weiss:#FFFFFF; --s-dunkel:#11131A; --s-tiefe:#16203E;
   --s-font:'Manrope','Segoe UI',system-ui,-apple-system,sans-serif;
   position:relative;background:var(--s-dunkel);color:var(--s-weiss);font-family:var(--s-font);
 }
@@ -1096,7 +1094,6 @@ section.block{padding-top:clamp(56px,7vw,104px);padding-bottom:clamp(56px,7vw,10
   }
   messen();
   window.addEventListener('resize', messen, { passive: true });
-  window.addEventListener('orientationchange', messen);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(messen);
 })();
 </script>
@@ -1260,7 +1257,6 @@ window.addEventListener('DOMContentLoaded', function () {
     film.classList.add('bereit');
     gsap.registerPlugin(ScrollTrigger);
     document.documentElement.classList.add('js-szene');
-    ScrollTrigger.refresh();
     aufbauen();
   }, { once: true });
 
@@ -1271,8 +1267,6 @@ window.addEventListener('DOMContentLoaded', function () {
      niedrigen Geraeten wird er gekuerzt, damit nichts unter die Leiste rutscht. */
   var bandH = 0;
   function bandHoehe() { return bandH || Math.round(bild.clientWidth / 1.5); }
-
-  function zielScale() { return 1; }
 
   /* Nutzbares Band der Buehne: unter Hinweis + Header, ueber der WhatsApp-Leiste. */
   function band() {
@@ -1413,14 +1407,8 @@ window.addEventListener('DOMContentLoaded', function () {
                                 ease: hoch ? 'none' : 'power1.out' }, ab);
     if (!hoch) tl.to('.szene-himmel', { opacity: 0, duration: 0.07 }, ab);
 
-    /* Im Querformat waechst der Ausschnitt in den Laderaum hinein. Im
-       Hochformat nicht: die Paletten stehen am linken und rechten Bildrand,
-       jeder staerkere Zoom wirft sie aus dem Bild. Dort bleibt das Band
-       stehen, und nur Text und Etiketten wechseln. */
-    if (!hoch) {
-      tl.to(['.film', '.poster'], { scale: function () { return zielScale(); },
-                                    ease: 'none', duration: 0.30 }, 0.32);
-    }
+    /* Kein Zoom in den Laderaum: die Paletten stehen am Bildrand, jeder
+       staerkere Ausschnitt wirft sie aus dem Bild. */
 
     /* Nur leicht abdunkeln und schwach weichzeichnen - die Ware soll
        erkennbar bleiben, die Etiketten tragen ihren Kontrast selbst. */
