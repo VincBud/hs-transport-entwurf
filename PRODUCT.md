@@ -8,7 +8,9 @@ web
 
 ## Stack
 
-Statisches HTML ohne Build-Schritt: alles in `index.html`, CSS und JS inline. Hosting auf GitHub Pages. Google Fonts erlaubt (aktuell Archivo + IBM Plex Sans). Kein Server, also kein serverseitiges Formular-Backend.
+Statisches HTML ohne Build-Schritt: alles in `index.html`, CSS und JS inline. Hosting auf GitHub Pages. **Keine externen Server** (seit 15.10.2026): Manrope (variabel, 400–800) und GSAP 3.13.0 liegen unverändert unter `vendor/` im Repo – keine IP-Übertragung an Google oder ein CDN (DSGVO, vgl. LG München I, 3 O 17493/20). Kein Server, also kein serverseitiges Formular-Backend. Interne Dateien (`PRODUCT.md`, `tests/`, `redesign-handoff/`, `README.md`) sind per `_config.yml` von Pages ausgenommen.
+
+Regressionstest unter `tests/` (Playwright, Anleitung in `tests/README.md`): vor und nach jeder Änderung an Animation oder Layout laufen lassen.
 
 ## Users
 
@@ -45,12 +47,12 @@ Offene Stellen:
 - **CS Logistics** ist ein Einzelunternehmen des Gründers für Beratung und Vermittlung in Transport und Logistik. Es ist bewusst nachrangig: höchstens ein kurzer Hinweis im Über-uns-Bereich oder im Footer, **kein eigenes Logo in der Navigation** und keine eigene Sektion.
 - Kein Backend: Auftraggeber-Formular läuft über `mailto:` und bleibt schlank (Firma, Ansprechpartner, Kontakt, Anliegen). Abhol- und Zielort-Felder sind gestrichen, sie gehören zum falschen Geschäftsmodell.
 - Kein Google-Maps-Embed. Standorte als SVG-Karte oder Liste.
-- Keine Bilder von der alten Seite hotlinken, keine Stockfotos. **Ausnahme seit 14.10.2026:** Für „Was wir fahren“, „Fahrer gesucht“ und „Von wo wir fahren“ sind die Fotos aus `fotos-original/` freigegeben (Zuschnitte laut `redesign-handoff/fotos.md`). Fotos mit großen Fremdlogos (DHL, Dachser, Fercam, Lermer) und der Kühlauflieger bleiben draußen.
+- Keine Bilder von der alten Seite hotlinken, keine Stockfotos. **Ausnahme seit 14.10.2026:** Für „Was wir fahren“ und „Fahrer gesucht“ sind die Fotos aus `fotos-original/` freigegeben; „Über uns“ nutzt die vorhandenen `bilder/ueberuns-*.webp`, „Von wo wir fahren“ hat bewusst kein Foto (Zuschnitte laut `redesign-handoff/fotos.md`). Fotos mit großen Fremdlogos (DHL, Dachser, Fercam, Lermer) und der Kühlauflieger bleiben draußen.
 - Ton: direkt und bodenständig, Fahrer-Sprache statt Marketing-Floskeln. **Du** für Bewerber, **Sie** für Auftraggeber.
 - **Keine Aussagen gegen Subunternehmer, Partner oder zugekaufte Kapazität** (Stand 08.10.2026). Subunternehmer sind in der Branche üblich, und HS Transport arbeitet selbst im Unternehmerverbund mit einem Partner. Formulierungen wie „keine zugekaufte Kapazität“, „kein Subunternehmer-Karussell“ oder „mit eigenen Fahrzeugen statt …“ sind damit ausgeschlossen. Der eigene Fuhrpark darf als Tatsache genannt werden, aber nicht als Abgrenzung.
-- Für später vorbereitet, aber auskommentiert: JSON-LD für Organization/LocalBusiness und JobPosting für beide Stellen.
+- Für später vorbereitet, aber auskommentiert: JSON-LD für LocalBusiness (nicht MovingCompany – das hieße Umzugsunternehmen) und JobPosting für beide Stellen. Die JobPostings bleiben aus, bis die Firma Gehalt und Details liefert; die fehlenden Pflichtfelder stehen als Kommentar in `index.html`.
 
-### Explizit unentschieden — nicht erfinden, als gelbe Platzhalter `[so]` stehen lassen
+### Explizit unentschieden — nicht erfinden, als rosa Platzhalter `[so]` stehen lassen
 
 - Butzbach oder Langgöns (die alte Seite widerspricht sich).
 - Für welche Auftraggeber beziehungsweise Netzwerke gefahren wird.
@@ -62,8 +64,8 @@ Offene Stellen:
 - Fotos für die übrigen Sektionen (über `fotos-original/` hinaus).
 - Ob **alle 30 LKW Eigentum** der HS Transport GmbH sind oder ein Teil geleast, gemietet oder ueber den Unternehmerverbund gefahren wird. Bis zur Klaerung heisst es auf der Seite nur „30 LKW im Fuhrpark“, nicht „im eigenen Fuhrpark“.
 - Farbe der eigenen Wechselbrücken. Arbeitsannahme bis zur Klärung: hellgrau-weißer Kofferaufbau mit Schriftzug in Navy `#2A3977`.
-- Inhalte, die im Laderaum der Eröffnungsszene stehen sollen (Vincent liefert nach; vorläufig die zwei Wege Jobs und Leistungen).
-- **Scroll-Straße am rechten Rand** — beschlossen am 07.10.2026, wird **nach Schritt 2** gebaut. Der Plan liegt vollständig im Abschnitt „Bauplan Scroll-Straße" am Ende dieser Datei.
+- Inhalte der fünf Ladeetiketten im Laderaum der Eröffnungsszene (Leistung 01–05; zwei davon noch mit Platzhaltern).
+- ~~Scroll-Straße am rechten Rand~~ — gebaut. Stand im Abschnitt „Bauplan Scroll-Straße" am Ende dieser Datei.
 
 ## Brand Commitments
 
@@ -72,7 +74,7 @@ Offene Stellen:
 - Logo-Eigenfarben: Navy `#2A3977`, Hellblau `#3F6BC4` (Schreibschrift „GmbH"), Metallgrau `#A2ABAE`. Das Metallgrau liegt auf Weiß bei **2,34:1** und darf dort nie Text sein.
 - **Verworfen am 07.10.2026:** Der Industrie-Look des ersten Entwurfs — Graphit `#16191C`, Papier `#F2F0EB`, Signalgelb `#E8A317`, Archivo, IBM Plex Sans — war eine Annahme von Vincent und ist **keine** CI der Firma. Er wird vollständig entfernt, nicht nur im Hero. Die ganze Seite läuft auf Primärblau, Navy, `#201F1E`, Weiß und Manrope.
 - **Einzige Ausnahme:** Die Markierung offener Inhalte (`.ph`) bleibt. Sie ist Arbeitsmarkierung für den Entwurf, nicht CI. Ab 07.10.2026 **nicht mehr gelb**, sondern hellrosa, damit sie nicht mit der CI verwechselt wird. Sie verschwindet, sobald die Firma die Fakten liefert.
-- **Vorgaben für die CI-Umstellung des Seitenkörpers (Schritt 2, noch offen):** Signalgelb verschwindet restlos, auch aus Flächen, Buttons, Header, Logo-Kachel und Linien. Die Karriere-Sektion bekommt statt der gelben Vollfläche eine CI-Fläche (Navy `#2A3977` mit weißer Schrift oder Weiß mit Blau als Akzent). Der WhatsApp-Button wird Primärblau `#2748AC`. Überschriften in Manrope statt Archivo.
+- **Vorgaben für die CI-Umstellung des Seitenkörpers (Schritt 2, umgesetzt):** Signalgelb verschwindet restlos, auch aus Flächen, Buttons, Header, Logo-Kachel und Linien. Die Karriere-Sektion bekommt statt der gelben Vollfläche eine CI-Fläche (Navy `#2A3977` mit weißer Schrift oder Weiß mit Blau als Akzent). Der WhatsApp-Button wird Primärblau `#2748AC`. Überschriften in Manrope statt Archivo.
 - Keine KI-Klischees: keine Verläufe als Deko, keine gleichförmigen Karten-Raster überall, keine Emojis, keine Fantasie-Zahlen.
 
 ## Evidence on Hand
@@ -83,7 +85,7 @@ Offene Stellen:
 - Logo liegt **nur als Raster** vor: `/images/logo.png`, 1346 × 178, RGBA. Keine SVG-Fassung auffindbar. Motiv: zwei graue Keile als Fahrtlinien, dunkelblauer 3D-Block, „HST" in Metallic-Grau mit Verlauf, „ransport" in Hellgrau, „GmbH" in blauer Schreibschrift. Nicht hotlinken, nicht als Raster übernehmen — bis zu einer SVG-Datei bleibt jeder Schriftzug Platzhalter.
 - CS-Logistics-Logo: `/images/cs-logo.png`, 450 × 120, Schwarz mit reinem Blau `#0000FF`. Wird laut Firma ohnehin nicht prominent gezeigt.
 - Direkte Auskunft der Firma (06.10.2026): 30 LKW im Fuhrpark (die alte Seite nannte 20, der korrekte Wert ist 30), CS Logistics als Einzelunternehmen des Gründers, Fahrerstellen an beiden Standorten, info@h-s-transport.de als Kontaktadresse.
-- **Fotos:** `fotos-original/` (50 Aufnahmen eigener Fahrzeuge und des Betriebshofs) ist für Leistungen, Karriere und Standorte freigegeben. Team-Fotos fehlen weiterhin.
+- **Fotos:** `fotos-original/` (50 Aufnahmen eigener Fahrzeuge und des Betriebshofs) ist für Leistungen und Karriere freigegeben. Team-Fotos fehlen weiterhin.
 - Keine Referenzen, Testimonials, Zertifikate oder Kennzahlen über die oben genannten hinaus. Nichts davon darf ergänzt werden.
 
 ## Product Principles
@@ -99,36 +101,37 @@ Offene Stellen:
 Zoom nicht sperren (kein `maximum-scale`/`user-scalable=no`), Textkontrast mindestens 4,5:1, sichtbarer Fokus auf allen interaktiven Elementen, Klick- und Tap-Flächen mindestens 44 px, `prefers-reduced-motion` respektieren. Begründung: Nutzung überwiegend mobil, draußen, bei wechselndem Licht und oft einhändig.
 
 
-## Bauplan Scroll-Straße (nach Schritt 2)
+## Bauplan Scroll-Straße (gebaut)
 
 Vollständig beschlossen am 07.10.2026. Beim Bauen gilt dieser Abschnitt, nichts muss neu hergeleitet werden.
 
-**Zweck.** Vertikale Straße am rechten Bildschirmrand, fixiert. Darauf ein LKW in Draufsicht, dessen Position dem Scrollfortschritt der Seite entspricht. Die gefahrene Strecke leuchtet. Vier anklickbare Haltepunkte für Leistungen, Karriere, Standorte, Kontakt.
+**Zweck.** Vertikale Straße am rechten Bildschirmrand, fixiert. Darauf ein LKW in Draufsicht, dessen Position dem Scrollfortschritt der Seite entspricht. Die gefahrene Strecke leuchtet. Fünf anklickbare Haltepunkte für Leistungen, Karriere, Standorte, Über uns, Kontakt.
 
 **Technik: ohne MotionPathPlugin.** `path.getTotalLength()` und `path.getPointAtLength()` sind im Browser eingebaut und reichen; das Plugin würde 9.702 B gzip kosten und nichts beitragen, was hier gebraucht wird. Den Tangentenwinkel aus einer zweiten Abtastung knapp daneben rechnen. Beim Laden und bei jedem Resize eine Tabelle mit ~200 Stützpunkten anlegen und im Scroll nur interpolieren — keine Geometrieabfrage pro Frame.
 
 **Verzerrungsfalle.** Das Straßen-SVG hat `viewBox="0 0 76 1000"` und `preserveAspectRatio="none"`, damit es jede Viewport-Höhe füllt. Der LKW darf das nicht mitmachen, sonst wird er gestaucht: eigenes Element, per `translate`/`rotate` in Pixeln positioniert. Der Winkel muss um die ungleiche Skalierung korrigiert werden — `atan2(dy * H/1000, dx)`, **nicht** `atan2(dy, dx)`.
 
-**Vier Linien auf demselben Pfad**, von unten nach oben:
+**Fünf Linien auf demselben Pfad**, von unten nach oben (Stand im Code):
 
 | Ebene | Farbe und Breite |
 |---|---|
-| Fahrbahn | Navy `#2A3977`, 14 % Deckkraft, 34 px |
-| Mittelstreifen | gestrichelt `6 10`, Navy 22 % |
+| Fahrbahn | Navy `#2A3977`, 14 % Deckkraft, 40 px |
+| Mittelstreifen | gestrichelt `6 10`, Navy 26 % |
 | Glow (nur gefahren) | Blau `#2748AC`, 44 px, 18 % Deckkraft |
-| Gefahrene Strecke | Blau `#2748AC` deckend, 34 px |
+| Gefahrene Strecke | Blau `#2748AC` deckend, 40 px |
+| Mittelstreifen auf der gefahrenen Strecke | gestrichelt `6 10`, Weiß 55 % |
 
-Die beiden unteren bekommen `stroke-dasharray` = Pfadlänge und einen vom Scroll gesteuerten `stroke-dashoffset`. **Kein `filter: drop-shadow`** für den Glow — die breitere, transparente Zweitlinie sieht gleich aus und erzeugt keine eigene Kompositionsebene.
+Die drei Linien der gefahrenen Strecke bekommen `stroke-dasharray` = Pfadlänge und einen vom Scroll gesteuerten `stroke-dashoffset`. **Kein `filter: drop-shadow`** für den Glow — die breitere, transparente Zweitlinie sieht gleich aus und erzeugt keine eigene Kompositionsebene.
 
 **Pfadform.** Vier bis fünf sanfte Kurven über die volle Höhe, Auslenkung etwa ±14 px um die Mittelachse. Genug für sichtbare Drehung des LKW, zu wenig für eine Schlangenlinie.
 
 **LKW.** Eigenes kleines SVG in Draufsicht, passend zum Hero-Video: weißes Fahrerhaus, kleine Lücke, dann zwei schwarze Wechselbrücken — Motorwagen plus Anhänger, kein durchgehender Kasten. Rund 26 px breit, 70 px lang.
 
-**Haltepunkte.** Position **nicht fest eintragen**, sondern zur Laufzeit aus `offsetTop / Dokumenthöhe` je Abschnitt rechnen und über dieselbe Stützpunkt-Tabelle auf den Pfad legen — so sitzen sie auch nach Inhaltsänderungen richtig. Die vier IDs `leistungen`, `karriere`, `standorte`, `kontakt` existieren bereits. Darstellung: Ring gedämpft, nach dem Passieren gefüllt in Blau, per Klassenwechsel statt Dauer-Animation.
+**Haltepunkte.** Position **nicht fest eintragen**, sondern zur Laufzeit aus `offsetTop / Dokumenthöhe` je Abschnitt rechnen und über dieselbe Stützpunkt-Tabelle auf den Pfad legen — so sitzen sie auch nach Inhaltsänderungen richtig. Die fünf IDs `leistungen`, `karriere`, `standorte`, `ueber-uns`, `kontakt` existieren. Darstellung: Ring gedämpft, nach dem Passieren gefüllt in Blau, per Klassenwechsel statt Dauer-Animation.
 
 **Platz schaffen.** `body { padding-right: var(--strasse) }` mit `--strasse: 76px`, damit die vollflächigen Bänder (Kennzahlen, Karriere, Footer) vor dem Streifen enden und hinter der Straße immer der Seitenhintergrund liegt. Der Hero bekommt eine Ausnahme über negativen `margin-right`, damit das Video bis zum Rand läuft; dort ist die Straße ohnehin ausgeblendet. Folge: Der Inhalt sitzt auf mittleren Bildschirmen leicht links der Mitte — gewollt.
 
-**Vorrang für den Hero.** Straße startet mit `opacity: 0` und blendet erst auf, wenn die Hero-Bühne durchgelaufen ist. Eigener ScrollTrigger auf `.szene-buehne`, Übergang über etwa 200 px Scrollweg.
+**Vorrang für den Hero.** Straße startet mit `opacity: 0` und blendet erst auf, wenn die Hero-Bühne bis auf 200 px durchgelaufen ist. Kein ScrollTrigger: das eigene Scroll-Skript prüft die Schwelle, der Übergang ist eine CSS-Transition (260 ms). Ausgeblendet sind die Haltepunkte weder klick- noch fokussierbar (`visibility`).
 
 **Handy: unter 1024 px vollständig ausblenden.** Begründung, damit sie nicht später wieder aufgemacht wird: Am rechten Rand liegen auf Android die Systemgesten, Klickziele dort provozieren Fehlgriffe; die vier Haltepunkte verdoppeln nur die Hauptnavigation, die mobil schon im Menü steckt, es geht also keine Funktion verloren; und unten liegt bereits die fixierte Bewerbungsleiste — ein zweites fixiertes Element am Rand wäre eines zu viel.
 
@@ -156,6 +159,8 @@ Das Hero-Video ist 16:9, ein Handy ist etwa 9:19,5. Beide Formate lassen sich ni
 
 **Entwurfs-Hinweis.** Bleibt oben kleben, der Header rastet darunter ein. Seine Höhe misst ein eigenes Skript in `--hinweis`; der CSS-Rückfallwert 49 px gilt nur ohne JavaScript und stimmt für zweizeiligen Umbruch ab 360 px Breite.
 
+**Größenänderung und Reload.** Auf Touch-Geräten baut der Hero nur neu, wenn sich Breite, Ausrichtung oder die Höhe um mindestens 160 px ändert – das Ein- und Ausfahren der Adressleiste löst keinen Neuaufbau aus (die Bühne rechnet mit `svh`). Nach einem Reload mitten in der Seite setzt `onRefresh` das Video auf den Stand der Zeitachse. Während eines Videosprungs meldet das Video `readyState` 1; Scrub-Werte werden deshalb schon ab Metadaten geschrieben, sonst bleibt das Bild nach schnellem Scrollen auf einem Zwischenstand stehen.
+
 ## Fahrzeugzeichnungen: ein Massraster für beide Ansichten
 
 Alle Fahrzeugteile auf der Seite folgen denselben echten Massen, damit Draufsicht und Seitenansicht zueinander passen: Fahrerhaus 2,3 m, Wechselbrücke 7,45 m lang und 2,67 m hoch, Lücke 1,0 m, Breite 2,55 m, Ladekante 1,25 m über der Fahrbahn, Rad 1,05 m. Wer eine Zeichnung ändert, rechnet sie aus diesen Zahlen neu — nicht nach Augenmass.
@@ -174,7 +179,7 @@ Ersatz für die Zeichnung ist eine Lagekarte als Inline-SVG (`redesign-handoff/s
 
 - Links Text mit Adressliste (Siegsdorf zuerst, Firmensitz), rechts die Karte. **Unter 980 px** steht die Karte unter dem Text.
 - **Unter 640 px** sind die Orientierungsstädte (`.karte-ref`) ausgeblendet, damit Rodgau und Siegsdorf lesbar bleiben.
-- Unter der Sektion ein breites Fotoband vom Betriebshof Siegsdorf mit Bergen (`bilder/standorte-berge-*.webp`).
+- Unter der Karte bewusst **kein** Bildband (Entscheidung vom 14.10.2026).
 - Einblenden wie in den beiden anderen Redesign-Sektionen (`.rv`, `.cur`), aus bei `prefers-reduced-motion`.
 
 
