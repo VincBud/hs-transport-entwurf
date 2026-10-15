@@ -159,6 +159,12 @@ Das Hero-Video ist 16:9, ein Handy ist etwa 9:19,5. Beide Formate lassen sich ni
 
 **Entwurfs-Hinweis.** Bleibt oben kleben, der Header rastet darunter ein. Seine Höhe misst ein eigenes Skript in `--hinweis`; der CSS-Rückfallwert 49 px gilt nur ohne JavaScript und stimmt für zweizeiligen Umbruch ab 360 px Breite.
 
+**Bühne ab dem ersten Bild (15.10.2026).** Ob die scrollgesteuerte Bühne gebaut wird, entscheidet ein kurzes Skript im `<head>` (keine reduzierte Bewegung, kein Save-Data, keine 2G/3G-Verbindung) und setzt `.js-szene` vor dem ersten Bild. Die Zeitachse steht ab `DOMContentLoaded` mit dem Poster, das Video blendet über, sobald es bespielbar ist, und springt auf den Stand der Zeitachse. Es gibt also keinen Layout-Sprung beim Laden mehr. Im Hochformat sind Poster und Text unsichtbar, bis das Skript sie platziert hat. Fehlt GSAP oder scheitert das Video, fällt die Seite auf den ruhigen Hero zurück.
+
+**Ruhiger Hero.** Ohne Bühne (ohne JS, reduzierte Bewegung, Save-Data, langsame Verbindung, Fehler) liegen Überschrift, Text und Button im Querformat wie im animierten Startbild oben auf dem Poster. Im Hochformat stehen sie darunter.
+
+**ScrollTrigger und `scroll-behavior:smooth`.** Beim Refresh springt ScrollTrigger intern nach oben, um zu messen. Ist dieser Sprung animiert, wird die Bühne um die Scrollposition verschoben gemessen. Während des Refresh gilt deshalb `scroll-behavior:auto`. Wer das entfernt, bricht jede Größenänderung und jeden Reload mitten im Hero.
+
 **Größenänderung und Reload.** Auf Touch-Geräten baut der Hero nur neu, wenn sich Breite, Ausrichtung oder die Höhe um mindestens 160 px ändert – das Ein- und Ausfahren der Adressleiste löst keinen Neuaufbau aus (die Bühne rechnet mit `svh`). Nach einem Reload mitten in der Seite setzt `onRefresh` das Video auf den Stand der Zeitachse. Während eines Videosprungs meldet das Video `readyState` 1; Scrub-Werte werden deshalb schon ab Metadaten geschrieben, sonst bleibt das Bild nach schnellem Scrollen auf einem Zwischenstand stehen.
 
 ## Fahrzeugzeichnungen: ein Massraster für beide Ansichten
