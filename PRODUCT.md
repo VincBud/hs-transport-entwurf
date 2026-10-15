@@ -141,7 +141,26 @@ Die drei Linien der gefahrenen Strecke bekommen `stroke-dasharray` = Pfadlänge 
 
 **Größe.** SVG ~2,4 KB, CSS ~1,2 KB, JS ~1,8 KB — zusammen rund **5,4 KB roh, ~1,6 KB gzip**.
 
+## Handy-Hero unter 768 px (15.10.2026, freigegeben)
+
+Unter 768 px Breite gibt es **kein Video, keine scrollgesteuerte Szene und keine Ladeetiketten**. Die Szene (`.szene`) ist dort ausgeblendet, die GSAP-Zeitachse wird nicht gebaut. Stattdessen steht `.hero-m`:
+
+1. **Navy-Block** (`#2A3977`) direkt unter dem Header, kompakt genug, dass er mit den Buttons auf den ersten Bildschirm passt (390 × 844, 360 × 800). Inhalt: kleine Zeile „Spedition · Siegsdorf und Rodgau“, Überschrift und Unterzeile wie im Desktop-Hero, drei Kennzahlen nebeneinander („30“ LKW im Fuhrpark, „2“ Standorte Siegsdorf und Rodgau, Fahrerzahl als rosa Platzhalter), zwei Buttons nebeneinander: „Jobs als Fahrer“ (weiß gefüllt, springt zu Karriere) und „Anrufen“ (weißer Rahmen, `tel:`-Link), je 52 px hoch.
+2. **Foto** `bilder/hof-siegsdorf-*.webp` (Foto 01, Betriebshof Siegsdorf mit Bergen) in voller Breite, 16:9.
+3. **„Was wir fahren“ als kompakte Liste**: die bestehende Sektion `#leistungen` zeigt am Handy je Leistung nur Titel und eine Zeile (die Texte der Ladeetiketten, `.svc-kurz`), mit Haarlinien, ohne Bilder und ohne lange Texte. „Unser Fuhrpark“ folgt erst danach (Reihenfolge per CSS `order`, die Sektion hat keine fokussierbaren Elemente).
+
+**Das Video darf am Handy nicht geladen werden** – kein Download über Mobilfunk, auch nicht ausgeblendet. Dafür sorgen drei Stellen, die zusammengehören:
+
+- Das Kopf-Skript setzt unter 768 px kein `.js-szene`; das Szenen-Skript prüft die Breite ein zweites Mal, bevor es `film.src` setzt.
+- **Das Viewport-Meta muss vor dem Kopf-Skript stehen.** Sonst misst `matchMedia` im Kopf-Skript noch den 980-px-Standard-Viewport, die Bühne wird gebaut und das Video lädt.
+- Poster und Hof-Foto stecken in `<picture>` mit einem leeren 1-px-Bild für die jeweils ausgeblendete Breite, damit auch sie nicht laden. Die Hülle ist `display:contents`, ihr `<source>` muss `display:none` bleiben – sonst öffnet es eine zweite Rasterzeile in der Szene und das Video füllt bei 1440 × 900 nicht mehr die volle Höhe.
+
+GSAP wird am Handy weiterhin heruntergeladen, aber nicht gestartet (bewusst so belassen).
+
 ## Hero im Hochformat (eigene Komposition, nicht das Querformat verkleinert)
+
+**Gilt nur ab 768 px Breite** (Tablets im Hochformat). Darunter steht der Handy-Hero aus dem Abschnitt davor.
+
 
 Das Hero-Video ist 16:9, ein Handy ist etwa 9:19,5. Beide Formate lassen sich nicht mit derselben Bildführung bedienen. Im Hochformat gilt deshalb eine eigene Anordnung; der Querformat-Hero bleibt davon unberührt.
 
