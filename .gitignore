@@ -4,3 +4,7 @@ fotos-original/
 screenshots/
 skills-lock.json
 video-original/
+tests/node_modules/
+tests/.cache/
+tests/referenz/
+tests/out/

@@ -1,0 +1,17 @@
+{
+  "name": "hs-transport-regression",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "server": "node server.mjs",
+    "referenz": "node regression.mjs --referenz",
+    "pruefen": "node regression.mjs",
+    "lighthouse": "node lighthouse.mjs"
+  },
+  "devDependencies": {
+    "lighthouse": "^12.8.2",
+    "pixelmatch": "^7.2.0",
+    "playwright-core": "^1.56.1",
+    "pngjs": "^7.0.0"
+  }
+}
