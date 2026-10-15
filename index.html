@@ -1368,7 +1368,10 @@ window.addEventListener('DOMContentLoaded', function () {
   function aufbauen() {
     platzieren();
     var z = { t: 0 };
-    var setzen = function () { if (film.readyState >= 2) film.currentTime = z.t; };
+    /* Metadaten genuegen. Waehrend eines Sprungs faellt readyState auf 1 -
+       mit ">= 2" gingen die letzten Scrub-Werte verloren, und das Video
+       blieb nach schnellem Scrollen auf einem Zwischenbild stehen. */
+    var setzen = function () { if (film.readyState >= 1) film.currentTime = z.t; };
 
     tl = gsap.timeline({
       scrollTrigger: { trigger: buehne, start: 'top top', end: 'bottom bottom',
