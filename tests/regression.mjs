@@ -332,7 +332,8 @@ function vergleiche(a, b, pfad) {
   }
   if (a && b && typeof a === 'object' && typeof b === 'object') {
     for (const k of new Set([...Object.keys(a), ...Object.keys(b)])) {
-      if (k === 'positionen' || k === 'anfragenFehler') continue;
+      // rs (readyState) ist ein Zwischenstand des Dekoders, entscheidend ist t.
+      if (k === 'positionen' || k === 'anfragenFehler' || k === 'rs') continue;
       vergleiche(a[k], b[k], pfad + '.' + k);
     }
     return;
