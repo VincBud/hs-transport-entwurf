@@ -1040,11 +1040,13 @@ section.block{padding-top:clamp(56px,7vw,104px);padding-bottom:clamp(56px,7vw,10
   (die Seite steht auf noindex, strukturierte Daten hätten hier keinen Nutzen).
   Vor dem Aktivieren prüfen: Straße in Rodgau, Einsatzgebiet Butzbach oder Langgöns,
   validThrough der beiden Stellen, und ob die Gehaltsangaben ergänzt werden sollen.
+  Typ LocalBusiness: schema.org kennt keine Spedition, MovingCompany hieße
+  Umzugsunternehmen.
 
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "MovingCompany",
+  "@type": "LocalBusiness",
   "name": "HS Transport GmbH",
   "description": "Spedition für Wechselbrücken und Systemverkehr mit 30 LKW.",
   "url": "https://www.h-s-transport.de/",
@@ -1068,6 +1070,10 @@ section.block{padding-top:clamp(56px,7vw,104px);padding-bottom:clamp(56px,7vw,10
 }
 </script>
 
+  JobPosting Fahrer – bleibt auskommentiert, bis die Firma liefert. Für Google
+  fehlen noch: datePosted (Pflicht), description (Pflicht, vollständiger
+  Stellentext), validThrough, baseSalary (Gehalt), directApply.
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -1082,6 +1088,9 @@ section.block{padding-top:clamp(56px,7vw,104px);padding-bottom:clamp(56px,7vw,10
   "qualifications": "Führerschein Klasse CE, Erfahrung mit Wechselbrücken erwünscht"
 }
 </script>
+
+  JobPosting Disponent/in – bleibt auskommentiert. Es fehlen dieselben Felder:
+  datePosted, description, validThrough, baseSalary, directApply.
 
 <script type="application/ld+json">
 {
