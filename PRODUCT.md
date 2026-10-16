@@ -30,7 +30,9 @@ Spezialist für Wechselbrücken und Systemverkehr, nicht eine regionale Speditio
 
 ## Operating Context
 
-Der aktuelle Stand ist ein privater Entwurf von Vincent Fitsch, der später als Vorschlag an die Firma geht. Er bleibt bis dahin unindexiert (`noindex, nofollow` plus `robots.txt`-Disallow) und trägt ein sichtbares Hinweis-Banner, dass er nicht die offizielle Website ist. Impressum und Datenschutz liegen weiterhin auf der alten Seite h-s-transport.de und werden dorthin verlinkt.
+Der aktuelle Stand ist ein privater Entwurf von Vincent Fitsch, der später als Vorschlag an die Firma geht. Er bleibt bis dahin unindexiert und trägt ein sichtbares Hinweis-Banner, dass er nicht die offizielle Website ist. Impressum und Datenschutz liegen weiterhin auf der alten Seite h-s-transport.de und werden dorthin verlinkt.
+
+**Indexierung (Stand 16.10.2026): Den Schutz trägt allein `<meta name="robots" content="noindex, nofollow">`.** Die `robots.txt` im Projekt wirkt nicht: Suchmaschinen lesen nur `vincbud.github.io/robots.txt` an der Wurzel der Domain, und die gibt es nicht (404); eine Datei unter `/hs-transport-entwurf/robots.txt` wird ignoriert. Dort auch **kein** `Disallow` nachrüsten – eine gesperrte Seite holt Google gar nicht erst ab und sieht dann das `noindex` nicht.
 
 Standorte: Firmensitz und Betriebsstätte Siegsdorf, Betriebsstätte Rodgau, zusätzliche Einsatzgebiete Altenstadt und Langgöns/Butzbach.
 
@@ -47,6 +49,7 @@ Offene Stellen:
 - **CS Logistics** ist ein Einzelunternehmen des Gründers für Beratung und Vermittlung in Transport und Logistik. Es ist bewusst nachrangig: höchstens ein kurzer Hinweis im Über-uns-Bereich oder im Footer, **kein eigenes Logo in der Navigation** und keine eigene Sektion.
 - Kein Backend: Auftraggeber-Formular läuft über `mailto:` und bleibt schlank (Firma, Ansprechpartner, Kontakt, Anliegen). Abhol- und Zielort-Felder sind gestrichen, sie gehören zum falschen Geschäftsmodell.
 - Kein Google-Maps-Embed. Standorte als SVG-Karte oder Liste.
+- **Content-Security-Policy als Meta-Tag** (seit 16.10.2026, ganz oben im `<head>`, vor dem ersten Skript): nur eigene Domain, Inline-Code erlaubt, `data:` nur für Bilder, keine Frames, kein `form-action`. Dazu `<meta name="referrer" content="no-referrer">`, damit Instagram, WhatsApp und die alte Firmenseite die Adresse des Entwurfs nicht erfahren. **Wer externe Dienste einbaut (Karte, Analytics, Schriften, Formular-Dienst), muss die CSP anpassen** – sonst blockiert der Browser sie stillschweigend, und der Datenschutzhinweis muss den Dienst dann ebenfalls nennen.
 - Keine Bilder von der alten Seite hotlinken, keine Stockfotos. **Ausnahme seit 14.10.2026:** Für „Was wir fahren“ und „Fahrer gesucht“ sind die Fotos aus `fotos-original/` freigegeben; „Über uns“ nutzt die vorhandenen `bilder/ueberuns-*.webp`, „Von wo wir fahren“ hat bewusst kein Foto (Zuschnitte laut `redesign-handoff/fotos.md`). Fotos mit großen Fremdlogos (DHL, Dachser, Fercam, Lermer) und der Kühlauflieger bleiben draußen.
 - Ton: direkt und bodenständig, Fahrer-Sprache statt Marketing-Floskeln. **Du** für Bewerber, **Sie** für Auftraggeber.
 - **Keine Aussagen gegen Subunternehmer, Partner oder zugekaufte Kapazität** (Stand 08.10.2026). Subunternehmer sind in der Branche üblich, und HS Transport arbeitet selbst im Unternehmerverbund mit einem Partner. Formulierungen wie „keine zugekaufte Kapazität“, „kein Subunternehmer-Karussell“ oder „mit eigenen Fahrzeugen statt …“ sind damit ausgeschlossen. Der eigene Fuhrpark darf als Tatsache genannt werden, aber nicht als Abgrenzung.
@@ -207,6 +210,16 @@ Ersatz für die Zeichnung ist eine Lagekarte als Inline-SVG (`redesign-handoff/s
 - Unter der Karte bewusst **kein** Bildband (Entscheidung vom 14.10.2026).
 - Einblenden wie in den beiden anderen Redesign-Sektionen (`.rv`, `.cur`), aus bei `prefers-reduced-motion`.
 
+
+## Vor dem echten Launch
+
+Für den Entwurf bewusst nicht gebaut, vor dem Livegang als offizielle Seite aber Pflicht:
+
+- **Eigenes Impressum nach § 5 DDG** auf der neuen Domain (bisher Link auf die alte Seite).
+- **Eigene Datenschutzerklärung**: Hosting und Server-Logs (IP-Adressen), Kontakt per E-Mail (das Formular öffnet nur das Mailprogramm, die Seite selbst speichert nichts), Bewerbung per WhatsApp, Link zu Instagram.
+- **Hosting entscheiden: GitHub Pages oder ein EU-Hoster.** GitHub ist ein US-Anbieter; das muss in die Datenschutzerklärung und braucht eine Grundlage für die Übermittlung. Ein EU-Hoster würde außerdem echte HTTP-Header erlauben (CSP mit `frame-ancestors`, HSTS).
+- **Entwurfs-Banner, `noindex` und `robots.txt` entfernen.**
+- Cookie-Banner ist nicht nötig, solange keine Cookies, kein Tracking und keine externen Dienste dazukommen.
 
 ## Offene Punkte
 

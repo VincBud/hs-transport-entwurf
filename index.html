@@ -4,6 +4,15 @@
 <meta charset="utf-8">
 <!-- Viewport vor dem Kopf-Skript: dessen Breitenabfrage braucht ihn schon. -->
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- Sicherheit: Die Seite laedt nichts von fremden Servern; die CSP haelt das fest.
+     Inline-Code ist erlaubt (Skripte und Styles stehen in dieser Datei). Wer
+     externe Dienste einbaut (Karte, Analytics, Schriften, Formular-Dienst), muss
+     die CSP anpassen. frame-ancestors geht per Meta-Tag nicht, Header setzt Pages nicht.
+     Muss vor dem ersten Skript stehen: eine Meta-CSP gilt erst ab ihrer Stelle. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; media-src 'self'; connect-src 'self'; object-src 'none'; frame-src 'none'; base-uri 'none'; form-action 'none'">
+<!-- Kein Referrer: Ziele externer Links (Instagram, WhatsApp, alte Firmenseite)
+     erfahren die Adresse des Entwurfs nicht. -->
+<meta name="referrer" content="no-referrer">
 <script>
 /* .js: Skripte laufen. .js-szene: die scrollgesteuerte Hero-Buehne wird
    gebaut - schon hier entschieden, damit die Seite von Anfang an im
